@@ -47,7 +47,8 @@ The retrieval function(相似度) is the inner product between a document vector
 
 + Gleason Theorem
 
-  概率分布可以沿着称为密度矩阵的k维矩阵r的对角线排列 $$\operatorname{diag}(\rho)=(p_1,\ldots,p_k)^{\prime}$$经典概率分布对应的密度矩阵总是对角的，并且具有单位迹，因为对角元素之和为 1
+  概率分布可以沿着称为密度矩阵的k维矩阵r的对角线排列 
+  $$\operatorname{diag}(\rho)=(p_1,\ldots,p_k)^{\prime}$$经典概率分布对应的密度矩阵总是对角的，并且具有单位迹，因为对角元素之和为 1
   当使用这种代数形式表示概率空间时，计算概率的函数是密度矩阵$\rho$乘以事件对应的投影得到的矩阵的迹。(感觉投影矩阵对有许多词项的查询是稀疏矩阵)
   
  $$Trace(\rho|x\rangle \langle x|)$$
@@ -71,3 +72,4 @@ $$1-tr(\rho A_0)=tr(\rho A_1)$$
 
 
 ### 实验
+

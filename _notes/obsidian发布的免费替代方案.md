@@ -1,7 +1,6 @@
 ---
 ---
 
-
 ## 教程
 
 ### [ obsidian 目前最完美的免费发布方案 - 渐进式教程](https://www.nuomiphp.com/t/62d3d539b77c2c2aec6b748c.html)
@@ -25,13 +24,20 @@
 	+ 开启“使用Wiki链接”
 	+ 将“内部链接类型”修改为“尽可能简短的形式”
 + 不允许md文件有相同的命名
++ 每个md文件必须包含front-matter
 ### 问题
 - [x] 不支持latex，对于科研来说公式也很重要
 	- [ ]  寻找支持latex的方案 比如[插件](https://github.com/yoursamlan/pubsidian)
-	- [x] 更改代码使得Jekyll支持latex公式的调用：[教程](https://lloyar.github.io/2018/10/08/mathjax-in-jekyll.html)
-		- 只要将 MathJax 提供的代码片段放在 `_includes/head.html`
+	- [x] 更改代码使得Jekyll支持latex公式（包括内联插入\$$）的调用：
+		- 只要将 MathJax 提供的代码片段放在 `_includes/head.html`，原理在[教程](https://lloyar.github.io/2018/10/08/mathjax-in-jekyll.html)
+		- 参考[解决方案](https://www.zhblog.net/qa/inline-math-expressions.html)
 ```HTML
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+<script id="MathJax-script" async 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config"> 
+MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] } }); 
+</script>
 ```
 - [x] 无法自动同步到github上
 	- [ ] 尝试插件obsidian-git，我的工作区只设置在子文件_note下，没法跳出子文件夹进行push 
