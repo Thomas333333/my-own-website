@@ -3,13 +3,15 @@ title: "TKDE'16_Relevance Feedback Algorithms Inspired By Quantum Detection"
 --- 
 题目：Relevance Feedback Algorithms Inspired By Quantum Detection 
 
+作者： Massimo Melucci
+
 来源：TKDE
 
 日期：2016
 
 有无代码: 无
 
-### 引言
+### 1.引言
 + 目的：将查询向量投影到由特征向量张成的子空间上，使得相关性量子概率分布与不相关性量子概率分布之间的距离最大化。
 + RF（相关性反馈）：
 	+ 正：收集有关检索到的文档的一些相关性评估，并通过在相关文档中找到的术语来扩展查询，
@@ -27,35 +29,40 @@ title: "TKDE'16_Relevance Feedback Algorithms Inspired By Quantum Detection"
 	+ define signal detection in terms of quantum probability.(The use of vectors and matrices in quantum probability)
 
 
-### 论文主体
-#### 2.1 VSM
-> The VSM for IR represents both documents and queries as vectors of the k-dimensional real space $R^{k}$ . This vector space is defined by k basis vectors corresponding to the terms extracted from a document collection; for example, if the document collection stores three documents“orange juice”,“apple juice”and “apple”,the vector space is defined by three canonical basis vectors $e_{1}=\left(\begin{matrix}1&0&0\end{matrix}\right),e_{2}=$
-(0 1 0),$e_{3}={\left(\begin{matrix}{0}&{0}&{1}\end{matrix}\right)}$）corresponding to“apple”“juice”and “orange”，and the three documents are repre-sented, respectively, by the following vectors $\begin{pmatrix}0&1&1\end{pmatrix}$
-${\left(\begin{array}{l l l l}{1}&{1}&{0}\end{array}\right)},{\left(\begin{array}{l l l}{1}&{0}&{0}\end{array}\right)}$. Each document vector results from the weighted linear combination of the basis vectors which represents the terms extracted from the document collec-tion. In the example above, the weights are binary, that is,l if the term occurs in a document, 0 otherwise.
-The retrieval function(相似度) is the inner product between a document vector x and a query vector y
-
+### 2.论文主体
+#### 2.1 VSM（Vector Space Model）
++ 对于信息检索的VSM，我们可以用k维的实向量空间$R^{k}$表示查询（query）和文件
++ e.g. 三个文件“orange juice”,“apple juice”and “apple”
+	+ orange：$(\begin{matrix}{1}&{0}&{0}\end{matrix})$
+	+ apple：$(\begin{matrix}{0}&{1}&{0}\end{matrix})$
+	+ juice：$(\begin{matrix}{0}&{0}&{1}\end{matrix})$
+	+ “orange juice”：$(\begin{matrix}{1}&{0}&{1}\end{matrix})$==（有点类似纠缠的表示）==
+	+ ==缺点是当词项很多时，会产生高维稀疏向量==，还存在其他表示方式
++ 相似度由两个向量的内积结果表示
 #### 2.2 RF （ Rocchio's algorithm）
-+ 使用相关文档和不相关文档![Pasted image 20230629015450.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/Pasted%20image%2020230629015450.png)
++ 使用相关文档和不相关文档调整query向量![Pasted image 20230629015450.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/Pasted%20image%2020230629015450.png)
 
 #### 2.3 quantum probability
-> a probability space can be represented as vectors,matrices and operators between them.
+##### 2.3.1 背景
+在量子力学中，概率空间可以表示为向量、矩阵，以及它们之间的算子。
 
 
 >To each observable value,it is possible to correspond a basis vector of the k-dimensional space. Equivalently,to each observable value,it is possible to correspond a projector of the k-dimensional space. The equivalence relationship between a basis vector x and a projector A is that 
 >
 >$$A = xx^{\dagger}$$
+>可以举一个k=2时候的例子来理解投影算符的概念。从公式传达出的信息来看，其实它就是x的矩阵表示。
 
-+ Gleason Theorem
++ x因为是和概率有关，应该满足性质$|x|=1$
 
-  概率分布可以沿着称为密度矩阵的k维矩阵r的对角线排列 
+##### 2.3.2 Gleason Theorem
+
+  概率分布可以沿着称为密度矩阵的k维矩阵$\rho$的对角线排列 
   $$\operatorname{diag}(\rho)=(p_1,\ldots,p_k)^{\prime}$$经典概率分布对应的密度矩阵总是对角的，并且具有单位迹，因为对角元素之和为 1
-  当使用这种代数形式表示概率空间时，计算概率的函数是密度矩阵$\rho$乘以事件对应的投影得到的矩阵的迹。(感觉投影矩阵对有许多词项的查询是稀疏矩阵)
+
+  当使用这种代数形式表示概率空间时，计算概率的函数是密度矩阵$\rho$乘以事件对应的投影得到的矩阵的迹。
   
  $$Trace(\rho|x\rangle \langle x|)$$
- 
-  当密度矩阵的秩为1时，它对应一个向量，称为“状态向量”，等于状态向量与其转置共轭的外积。
-  
-$$A = xx^{\dagger}$$
+ 当密度矩阵的rank为1时，
 
   此时可观测量的概率分布完全由状态向量定义。当密度矩阵的秩不为1时，为混合态，可由两个互斥的投影矩阵$A_0,A_1$表示。
   
@@ -65,11 +72,25 @@ $$A_0+A_1=1,A_0A_1=0$$
 
 $$1-tr(\rho A_0)=tr(\rho A_1)$$
 
+该公式解释了为什么使用trace来计算向量空间中事件的概率。
+
+#### 2.4 RF based on quantum detection
+
+中心思想：将query向量投影到基于量子计算的数学框架张成的向量空间中，进行变换修正。
 
 
+公式证明：
+	
+$$\sum_{x\in A_i}\left|x'\phi_j\right|^2=\mathrm{tr}(\mathbf{A}_i\phi_j\phi_j')$$
+
+于是状态向量$\phi_j$可以转化成密度矩阵$\rho=\phi \phi'$
+
+#### 2.5  Connection:IR——QM
++ 相关性—— 文档状态，是一种二进制，相关或者不相关
++ 文档——粒子，具有状态向量
++ query——可观察量，投影
++ 
 
 
-
-
-### 实验
+### 3.实验
 
