@@ -81,7 +81,7 @@ title:
 
 $$x_{LC}^{*}=\underset{x}{\mathrm{argmax}}\ 1-P_{\theta}(\hat{y}|x)$$
 
-其中$\hat{y}=\mathrm{argmax}_{y}P_{\theta}({y}|x)$ 
+其中$$\hat{y}=\mathrm{argmax}_{y}P_{\theta}({y}|x)$$
 
 然而上述方法只考虑了最有可能的标签，丢弃了有关剩余标签的信息。为了纠正这种问题，出现了多类不确定性采样的变体，叫margin sampling（边际采样）。
 
