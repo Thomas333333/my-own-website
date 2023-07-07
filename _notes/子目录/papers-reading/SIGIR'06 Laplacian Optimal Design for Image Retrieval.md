@@ -35,7 +35,7 @@ title: "SIGIR'06 Laplacian Optimal Design for Image Retrieval"
 
 ### 论文主体
 ####  背景
->AL:Given a set of points$\mathcal{A}=\{\mathbf{x}_{1},\mathbf{x}_{2},\cdots,\mathbf{x}_{m}\}$ in $\mathbb{R}^{d}$ , find a subset $\mathcal{B}=\{\mathbf{z}_{1},\mathbf{z}_{2},\cdots,\mathbf{z}_{m}\} \subset \mathcal{A}$ which contains the most informative points. In other words,the points $z_i$ $(i=1,\cdots,k)$can improve the classifier the most if they are labeled and used as training points.
+AL:Given a set of points$\mathcal{A}=\{\mathbf{x}_{1},\mathbf{x}_{2},\cdots,\mathbf{x}_{m}\}$ in $\mathbb{R}^{d}$ , find a subset $\mathcal{B}=\{\mathbf{z}_{1},\mathbf{z}_{2},\cdots,\mathbf{z}_{m}\} \subset \mathcal{A}$ which contains the most informative points. In other words,the points $z_i$ $(i=1,\cdots,k)$can improve the classifier the most if they are labeled and used as training points.
 
 > 最小化误差平方和  $$J_{sse}(\mathbf{w})=\sum\limits_{i=1}^k\left(\mathbf{w}^T\mathbf{z}_i-y_i\right)^2$$
 > 协方差矩阵为$\sigma^2 H_{sse}^{-1}$，其中$$H_{sse}=\left(\frac{\partial^2J_{sse}}{\partial\mathbf{w}^2}\right)=\left(\sum\limits_{i=1}^k\mathbf{z}_i\mathbf{z}_i^T\right)=ZZ^T$$>The three most common scalar measures of the size of the parameter covariance matrix in optimal experimental design are: 
@@ -50,6 +50,6 @@ title: "SIGIR'06 Laplacian Optimal Design for Image Retrieval"
 ##### 3.1 损失函数
 + 如果两个点十分接近，他们的标签也应该接近，设S为相似度矩阵，损失函数后可以添加一项$$J_0(\mathbf{w})=\sum_{i=1}^k\left(f(\mathbf{z}_i)-y_i\right)^2+\frac{\lambda}{2}\sum\limits_{i,j=1}^m\left(f(\mathbf{x}_i)-f(\mathbf{x}_j)\right)^2S_{ij}$$ $$S_{ij}=\left\{\begin{array}{ll}1,&\text{if x}_i\text{is among the p }\text{nearcst neighborhood of x}_j,\\ &\text{or x}_j\text{is among the p }\text{nearest neighborhood of x}_i;\\ 0,&\text{otherwise}.\end{array}\right.$$<u>(S中不同的点的最近邻域也可以扩展，比如说划定一个范围，来动态调整，对于信息较多的点可以增大范围)</u>
 
->Let $D$ be a diagonal matrix,$D_{ii}=\sum_{j}S_{ij}$, and $L=D-S$ The matrix L is called graph Laplacian in spectral graph theory 3]. Let $\mathbf{y}=\left(y_1,\cdots,y_k\right)^T$ and $X=(\mathrm{x}_{1},\cdots,\mathrm{x}_{m}).$Following some simple algebraic steps, we see that:
+>Let $D$ be a diagonal matrix,$D_{ii}=\sum_{j}S_{ij}$, and $L=D-S$ The matrix L is called graph Laplacian in spectral graph theory 3]. Let $\mathbf{y}=\left(y_1,\cdots,y_k\right)^T$ and $X=(\mathrm{x}_{1},\cdots,\mathrm{x}_{m})$Following some simple algebraic steps, we see that:
 
 ### 实验

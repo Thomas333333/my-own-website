@@ -30,15 +30,23 @@
 	- [ ]  寻找支持latex的方案 比如[插件](https://github.com/yoursamlan/pubsidian)
 	- [x] 更改代码使得Jekyll支持latex公式（包括内联插入\$$）的调用：
 		- 只要将 MathJax 提供的代码片段放在 `_includes/head.html`，原理在[教程](https://lloyar.github.io/2018/10/08/mathjax-in-jekyll.html)
-		- 参考[解决方案](https://www.zhblog.net/qa/inline-math-expressions.html)
-```HTML
-<script id="MathJax-script" async 
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/x-mathjax-config"> 
-MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] } }); 
-</script>
-```
+		```HTML
+		<script>
+		MathJax = {
+		  tex: {
+		    inlineMath: [['$', '$']]
+		  }
+		};
+		</script>
+		<script id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+		</script>
+		```
+		- 参考[老版解决方案1，已不适用](https://www.zhblog.net/qa/inline-math-expressions.html)，[Mathjax最新文档](https://docs.mathjax.org/en/latest/web/start.html)
+		- [ ] 有些内联公式仍然不支持，例如   $\hat{y}=\mathrm{argmax}_{y}P_{\theta}({y}|x)$ ，因为存在双下横线，在html里会在转换成公式前率先被渲染成italics。
+			- 在github的mathjax[提问](https://github.com/mathjax/MathJax/issues/3067)
+			- 在jekyll论坛上有人遇到了[类似的情况](https://talk.jekyllrb.com/t/jekyll-and-mathjax/5514)
+
 - [x] 无法自动同步到github上
 	- [ ] 尝试插件obsidian-git，我的工作区只设置在子文件_note下，没法跳出子文件夹进行push 
 	- [x] 使用bat文件，cmd运行 `taskschd.msc`添加自动运行的新任务，每天运行一次。

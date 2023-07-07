@@ -94,3 +94,5 @@ $$\sum_{x\in A_i}\left|x'\phi_j\right|^2=\mathrm{tr}(\mathbf{A}_i\phi_j\phi_j')$
 
 ### 3.实验
 
+### 4.自己的感悟
+$$Tr(X^TH^{-1}X)= \sum_i x_i^TH^{-1}x_i$$
