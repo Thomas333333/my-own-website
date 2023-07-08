@@ -75,10 +75,11 @@ $$\begin{matrix}令\beta_l=(1-t_l/T)\Delta t\text{,}\ \ \gamma_l=t_l\Delta t/T
 则原式=\prod_{l=1}^pe^{-i\beta_lH_B}e^{-i\gamma_lH_C}
 \end{matrix}$$
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708205404.png)对应每个量子比特都使用RX门，因为
-![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708210059.png)
-$$\begin{matrix}e^{-i\beta_lX}=RX(\beta_l)
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708212603.png)
+
+$$\begin{matrix}e^{-i\beta_lX}=RX(2\beta_l)
  \\
-e^{-i\beta_lH_B}=e^{-i\beta_l\sum_{i} X_i}=\prod_{i}RX(\beta_l) 
+e^{-i\beta_lH_B}=e^{-i\beta_l\sum_{i} X_i}=\prod_{i}RX(2\beta_l) 
 \end{matrix}$$
 
 
