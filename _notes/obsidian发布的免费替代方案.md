@@ -46,7 +46,8 @@
 		- [ ] 有些内联公式仍然不支持，例如   $\hat{y}=\mathrm{argmax}_{y}P_{\theta}({y}|x)$ ，因为存在双下横线，在html里会在转换成公式前率先被渲染成italics。
 			- 在github的mathjax[提问](https://github.com/mathjax/MathJax/issues/3067)
 			- 在jekyll论坛上有人遇到了[类似的情况](https://talk.jekyllrb.com/t/jekyll-and-mathjax/5514)
-
+			- [ ] 可能的解决方案：在bat文件中，同步到github前运行python脚本将内联公式中的_替换成\_
+		
 - [x] 无法自动同步到github上
 	- [ ] 尝试插件obsidian-git，我的工作区只设置在子文件_note下，没法跳出子文件夹进行push 
 	- [x] 使用bat文件，cmd运行 `taskschd.msc`添加自动运行的新任务，每天运行一次。
