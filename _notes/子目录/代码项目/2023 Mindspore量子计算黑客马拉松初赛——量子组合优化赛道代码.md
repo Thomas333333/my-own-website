@@ -13,6 +13,159 @@ pip install mindspore==1.10.1 mindquantum networkx
 ### utils.py
 
 #### read_graph(filename)
+返回图g，以及QUBO问题对应的矩阵
++ g是nx中的图格式，G是csr格式的稀疏矩阵
+
+#### calc_subqubo(sub_index, x, J, h=None,C=0.0 )
+返回修正后的子矩阵 `J_sub`、修正后的节点偏置 `h_sub` 和修正后的常数项 `C_sub`。
++ 将节点状态 `x` 转换为 {-1, +1} 的取值
++ 根据子问题的节点索引 `sub_index` 和完整问题的 QUBO 矩阵 `J`，提取子问题对应的子矩阵 `J_sub`
++ 如果节点偏置列表 `h` 不为 None，则提取子问题对应的节点偏置 `h_sub`，否则设置为全零数组。
++ 计算修正后的节点偏置 `h_sub`。对于子问题中的每个节点，计算其在完整问题中与其他节点的连接边的权重乘以其他节点的状态，并将其累加到对应的节点偏置上。
+
+#### check_degenerate(J_dict, h)
+检查 Qbuild_ham(J_dict,h)UBO 问题是否存在退化情况，并对节点偏置进行修正。
+
+#### build_ham(J_dict,h)
+计算哈密顿量
+
+#### QAOAsolver(J, h, C, depth = 2, tol=1e-4,info=True)
+该函数使用 QAOA 方法求解 QUBO 问题的最优解，通过优化参数使得目标哈密顿量的期望值最小化，从而得到问题的解。
+
+#### solve_QAOA(J_sub,h_sub,C_sub,sub_index,x,depth=2,tol=1e-4)
+该函数通过调用 QAOAsolver 函数对子问题进行 QAOA 求解，利用优化得到的解向量更新原解向量，从而逐步求解整个问题。
+
+#### calc_qubo_x(J,x,h=None,C=0)
+计算QUBO问题的能量值，用于评估解的优劣程度
+
+#### calc_cut_x(G, x)
+计算解向量对应图的割大小
+
+#### init_solution(n)
+生成一个随机解向量作为初始解，作为算法起点。
+
+
+### solve_max_cut.py
+```python
+import os
+os.environ['OMP_NUM_THREADS'] = '2'
+from itertools import count
+import numpy as np
+import time
+import copy
+import sys
+import random
+import matplotlib.pyplot as plt
+import pickle
+import numpy as np
+from utils import *
+
+'''
+本赛题旨在引领选手探索，在NISQ时代规模有限的量子计算机上，求解真实场景中的大规模图分割问题。
+本代码为求解最大割
+'''
+import resource
+soft, hard = resource.getrlimit(resource.RLIMIT_AS)
+resource.setrlimit(resource.RLIMIT_AS, (1024*1024*4000, hard)) #设置虚拟内存限制4G
+N_sub=15 # 量子比特的规模限制
+
+filelist=['./graphs/regular_d3_n40_cut54_0.txt', './graphs/regular_d3_n80_cut108_0.txt',
+          './graphs/weight_p0.5_n40_cut238.txt','./graphs/weight_p0.2_cut406.txt',
+          './graphs/partition_n80_cut226_0.txt', './graphs/partition_n80_cut231_1.txt'
+          ]#图文件
+
+
+def build_sub_qubo(solution,N_sub,J,h=None,C=0.0):
+    '''
+    自定义函数选取subqubo子问题。
+    例如可简单选择对cost影响最大的前N_sub个变量组合成为subqubo子问题。
+    【注】本函数非必须，仅供参考
+    
+    返回
+    subqubo问题变量的指标，和对应的J，h，C。
+    '''
+    delta_L=[]
+    for j in range(len(solution)):
+        copy_x=copy.deepcopy(solution)
+        copy_x[j]=-copy_x[j]
+        x_flip=copy_x
+        sol_qubo=calc_qubo_x(J,solution,h=h,C=C)
+        x_flip_qubo=calc_qubo_x(J,x_flip,h=h,C=C)
+        delta=x_flip_qubo-sol_qubo
+        delta_L.append(delta)
+    delta_L=np.array(delta_L)
+    #print(delta_L)
+    sub_index = np.argpartition(delta_L, -N_sub)[-N_sub:] # subqubo子问题的变量们
+    #选取能量增量最大的前 N_sub 个变量的索引，存储在 sub_index 中。
+    #print('subindex:',sub_index)
+    J_sub,h_sub,C_sub = calc_subqubo(sub_index, solution, J, h=h,C=C )
+    return sub_index,J_sub,h_sub,C_sub
+
+def solve(sol,G):
+    '''
+    自定义求解函数。
+    例如可简单通过不断抽取N_sub个变量组成subqubo问题并对子问题进行求解，最终收敛到一个固定值。
+    或者可采取其他方法...
+    
+    【注】可任意改变求解过程，但不可使用经典算法如模拟退火，禁忌搜索等提升解质量。请保持输入输出一致。
+    
+    输入：
+    sol （numpy.array）：初始随机0/1比特串，从左到右分别对应从第1到第N个问题变量。
+    G （matrix): QUBO问题矩阵
+    
+    输出：
+    sol （numpy.array）：求解结果的0/1比特串
+    cut_temp （float）：最终结果的cut值
+    '''
+    i=0
+    while(i<4):
+        sub_index,J_sub,h_sub,C_sub=build_sub_qubo(sol,N_sub,G,h=None,C=0)
+        #print('before sol:',calc_qubo_x(G, sol))
+        sol=solve_QAOA(J_sub,h_sub,C_sub,sub_index,sol,depth=3,tol=1e-5) # You can change the depth and tolerance of QAOA solver
+        qubo_temp=calc_qubo_x(G, sol)
+        cut_temp =calc_cut_x(G, sol)
+ #       print('after subqubo:',qubo_temp,'|cut:',cut_temp)
+        i+=1
+    return sol, cut_temp
+
+
+def run():
+    """
+    Main run function, for each graph need to run for 20 times to get the mean result.
+    Please do not change this function, we use this function to score your algorithm. 
+    """
+    cut_list=[]
+    for filename in filelist[:]:
+        #print(f'--------- File: {filename}--------')
+        g,G=read_graph(filename)
+        n=len(g.nodes) # 图整体规模
+        cuts=[]
+        for turn in range(20):
+            #print(f'------turn {turn}------')
+            sol=init_solution(n) # 随机初始化解   
+            qubo_start = calc_qubo_x(G, sol)
+            cut_start =calc_cut_x(G, sol)
+            #print('origin qubo:',qubo_start,'|cut:',cut_start)
+            solution,cut=solve(sol, G) #主要求解函数, 主要代码实现
+            cuts.append(cut)
+        cut_list.append(cuts)    
+    return np.array(cut_list)  
+
+
+
+if __name__== "__main__": 
+    #计算分数
+    cut_list=run()
+    print(cut_list)
+    max_arr=np.array([54,108,238,406,226,231])
+    size_arr=np.array([40,80,40,80,80,80])
+    score=np.array(np.mean(cut_list,axis=1))/max_arr*size_arr
+    print('score:',np.sum(score))
+    
+```
+
+### utils.py
+
 ```python 
 import numpy as np
 import networkx as nx
