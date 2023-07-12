@@ -66,16 +66,9 @@ pip install mindspore==1.10.1 mindquantum networkx
 
 
 ### 修改
++ 将影响力由一个点修改后的能量变化改为两个点的。
 ```python
 def build_sub_qubo(solution,N_sub,J,h=None,C=0.0):
-    '''
-    自定义函数选取subqubo子问题。
-    例如可简单选择对cost影响最大的前N_sub个变量组合成为subqubo子问题。
-    【注】本函数非必须，仅供参考
-    
-    返回
-    subqubo问题变量的指标，和对应的J，h，C。
-    '''
     delta_L=[]
     sol_qubo=calc_qubo_x(J,solution,h=h,C=C)
     for j in range(len(solution)):

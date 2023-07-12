@@ -17,3 +17,12 @@ conda create -n web_interface python=3.9
 pip install flask
 ```
 2. 在app.py定义路由，在`templates/`文件夹下创建index.html文件映射 网页前端。
+3. 启动`python app.py`
+
+
+### 改进
+- [x] 把图片换成缩略图，减少浏览器加载图片时间
+	- [-] 上传官方缩略图，预计耗时超过100h
+	- [x] 使用PIL对图片进行压缩，将压缩图片存到本地。
+
+- [ ] 因为一共有30道题，添加自动切换到下一题的按钮。
