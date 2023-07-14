@@ -18,10 +18,9 @@
 1. 存在动作流，不能仅凭单张图片来判断，必须知道上下文。比如：
 	+ `716  A drone landing or rising from the ground`
 	+ `721  Two persons are seen while at least one of them is speaking in a non-English language outdoors`
-2. 处理权重的时间很短，融合一次分数耗时接近1h。
-3. 只用图片交互，有时也很难判断是否符合query的真实意图。
-4. 在处理用prompt处理query时，可以考虑将复杂词汇进行翻译，比如
-	+ 717 a dry area  TOP30仍然存在水池地![image.png|500](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713122920.png)
-	+ 730 non-kitchen  因为存在刀这个单词，很多仍然在厨房里。![image.png|450](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713123617.png)
-5. 生成待交互的文件也是43min-1h，交互时间大概20min，生成权重5min，生成csv文件43min-1h
-	+ 减少交互时间，TOP30可以取前20000个。
+2. 只用图片交互，有时也很难判断是否符合query的真实意图。
+3. 在处理用prompt处理query时，可以考虑将复杂词汇进行翻译，比如
+	+ 717 a dry area  TOP30仍然存在水池地![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713122920.png)
+	+ 730 non-kitchen  因为存在刀这个单词，很多仍然在厨房里。![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713123617.png)
+4. 生成待交互的文件也是43min-1h，交互时间大概20min，生成权重5min，生成csv文件43min-1h
+	+ 减少交互时间，TOP30可以取前100000个。生成待交互的图片从43min变为4 min
