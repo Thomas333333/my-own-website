@@ -30,3 +30,4 @@
 	+ 730 non-kitchen  因为存在刀这个单词，很多仍然在厨房里。![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713123617.png)
 4. 生成待交互的文件也是43min-1h，交互时间大概20min，生成权重5min，生成csv文件43min-1h
 	+ 减少交互时间，TOP30可以取前100000个。生成待交互的图片从43min变为4 min
+5. 

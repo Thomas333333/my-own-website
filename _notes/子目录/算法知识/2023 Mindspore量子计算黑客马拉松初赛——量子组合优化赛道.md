@@ -17,7 +17,12 @@ Max-Cut问题需要将图中的顶点分成两部分，使得两部分被切割�
 
 ### Max-Cut问题$\longrightarrow$哈密顿量的基态能量求解
 
-我们对问题进行建模，我们让一个量子比特对应一个顶点，其中量子态$|0\rangle$ 代表分到第一组，$|1\rangle$ 代表分到第二组。因此我们只要找到一个哈密顿量H使得：当有连线的两个顶点处于不同量子态时，哈密顿量的期望值为-1，即
+我们对问题进行建模，我们让一个量子比特对应一个顶点，其中量子态
+$$\begin{matrix}
+ |0\rangle 代表分到第一组\\
+|1\rangle代表分到第二组
+\end{matrix}$$
+因此我们只要找到一个哈密顿量H使得：当有连线的两个顶点处于不同量子态时，哈密顿量的期望值为-1，即
 
 $$\langle01|H|01\rangle=-1,\quad\langle10|H|10\rangle=-1$$
 
@@ -52,7 +57,9 @@ $$\langle00|H|00\rangle=0,\quad\langle11|H|11\rangle=0$$
 
 ==实质上是两个不同的量子线路，第一个量子线路不断优化量子门参数使得HB演化至HC。我们记录这些参数（量子门顺序），在第二个量子线路中，先制备HB的基态，然后对其应用之前的参数，最后进行多次量子观测，最后的观测结果概率最高的就最有可能是HC的基态。==
 
-在这里选取HB=![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708190752.png)，则其基态对应为$|+\rangle ^{\otimes n}$ 。（可以证明，在基态时HB的期望值为0，最低）
+在这里选取HB=![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708190752.png)，则
+$$其基态对应为|+\rangle ^{\otimes n}$$
+（可以证明，在基态时HB的期望值为0，最低）
 
 ### ansatz线路
 #### 演化方程
@@ -62,8 +69,12 @@ t=0时为HB，t=T为HC
 当T足够大时，系统将始终处于H（t）的瞬时基态上。存在积分形式：
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708204523.png)
 
-其中![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708204602.png)对应一系列量子门，$|\psi (0)\rangle$ 对应HB
-的基态，$|\psi (T)\rangle$对应HC的基态。可根据该公式构造量子线路。
+其中![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708204602.png)对应一系列量子门，
+$$\begin{matrix}
+ |\psi (0)\rangle 对应HB
+的基态\\|\psi (T)\rangle对应HC的基态
+\end{matrix}$$
+可根据该公式构造量子线路。
 
 根据trotter公式
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708204739.png)

@@ -24,10 +24,11 @@ pip install flask
 ## 展示效果
 + 交互界面
 ![image.png|500](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713105638.png)
-+ 选中图片后右下角会出现图标
-![image.png|378](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713115313.png)
-![image.png|380](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713115241.png)
-+ 最后点击interact按钮，生成选中图片的txt文件，自动切换到下一题。
++ 单击一次代表选中做正反馈，右下角出现"+"；点击两次代表选中做负反馈，右下角出现"-"
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230713115313.png)
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230715162015.png)
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230715162047.png)
++ 最后点击interact按钮，生成选中图片的txt文件，并自动切换到下一题。
 ## 改进
 - [x] 把图片换成缩略图，减少浏览器加载图片时间
 	- [-] 上传官方缩略图，预计耗时超过100h
@@ -35,3 +36,6 @@ pip install flask
 
 - [x] 因为一共有30道题，添加自动切换到下一题的按钮。
 	- [x] 添加script函数，在按下按钮后修改app.py中的全局变量qid并刷新页面
+
+- [x] 由于算法需要，需要加入正反馈和负反馈，对图片设计两种不同的选中状态。
+	- [x] 在css设计两种不同的类，在script函数中设置新变量读取图片变量，根据变量值进行条件判断，赋予对应属性。 ==7.15==
