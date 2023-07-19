@@ -16,12 +16,16 @@ pip install mindspore==1.10.1 mindquantum networkx
 返回图g，以及QUBO问题对应的矩阵
 + g是nx中的图格式，G是csr格式的稀疏矩阵
 
+$$G_{ij}=\begin{cases}
+  -\frac{1}{2} &if \ x_i与x_j相邻\\
+0 & if \ x_i与x_j不相邻
+\end{cases}$$
+
 #### calc_subqubo(sub_index, x, J, h=None,C=0.0 )
-返回修正后的子矩阵 `J_sub`、修正后的节点偏置 `h_sub` 和修正后的常数项 `C_sub`。
-+ 将节点状态 `x` 转换为 {-1, +1} 的取值
-+ 根据子问题的节点索引 `sub_index` 和完整问题的 QUBO 矩阵 `J`，提取子问题对应的子矩阵 `J_sub`
-+ 如果节点偏置列表 `h` 不为 None，则提取子问题对应的节点偏置 `h_sub`，否则设置为全零数组。
-+ 计算修正后的节点偏置 `h_sub`。对于子问题中的每个节点，计算其在完整问题中与其他节点的连接边的权重乘以其他节点的状态，并将其累加到对应的节点偏置上。
+sub_index是QAOA算法的15量子比特。
+fix_index是不在QAOA算法的15量子比特的所有其他比特。
+h_sub是一个有sub_index的解向量，目的是使得在仅修改15个节点的位置的情况下，记录该15个节点分到第二组比分到第一组的cut的变化，在哈密顿量中作为Z门的参数，参与QAOA算法优化，使得该哈密顿量为全局最优解。
+
 
 #### check_degenerate(J_dict, h)
 检查 Qbuild_ham(J_dict,h)UBO 问题是否存在退化情况，并对节点偏置进行修正。
@@ -66,7 +70,7 @@ pip install mindspore==1.10.1 mindquantum networkx
 
 
 ### 修改
-+ 将影响力由一个点修改后的能量变化改为两个点的。
+1. 将影响力由一个点修改后的能量变化改为两个点的。==测试后变化不大==
 ```python
 def build_sub_qubo(solution,N_sub,J,h=None,C=0.0):
     delta_L=[]
@@ -97,3 +101,5 @@ def build_sub_qubo(solution,N_sub,J,h=None,C=0.0):
     J_sub,h_sub,C_sub = calc_subqubo(sub_index, solution, J, h=h,C=C )
     return sub_index,J_sub,h_sub,C_sub
 ```
+2. 选取15个点，使得选取的每个点与未选取的每个点的边的连线最少
+3. 增加电路循环p

@@ -96,10 +96,6 @@ e^{-i\beta_lH_B}=e^{-i\beta_l\sum_{i} X_i}=\prod_{i}RX(2\beta_l)
 
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708205507.png)对应ZZ门，由此我们可以根据公式![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230708210909.png)构建量子线路。p代表线路循环次数，p越大，模拟的越好。循环次数受算力制约。
 
-
-
-
-
 ## 难点
 1. 限制量子比特个数最多15个。节点个数远超可使用的量子比特数。
 
