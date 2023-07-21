@@ -35,6 +35,18 @@
 	- [x] 第二轮反馈的时候不需要第一轮的反馈信息，不然反馈项之前随着迭代，权重就不是均等的了。==7.16==
 	- [x] 整合成一个python文件，省去一些等待时间 ==7.16==
 6. 不敢做负反馈，以及很难判断是否是负反馈，负反馈得分不能超过正反馈得分`1707，1721`
++ A person is ==mixing== ingredients in a bowl, cup, or similar type of containers![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100032.png)
++ A person wearing a light t-shirt with dark or black writing on it![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100140.png)
++ A man wearing black shorts![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100224.png)![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100312.png)
+
++ 
+
+
+
+
+
+
+
 
 ### `csv2xml.py`
 用于将csv文件转化为xml格式的提交结果。
@@ -43,3 +55,6 @@
 刚刚做完第一轮循环，生成了csv结果。明天重新按照读取顺序生成权重new_w，然后进行第二轮反馈。
 7.19
 + 用ChatGPT生成的语料训练的Caclip说不定能更好地帮助我们理解query
+7.20
++ 算法结果越跑越差，交互算法的问题。首先在反馈列表为空的时候，结果是正常的。
+	+ 怀疑是fusion时对列表中正反馈和负反馈的元素进行了提前或者滞后
