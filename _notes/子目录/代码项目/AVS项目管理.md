@@ -39,15 +39,6 @@
 + A person wearing a light t-shirt with dark or black writing on it![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100140.png)
 + A man wearing black shorts![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100224.png)![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230721100312.png)
 
-+ 
-
-
-
-
-
-
-
-
 ### `csv2xml.py`
 用于将csv文件转化为xml格式的提交结果。
 
@@ -58,3 +49,8 @@
 7.20
 + 算法结果越跑越差，交互算法的问题。首先在反馈列表为空的时候，结果是正常的。
 	+ 怀疑是fusion时对列表中正反馈和负反馈的元素进行了提前或者滞后
+
+### 重要时间
++  Final submissions：Washington, DC time on July 31st. 大概是中国7月31日十二点开始。
++ 提交网址：压缩成zip文件，选择自己的id，填写自己的邮箱地址
++ 注意qid要替换成731-750，并且对应的符号需要更换。
