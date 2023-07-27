@@ -14,7 +14,7 @@
 	
 #### [ Netlify](https://app.netlify.com/sites/cool-crisp-af8aed/overview)环境部署 博客部署
 + [教程](https://zhuanlan.zhihu.com/p/55252024)
-+ 获取个人网站网址 [My digital garden (cool-crisp-af8aed.netlify.app)](https://cool-crisp-af8aed.netlify.app/)
++ 获取个人网站网址 
 
 #### 如何自动发布到github与更新web网页
 + [参考](https://refinedmind.co/obsidian-jekyll-workflow)
