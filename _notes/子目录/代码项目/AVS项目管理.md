@@ -54,3 +54,11 @@
 +  Final submissions：Washington, DC time on July 31st. 大概是中国7月31日十二点开始。
 + 提交网址：压缩成zip文件，选择自己的id，填写自己的邮箱地址
 + 注意qid要替换成731-750，并且对应的符号需要更换。
+
+### stable-diffusion 
+stable-diffusion模型提特征：ViT-B/32
+1400s=23min 20s - 30topics/10——33h
+虚假4倍加速后 1081s=18min——30h
+真实4倍加速后  328s= 5min—— 10h
+
+
