@@ -61,4 +61,6 @@ stable-diffusion模型提特征：ViT-B/32
 虚假4倍加速后 1081s=18min——30h
 真实4倍加速后  328s= 5min—— 10h
 
+提取特征用时 1min27s——8700s=2h30min
+
 
