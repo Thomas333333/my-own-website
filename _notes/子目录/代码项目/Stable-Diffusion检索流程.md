@@ -11,7 +11,13 @@
 		- ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230729113646.png)
 3. `compute_score.py`使用faiss加速计算生成图片与数据库图片的相似度。
 	+ 2个topics ——1h13min  总的 15h
-	- [ ] 大概率问题出在这里。
-2.  `merge_result_prob.py`将所有txt文件合并成一个txt文件用作计算指标
-	- [ ] 在此之前出了问题
-3. `perl_to_excel.py`计算指标
+	- [x] 大概率问题出在这里。
+		- 是faiss计算的结果并不是相似度，而是一个给分，分数越大，相关性越低，所以应该升序排序，`sorted()`函数内不该加`reverse = True`
+4.  `merge_result_prob.py`将所有txt文件合并成一个txt文件用作计算指标
+	
+5. `perl_to_excel.py`计算指标
+
+- [x] 7.29 23:47 测试成功！终于到正常水平了。![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230729234737.png)
+- [ ] 20topics——20x35min~11h40min  明天中午12点，明天可以想想4个优先级的提交思路，和老师汇报一下，或者改一下交互算法。
+
+
