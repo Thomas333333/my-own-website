@@ -48,6 +48,19 @@
 			- 在jekyll论坛上有人遇到了[类似的情况](https://talk.jekyllrb.com/t/jekyll-and-mathjax/5514)
 			- [ ] 可能的解决方案：在bat文件中，同步到github前运行python脚本将内联公式中的_替换成\_
 			- [ ] 参考链接：[jekyll论坛](https://talk.jekyllrb.com/t/jekyll-and-mathjax/5514)，[github issue](https://github.com/mathjax/MathJax/issues/3067)，[github issue2](https://github.com/mathjax/MathJax/issues/2757)，[github issue3](https://github.com/mathjax/MathJax/issues/830)
+			- [x] 最终方案是参考[包哥的博客](https://baoyu.space/Jekyll-Math.html)，在`_includes/footer.html`前加入脚本，将下划线转换的html标签重新更改为下划线。
+```
+<script>
+    function rep() 
+    {
+        document.body.innerHTML
+            = document.body.innerHTML
+            .replaceAll("<em>", "_").replaceAll("</em>", "_")
+        
+    }
+    rep()
+</script>
+```
 		
 - [x] 无法自动同步到github上
 	- [ ] 尝试插件obsidian-git，我的工作区只设置在子文件_note下，没法跳出子文件夹进行push 

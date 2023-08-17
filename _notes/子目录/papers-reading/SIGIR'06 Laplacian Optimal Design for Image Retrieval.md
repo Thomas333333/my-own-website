@@ -37,7 +37,8 @@ title: "SIGIR'06 Laplacian Optimal Design for Image Retrieval"
 ####  背景
 AL:Given a set of points$\mathcal{A}=\{\mathbf{x}_{1},\mathbf{x}_{2},\cdots,\mathbf{x}_{m}\}$ in $\mathbb{R}^{d}$ , find a subset $\mathcal{B}=\{\mathbf{z}_{1},\mathbf{z}_{2},\cdots,\mathbf{z}_{m}\} \subset \mathcal{A}$ which contains the most informative points. In other words,the points $z_i$ $(i=1,\cdots,k)$can improve the classifier the most if they are labeled and used as training points.
 
-> 最小化误差平方和  $$J_{sse}(\mathbf{w})=\sum\limits_{i=1}^k\left(\mathbf{w}^T\mathbf{z}_i-y_i\right)^2$$
+> 最小化误差平方和  
+> $$J_{sse}(\mathbf{w})=\sum\limits_{i=1}^k\left(\mathbf{w}^T\mathbf{z}_i-y_i\right)^2$$
 > 协方差矩阵为$\sigma^2 H_{sse}^{-1}$，其中$$H_{sse}=\left(\frac{\partial^2J_{sse}}{\partial\mathbf{w}^2}\right)=\left(\sum\limits_{i=1}^k\mathbf{z}_i\mathbf{z}_i^T\right)=ZZ^T$$>The three most common scalar measures of the size of the parameter covariance matrix in optimal experimental design are: 
 >• D-optimal design: determinant of $H_{sse}$ 
 >• A-optimal design: trace of $H_{sse}$ .
