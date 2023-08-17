@@ -11,3 +11,14 @@
     {% include link-previews.html wrapperQuerySelector="content" %}
   </body>
 </html>
+
+<script>
+    function rep() 
+    {
+        document.body.innerHTML
+            = document.body.innerHTML
+            .replaceAll("<em>", "_").replaceAll("</em>", "_")
+        
+    }
+    rep()
+</script>
