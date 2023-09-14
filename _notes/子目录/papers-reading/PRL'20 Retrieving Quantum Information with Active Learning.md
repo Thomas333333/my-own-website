@@ -1,10 +1,10 @@
 ---
 ---
 
+---
+title
+---
 
----
-title:
----
 阅读时间：2023.6.5
 
 作者：Yongcheng Ding... ——International Center of Quantum Artificial Intelligence for Science and Technology (QuArtist) and Department of Physics, Shanghai University
