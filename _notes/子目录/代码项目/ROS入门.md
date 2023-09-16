@@ -3,7 +3,7 @@
 ```bash
 sudo apt-get install ros-kinetic-ros-tutorials
 ```
-![image.png|500](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230912143247.png)
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230912143247.png)
 
 #### rospack
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230912143803.png)
