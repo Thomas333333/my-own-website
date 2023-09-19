@@ -106,4 +106,211 @@ $ rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230912155406.png)
 
 
+---
+### ROS程序包
 
+#### catkin_make
+![image.png|500](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919144255.png)
+
+#### 创建beginner_tutorials文件夹
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919144841.png)
+
+#### 查看程序包依赖关系
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919145029.png)
+
+#### 所有文件在运行前需要打开roscore
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919145918.png)
+
+
+### 实验6
+
+#### Num.msg 
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919152753.png)
+
+#### 插入build_depend 和exec_depend 
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919153017.png)
+
+#### 修改CMakeLists.txt
+#### rosmsg show 显示消息
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919153629.png)
+
+#### 修改CMakeLists.txt
+![](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919154323.png)
+#### rossrv show 显示消息
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919154248.png)
+
+
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919154539.png)
+
+利用catkin_make重新编译
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919154638.png)
+
+
+### 编写简单的服务器和客户端
+将代码写入`scripts/add_two_ints_server.py`
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919155351.png)
+
+```python
+#!/usr/bin/env python
+
+from beginner_tutorials.srv import AddTwoInts,AddTwoIntsResponse
+import rospy
+
+def handle_add_two_ints(req):
+    print "Returning [%s + %s = %s]"%(req.a, req.b, (req.a + req.b))
+    return AddTwoIntsResponse(req.a + req.b)
+
+def add_two_ints_server():
+    rospy.init_node('add_two_ints_server')#声明节点
+    s = rospy.Service('add_two_ints', AddTwoInts, handle_add_two_ints)#声明服务 服务类型：AddTwoInts
+    print "Ready to add two ints."
+    rospy.spin()#防止代码退出，直到服务关闭“
+
+if __name__ == "__main__":
+    add_two_ints_server()
+```
+
+#### 编写client节点
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919155708.png)
+
+```python
+#!/usr/bin/env python
+
+import sys
+import rospy
+from beginner_tutorials.srv import *
+
+def add_two_ints_client(x, y):
+    rospy.wait_for_service('add_two_ints') #直到服务器端可用
+    try:
+        add_two_ints = rospy.ServiceProxy('add_two_ints', AddTwoInts)
+        resp1 = add_two_ints(x, y)
+        return resp1.sum
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+
+def usage():
+    return "%s [x y]"%sys.argv[0]
+
+if __name__ == "__main__":
+    if len(sys.argv) == 3:
+        x = int(sys.argv[1])
+        y = int(sys.argv[2])
+    else:
+        print usage()
+        sys.exit(1)
+    print "Requesting %s+%s"%(x, y)
+    print "%s + %s = %s"%(x, y, add_two_ints_client(x, y))
+```
+
+编译节点
+
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919155929.png)
+
+#### 对servicer和client进行测试
+启动server
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919160109.png)
+
+启动client 并测试
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919160829.png)
+其中server端返回
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919160924.png)
+
+
+### 录制和回放数据
+rosbag
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919161417.png)
+生成记录文件
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919161447.png)
+
+rosbag info 
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919161534.png)
+
+rosbag play xx
+乌龟会在没有操控的情况下自动回放
+
+![image.png|475](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919161636.png)
+
+只录取指定内容
+````bash
+rosbag record -O subset /turtle1/cmd_vel /turtle1/pose
+````
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919162105.png)
+
+### TurtleBot导航仿真
+gazebo界面
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919162705.png)
+
+rviz界面
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919163115.png)
+
+控制机器人移动
+jl分别是左右转向，`，`是前进，i是后退
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919163851.png)
+
+保存地图
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919164823.png)
+
+### 发布器和订阅器
+发布器源代码
+```python
+#!/usr/bin/env python
+# license removed for brevity
+import rospy
+from std_msgs.msg import String
+
+def talker():
+    pub = rospy.Publisher('chatter', String, queue_size=10)# 使用消息类型字符串发布到聊天主题
+    rospy.init_node('talker', anonymous=True)
+    rate = rospy.Rate(10) # 10hz 创建一个Rate对象rate 每秒循环十次
+    while not rospy.is_shutdown():
+        hello_str = "hello world %s" % rospy.get_time()
+        rospy.loginfo(hello_str) # 消息被打印到屏幕，它被写入节点的日志文件，并被写入rosout
+        pub.publish(hello_str)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
+```
+
+订阅器源代码
+```python
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+
+def callback(data):
+    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    
+def listener():
+
+    # In ROS, nodes are uniquely named. If two nodes with the same
+    # name are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'listener' node so that multiple listeners can
+    # run simultaneously.
+    rospy.init_node('listener', anonymous=True)
+
+    rospy.Subscriber("chatter", String, callback)
+	#这声明你的节点订阅了类型为std_msgs.string的chatter主题。当接收到新消息时，将以消息作为第一个参数调用回调。
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
+
+if __name__ == '__main__':
+    listener()
+```
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919165931.png)
+
+编写完代码后进行编译
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919170110.png)
+
+#### 测试发布器和订阅器
+
+发布器
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919171050.png)
+
+订阅器
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20230919171131.png)
