@@ -73,6 +73,7 @@ Furthermore, we referred to the practices of last year's team. Based on textual 
 ##### QRA 
 ##### Top-K
 ### Analysis 
+
 ###  Conculsion
 
 
@@ -81,4 +82,22 @@ Furthermore, we referred to the practices of last year's team. Based on textual 
 
 ## presentation
 
-1. 如何确定权重
+### Experiment 
+1. various language-image model 
+	+ The more diverse the types of models, the better the results after fusion.
+	+ For models of the same kind, the fewer models that perform poorly, the better the results.
+2. mean image query （相同模态下处理）文-文 图-图
+3.用GPT prompt修改题目
+过渡：如何确定各个权重以到达最佳效果
+无监督算法——效果不佳
+引入交互
+
+4. Relevance Feedback：QT-IRA +Top-K
+	+ our method 
+	+ 反映问题
+5. 当我交互时会遇到的问题：
+
+### 总结
+1.多元化模型
+2.同模态处理
+3.交互时
