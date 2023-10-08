@@ -80,7 +80,8 @@ Furthermore, we referred to the practices of last year's team. Based on textual 
 引用：J. Wu, Z. Hou, Z. Ma, and C.-W. Ngo, “VIREO@trecvid 2021: Ad-hoc video search,” in In NIST TRECVID Workshop, 2021.
 
 
-## presentation
+## Presentation
+### proposal
 
 ### Experiment 
 1. various language-image model 
