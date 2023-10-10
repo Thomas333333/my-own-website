@@ -57,11 +57,15 @@ title: "TKDE'16_Relevance Feedback Algorithms Inspired By Quantum Detection"
 ##### 2.3.2 Gleason Theorem
 
   概率分布可以沿着称为密度矩阵的k维矩阵$\rho$的对角线排列 
-  $$\operatorname{diag}(\rho)=(p_1,\ldots,p_k)^{\prime}$$经典概率分布对应的密度矩阵总是对角的，并且具有单位迹，因为对角元素之和为 1
+  
+  $$\operatorname{diag}(\rho)=(p_1,\ldots,p_k)^{\prime}$$
+  
+  经典概率分布对应的密度矩阵总是对角的，并且具有单位迹，因为对角元素之和为 1
 
   当使用这种代数形式表示概率空间时，计算概率的函数是密度矩阵$\rho$乘以事件对应的投影得到的矩阵的迹。
   
  $$Trace(\rho|x\rangle \langle x|)$$
+ 
  当密度矩阵的rank为1时，
 
   此时可观测量的概率分布完全由状态向量定义。当密度矩阵的秩不为1时，为混合态，可由两个互斥的投影矩阵$A_0,A_1$表示。

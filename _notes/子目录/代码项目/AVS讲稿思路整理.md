@@ -87,7 +87,10 @@ Furthermore, we referred to the practices of last year's team. Based on textual 
 1. various language-image model 
 	+ The more diverse the types of models, the better the results after fusion.
 	+ For models of the same kind, the fewer models that perform poorly, the better the results.
-2. mean image query （相同模态下处理）文-文 图-图
+	+ 像一个投票器（集成学习）
+		+ 机器学习p171
+		+ 多数model认为正确的命中会在融合过程中获得较为靠前的排名
+1. mean image query （相同模态下处理）文-文 图-图
 3.用GPT prompt修改题目
 过渡：如何确定各个权重以到达最佳效果
 无监督算法——效果不佳
