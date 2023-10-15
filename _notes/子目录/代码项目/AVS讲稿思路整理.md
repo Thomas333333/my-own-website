@@ -69,15 +69,54 @@ Here, "id" represents the shot id corresponding to the keyframe, "M" denotes the
 
 Furthermore, we referred to the practices of last year's team. Based on textual input, we employed [the Diffusion model](https://huggingface.co/runwayml/stable-diffusion-v1-5) to generate 1000 images and utilized CLIP's Vit-B/32 model to extract image vectors. For each keyframe image, its text vector needs to be summed and normalized after calculating similarity with the image vectors of these 1000 images. Here, we can view this operation as generating a "mean image query", effectively transforming cross-modal tasks into comparisons within the image modality. In our testing, this method performed even better in certain queries where CLIP underperformed. With the Diffusion model, we obtained another list of similarity scores.
 #### Ranking Aggregation
+With the mentioned cross-modal models, we acquire multiple score lists ${s_i}$, and the final score can be defined as：
+
+$$s = \sum w_i s_i,$$
+
+which means we need to select an appropriate weight $w_i$, to achieve a relatively optimal result. Typically we set the respective weights heuristically. Based on the practices of previous years' teams and our experimental data, our model parameters are set as shown in the table.
+
 #### Relevance Feedback 
-##### QRA 
+
+In the Relevance-Feedback (R) runs, we fit the weights according to the users’ feedback. In the following part, we will introduce a Quantum-inspired Ranking Aggregation (QRA) method via users’ feedback on the relevance of the results.
+
 ##### Top-K
+##### QRA 
+
+A document can be determined by the relevance and non-relevance of a query in the quantum-inspired approaches to information retrieval,
+$$\left | d \right \rangle  = \alpha |r \rangle + \beta |\neg r \rangle$$ [1]
+
+where $\left | d \right \rangle$ is the state of the document to be retrieved, $|r  \rangle$ is the relevant state of the query, $|\neg r \rangle$ is the complementary state of $|r \rangle$, $\alpha$ and $\beta$ are the coefficients that subject to $|\alpha|^2 + |\tilde{\alpha}|^2 = 1$.
+
+Given a specific query and the weights set heuristically, we can get an initial ranking result. After one round of the user’s interaction, there are the images set with positive feedback $\Phi_+$ and the set with negative feedback $\Phi_-$.
+
+Considering both positive and negative feedback, in the perspective of [1], a new weight $\tilde{w_i}$ of each method $s_i$ can be defined as:
+
+$$\begin{aligned}
+
+   \tilde{w_i}:&= \frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 + \frac{1}{|\Phi_-|}\sum_{d \in                \Phi_-} \tilde{s}_{i,d}^2 \\
+
+            &=\frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 + \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-} 1 - s_{i,d}^2 \\
+
+            &=\frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 - \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-}s_{i,d}^2 + 1\\
+
+            &\xrightarrow{for\ simplicity} \frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 - \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-}s_{i,d}^2
+
+\end{aligned}$$
+
+To get a smooth update of the weight, we adopt the weighted average in our experiments:
+
+$$w_i = \alpha \tilde{w}_i + (1 - \alpha)w_i, \alpha \in (0, 1)$$
+
+The above feedback interaction can be repeated by iteration.
+
 ### Analysis 
 
 ###  Conculsion
 
 
 引用：J. Wu, Z. Hou, Z. Ma, and C.-W. Ngo, “VIREO@trecvid 2021: Ad-hoc video search,” in In NIST TRECVID Workshop, 2021.
+
+
 
 
 ## Presentation
