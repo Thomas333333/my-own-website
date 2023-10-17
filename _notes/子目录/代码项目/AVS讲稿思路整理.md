@@ -79,42 +79,52 @@ which means we need to select an appropriate weight $w_i$, to achieve a relative
 
 In the Relevance-Feedback (R) runs, we fit the weights according to the users’ feedback. In the following part, we will introduce a Quantum-inspired Ranking Aggregation (QRA) method via users’ feedback on the relevance of the results.
 
-##### Top-K
+##### Top-K Feedback
+In interactive submissions, we can conduct a maximum of three rounds, with interactions involving the top 30 items in each round. To maximize interactions, we promote the shots marked as positive feedback to the top of the list and place the shots marked as negative feedback at the end. This way, the same keyframes won't appear in each round, avoiding repetition.
 ##### QRA 
 
 A document can be determined by the relevance and non-relevance of a query in the quantum-inspired approaches to information retrieval,
-$$\left | d \right \rangle  = \alpha |r \rangle + \beta |\neg r \rangle$$ [1]
 
-where $\left | d \right \rangle$ is the state of the document to be retrieved, $|r  \rangle$ is the relevant state of the query, $|\neg r \rangle$ is the complementary state of $|r \rangle$, $\alpha$ and $\beta$ are the coefficients that subject to $|\alpha|^2 + |\tilde{\alpha}|^2 = 1$.
+$$\left | d \right \rangle  = \alpha |r \rangle + \tilde{\alpha} |\neg r \rangle$$
+
+where $\left | d \right \rangle$ is the state of the document to be retrieved, $|r  \rangle$ is the relevant state of the query, $|\neg r \rangle$ is the complementary state of $|r \rangle$, $\alpha$ and $\beta$ are the coefficients that subject to $|\alpha|^2 + |\tilde{\alpha}|^2 = 1$.于是，
+
+$$||\left \langle r \right | d\rangle  ||^2= |\alpha|^2 $$represents similarity between the document and the query.
 
 Given a specific query and the weights set heuristically, we can get an initial ranking result. After one round of the user’s interaction, there are the images set with positive feedback $\Phi_+$ and the set with negative feedback $\Phi_-$.
 
-Considering both positive and negative feedback, in the perspective of [1], a new weight $\tilde{w_i}$ of each method $s_i$ can be defined as:
+为了保证Top30的结果里尽可能多地出现正反馈图片，尽可能少地出现负反馈，我们希望包含负反馈的模型的权值减小，包含正反馈的模型的权值增加。
+To ensure that as many positive feedback images as possible appear in the Top 30 results，we want to decrease the weight of models that include negative feedback and increase the weight of models that include positive feedback.Considering both positive and negative feedback, in the perspective of [1], a new weight $\tilde{w_i}$ of the $i$ th method can be defined as:
 
 $$\begin{aligned}
 
-   \tilde{w_i}:&= \frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 + \frac{1}{|\Phi_-|}\sum_{d \in                \Phi_-} \tilde{s}_{i,d}^2 \\
+   \tilde{w_i}&= \frac{1}{|\Phi_+|}\sum_{d_j \in \Phi_+} ||\langle d_j| r\rangle||^2 + \frac{1}{|\Phi_-|}\sum_{d_k \in                \Phi_-} ||\langle d_k|\neg r\rangle||^2 \\
+   &= \frac{1}{|\Phi_+|}\sum_{d_j \in \Phi_+} s_{i,d_j} + \frac{1}{|\Phi_-|}\sum_{d_k \in                \Phi_-} \tilde{s}_{i,d_k} \\
 
-            &=\frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 + \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-} 1 - s_{i,d}^2 \\
+            &=\frac{1}{|\Phi_+|}\sum_{d_j \in \Phi_+} s_{i,d_j} + \frac{1}{|\Phi_-|}\sum_{d_k \in \Phi_-} 1 - s_{i,d_k} \\
 
-            &=\frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 - \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-}s_{i,d}^2 + 1\\
-
-            &\xrightarrow{for\ simplicity} \frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d}^2 - \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-}s_{i,d}^2
+            &=\frac{1}{|\Phi_+|}\sum_{d_j \in \Phi_+} s_{i,d_j} - \frac{1}{|\Phi_-|}\sum_{d_k \in \Phi_-}s_{i,d_k} + 1
 
 \end{aligned}$$
+For the sake of computation simplicity, we can ignore the trailing constants since we only need the change in weight trends. The new weights can be expressed in the following form:
 
-To get a smooth update of the weight, we adopt the weighted average in our experiments:
+$$ \tilde{w_i}= \frac{1}{|\Phi_+|}\sum_{d \in \Phi_+} s_{i,d} - \frac{1}{|\Phi_-|}\sum_{d \in \Phi_-}s_{i,d}$$
 
-$$w_i = \alpha \tilde{w}_i + (1 - \alpha)w_i, \alpha \in (0, 1)$$
+To get a smooth update of the weight as well as avoid the updated weights becoming 0, we adopt the weighted average in our experiments:
+
+$$w_i = \alpha \tilde{w}_i + (1 - \alpha)w_i, \alpha =0.9$$
 
 The above feedback interaction can be repeated by iteration.
 
 ### Analysis 
+#### 融合模型选择
+#### 同模态
+#### 交互算法
+
 
 ###  Conculsion
 
 
-引用：J. Wu, Z. Hou, Z. Ma, and C.-W. Ngo, “VIREO@trecvid 2021: Ad-hoc video search,” in In NIST TRECVID Workshop, 2021.
 
 
 
@@ -129,7 +139,7 @@ The above feedback interaction can be repeated by iteration.
 	+ 像一个投票器（集成学习）
 		+ 机器学习p171
 		+ 多数model认为正确的命中会在融合过程中获得较为靠前的排名
-1. mean image query （相同模态下处理）文-文 图-图
+1. mean image query （相同模态下处理）文-文 图-图 在简单语义上能取得较好的成绩
 3.用GPT prompt修改题目
 过渡：如何确定各个权重以到达最佳效果
 无监督算法——效果不佳
