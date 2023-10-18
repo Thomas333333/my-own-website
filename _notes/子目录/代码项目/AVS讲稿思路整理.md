@@ -118,8 +118,18 @@ The above feedback interaction can be repeated by iteration.
 
 ### Analysis 
 #### 融合模型选择
+我们的表现主要依靠多种embedding model的融合，来获得比单一模型更优越的泛化能力。具体实验数据在表。在模型选择上，我们认为
++ The more diverse the types of models, the better the results after fusion.
++ For models of the same kind, the fewer models that perform poorly, the better the results.
+这和集成学习的思想是类似的。
+
 #### 同模态
+受去年队伍的启发，我们发现将diffusion引入检索中会略微提升成绩。通过大量的生成符合query的图片，可以视作人类在想象可能出现在数据集中的图片，在结合可信的embedding model，我们能完成两个图片之间的比较。
+虽然总体来说，它的表现接近不同模型种类的预训练模型，但在我们的实验中，我们发现diffusion在某些题目上具有优势，如表格。比如去年的有关“建筑工地”和“农场机器”的题目，它的表现就要远好于其他基础模型。我们认为这是diffusion模型对于这些query的输出较为接近真实场景所造成的结果。
 #### 交互算法
+我们的交互算法虽然在今年的题目上有起作用，但是收益较小。我们认为主要原因是
++ 在我们交互列表的前30个结果时，对于过于简单或难的题目，有可能出现全对和全错的情况，这样模型的能力无法区分开来。
++ 在这一基础上，我们的交互只能获取简单的信息，而无法获得复杂的语义信息。举一个简单的例子，对于query “一个男人穿着黑色衣服”，这时出现了一张图片包含“一个女人穿着黑色衣服”。按照算法原理，我们会将其标记为负反馈，同时根据该图片在不同模型中的相似度值笼统地更新权重。但事实上，我们应该让模型知道找“黑色衣服”是对的，找“女人”是错的。对于那些擅长找“黑色衣服”的模型，他们的权重将错误地快速下降。如果我们能告诉他们修正后的query信息，无疑是更优秀的。这可能可以和concept bank技术进行结合。
 
 
 ###  Conculsion
