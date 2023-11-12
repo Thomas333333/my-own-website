@@ -149,13 +149,13 @@ The above feedback interaction can be repeated by iteration.
 	+ 像一个投票器（集成学习）
 		+ 机器学习p171
 		+ 多数model认为正确的命中会在融合过程中获得较为靠前的排名
-1. mean image query （相同模态下处理）文-文 图-图 在简单语义上能取得较好的成绩
-3.用GPT prompt修改题目
-过渡：如何确定各个权重以到达最佳效果
-无监督算法——效果不佳
-引入交互
+2. mean image query （相同模态下处理）文-文 图-图 在简单语义上能取得较好的成绩
+3. 用GPT prompt修改题目
+	过渡：如何确定各个权重以到达最佳效果
+	无监督算法——效果不佳
+	引入交互
 
-4. Relevance Feedback：QT-IRA +Top-K
+4. Relevance Feedback：IRA +Top-K
 	+ our method 
 	+ 反映问题
 5. 当我交互时会遇到的问题：
@@ -163,4 +163,4 @@ The above feedback interaction can be repeated by iteration.
 ### 总结
 1.多元化模型
 2.同模态处理
-3.交互时
+3.交互算法设计
