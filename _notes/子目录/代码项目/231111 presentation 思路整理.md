@@ -1,7 +1,10 @@
 
-### Introduction 
+## Introduction 
 + AVS任务解释
 + 与KIS的区别：强调抽象，简短——引出对理解语义的要求较高——嵌入模型
+
+## solution
+强调我们参考了去年第一名队伍的方法
 
 ### Step1：Pre-processing 
 + 将官方数据集中的关键帧处理成图片嵌入向量，提前储存，用于计算
@@ -18,4 +21,7 @@
 
 ### Step 5 ：
 + 权重是由我们根据各模型在2022AVS题目的表现所人为设置的
+
+## Experiments 
+### Model Selection 
 + 
