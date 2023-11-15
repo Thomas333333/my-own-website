@@ -12,10 +12,10 @@ permalink: /
     This is Thomas's personal website. I am major in Artificial Intelligence in Wuhan University. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
     </p>
   <ol style="background: #f5f7ff;">
-    <li style="background: #f5f7ff;"><strong>[[Papers-Reading]]</strong></li>
-    <li style="background: #f5f7ff;"><strong>[[代码项目]]</strong></li>
-    <li style="background: #f5f7ff;"><strong>[[算法知识]]</strong></li>
-    <li style="background: #f5f7ff;"><strong>[[生活]]</strong></li>
+    <li style="background: #f5f7ff;"><strong>[[Paper-Reading]]</strong></li>
+    <li style="background: #f5f7ff;"><strong>[[Projects]]</strong></li>
+    <li style="background: #f5f7ff;"><strong>[[Algorithm and Classes]]</strong></li>
+    <li style="background: #f5f7ff;"><strong>[[Life]]</strong></li>
 
 
   </ol>
