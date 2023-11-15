@@ -9,7 +9,7 @@ permalink: /
 <div class="container">         <h1>This is Thomas's! 🌱 </h1> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/DSC_7355.JPG' width="300" height="200"> </div>
 
 <p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;">
-    这里是Thomas的个人网站，目前在WHU读AI专业。该网站主要用于分享科研论文笔记、同时记录一些接触过的工程文件。笔记主要分为以下几个部分:
+    This is Thomas's personal webdsite. I am major in AI in Wuhan University. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
     </p>
   <ol style="background: #f5f7ff;">
     <li style="background: #f5f7ff;"><strong>[[论文阅读]]</strong></li>
