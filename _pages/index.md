@@ -42,7 +42,8 @@ Codes：<a href='https://github.com/Thomas333333?tab=repositories'>https://githu
 
 + 大创项目：量子计算启发的多模态复合语义视频检索（2022.09-2023.09  指导老师：梁超老师）
   +  [Video Browser Showdown 2023 Best Newcomer](https://videobrowsershowdown.org/hall-of-fame/) 
-  + Song, W., **He, J.**, Li, X., Feng, S., & Liang, C. (2023, January). QIVISE: A Quantum-Inspired Interactive Video Search Engine in VBS2023. In *International Conference on Multimedia Modeling* (pp. 640-645). Cham: Springer International Publishing.（CCF-C类 共同一作）
+  + [Song, W., **He, J.**, Li, X., Feng, S., & Liang, C. (2023, January). QIVISE: A Quantum-Inspired Interactive Video Search Engine in VBS2023. In *International Conference on Multimedia Modeling* (pp. 640-645). Cham: Springer International Publishing.](https://link.springer.com/chapter/10.1007/978-3-031-27077-2_52)（CCF-C类 共同一作）
++ TREC Video Retrieval Evaluation2023 Ad-hoc Search任务排名第一（2023.01-2023.11  指导老师：梁超老师）
 + 《量子计算》课程助教（2022.09-2023.09）
   + 参与构建课程内容：量子神经网络
 
