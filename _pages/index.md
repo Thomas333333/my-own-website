@@ -9,13 +9,14 @@ permalink: /
 <div class="container">         <h1>This is Thomas's! 🌱 </h1> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/DSC_7355.JPG' width="300" height="200"> </div>
 
 <p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;">
-    This is Thomas's personal webdsite. I am major in AI in Wuhan University. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
+    This is Thomas's personal website. I am major in Artificial Intelligence in Wuhan University. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
     </p>
   <ol style="background: #f5f7ff;">
-    <li style="background: #f5f7ff;"><strong>[[论文阅读]]</strong></li>
+    <li style="background: #f5f7ff;"><strong>[[Papers-Reading]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[代码项目]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[算法知识]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[生活]]</strong></li>
+
 
   </ol>
 
