@@ -43,7 +43,7 @@ Codes：<a href='https://github.com/Thomas333333?tab=repositories'>https://githu
 
 + College student innovation projects：Multimodal compound semantic video retrieval inspired by quantum computing（2022.09-2023.09  Supervising teacher：Chao Liang）
   +  Award：[Video Browser Showdown 2023 Best Newcomer](https://videobrowsershowdown.org/hall-of-fame/) 
-  + Paper：[Song, W., **He, J.**, Li, X., Feng, S., & Liang, C. (2023, January). QIVISE: A Quantum-Inspired Interactive Video Search Engine in VBS2023. In *International Conference on Multimedia Modeling* (pp. 640-645). Cham: Springer International Publishing.](https://link.springer.com/chapter/10.1007/978-3-031-27077-2_52)（CCF-C conference paper- Co-first author）
+  + Paper：[Song, W., **He, J.**, Li, X., Feng, S., & Liang, C. (2023, January). QIVISE: A Quantum-Inspired Interactive Video Search Engine in VBS2023. In *International Conference on Multimedia Modeling* (pp. 640-645). Cham: Springer International Publishing.](https://link.springer.com/chapter/10.1007/978-3-031-27077-2_52)（CCF-C conference paper——Co-first author）
 + TREC Video Retrieval Evaluation2023 Ad-hoc Search: 1st in automatic runs and interactive runs（2023.01-2023.11  Supervising teacher：Chao Liang）
   + Lead person
 
