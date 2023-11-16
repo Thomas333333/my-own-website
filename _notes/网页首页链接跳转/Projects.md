@@ -15,5 +15,7 @@
 + [[Stable-Diffusion检索流程]]
 + [[AVS paper思路整理]]   2023.10.4
 + [[AVS Speaker Proposal]] 2023.10.7
++ [[Presentation 思路整理]] 2023.11.11
++ [[TRECVID AVS 个人感受]] 2023.11.15
 
 
