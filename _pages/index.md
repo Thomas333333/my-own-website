@@ -6,7 +6,7 @@ permalink: /
 ---
 
 <style>     .container {         display: flex;         align-items: center;  justify-content: space-between;   }          .container img {         width: 300px;         height: 200px;     } </style>  
-<div class="container">         <h1>This is Thomas's! 🌱 </h1> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/DSC_7355.JPG' width="300" height="200"> </div>
+<div class="container">         <h1>This is Thomas's! 🌱 </h1> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/ZFC_8983.JPG' width="300" height="200"> </div>
 
 <p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;">
     This is Thomas's personal website. I am major in Artificial Intelligence in Wuhan University. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
