@@ -11,7 +11,7 @@
 + [[Survey'09_Active learning]]
 
 ### 3. Ensemble Learning 
-+ 
++ [[进化集成学习算法综述]]
 
 ## 待阅读合集
 ### 1.机器学习
