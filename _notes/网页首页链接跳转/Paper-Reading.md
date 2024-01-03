@@ -10,6 +10,9 @@
 + [[SIGIR'06 Laplacian Optimal Design for Image Retrieval]]
 + [[Survey'09_Active learning]]
 
+### 3. Ensemble Learning 
++ 
+
 ## 待阅读合集
 ### 1.机器学习
-+ 人工智能：现代方法（第4版）
++ 人工智能：现代方法（第3版）
