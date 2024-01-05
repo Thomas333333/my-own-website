@@ -12,6 +12,9 @@
 
 ### 3. Ensemble Learning 
 + [[进化集成学习算法综述]]
++ [[FCS'20 A survey on ensemble learning]]
++ [[Access'22 A Survey of Ensemble Learning]]：过于简单的集成学习入门介绍，公式和引用多，大部分只解决分类问题
++ [[Artif. Intell. Rev.‘23 A Survey on ensemble learning under the era of deep learning]]：重视统一的范式，举的例子涉及各个领域，较杂。虽然标题有深度学习，但看完之后感觉更像是一个概念，没有说明怎么和深度学习结合，还得是看具体案例。
 
 ## 待阅读合集
 ### 1.机器学习
