@@ -17,7 +17,7 @@
 + [[Artif. Intell. Rev.‘23 A Survey on ensemble learning under the era of deep learning]]：重视统一的范式，举的例子涉及各个领域，较杂。虽然标题有深度学习，但看完之后感觉更像是一个概念，没有说明怎么和深度学习结合，还得是看具体案例。
 
 ### 4. Large Language Model(LLM)
-+ 
++ [[⭐ ⭐ ⭐ ⭐ ⭐ arxiv 2311' LLM_Survey_Chinese]]：很全面的综述，重点讲述最新的模型、训练方法、测试。
 
 ## 待阅读合集
 ### 1.机器学习
