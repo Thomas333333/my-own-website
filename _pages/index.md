@@ -9,13 +9,14 @@ permalink: /
 <div class="container">         <h1>This is Thomas's! 🌱 </h1> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/ZFC_8983.JPG' width="300" height="200"> </div>
 
 <p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;">
-    This is Thomas's personal website. I am major in Artificial Intelligence in Wuhan University. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
+    This is Thomas's personal website. I am major in Artificial Intelligence in <a href="https://www.whu.edu.cn/">Wuhan University</a>. This website is used for sharing notes of papers and recording experience of projects. The main parts are as follows:
     </p>
   <ol style="background: #f5f7ff;">
     <li style="background: #f5f7ff;"><strong>[[Paper-Reading]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Projects]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Algorithm and Classes]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Life]]</strong></li>
+
 
 
   </ol>
@@ -44,7 +45,7 @@ Current research interests are focused on **Math in AI**、**all kinds of learni
 + **College student innovation projects**：Multimodal compound semantic video retrieval inspired by quantum computing（2022.09-2023.09  Supervising teacher：Chao Liang）
   +  **Award**：[Video Browser Showdown 2023 Best Newcomer](https://videobrowsershowdown.org/hall-of-fame/) 
   + **Paper**：[Song, W., **He, J.**, Li, X., Feng, S., & Liang, C. (2023, January). QIVISE: A Quantum-Inspired Interactive Video Search Engine in VBS2023. In *International Conference on Multimedia Modeling* (pp. 640-645). Cham: Springer International Publishing.](https://link.springer.com/chapter/10.1007/978-3-031-27077-2_52)（CCF-C conference paper——Co-first author）
-+ **[TREC Video Retrieval Evaluation2023 Ad-hoc Search](https://www-nlpir.nist.gov/projects/tvpubs/tv.pubs.23.org.html)**: 1st in automatic runs and interactive runs（2023.01-2023.11  Supervising teacher：Chao Liang）
++ **[TREC Video Retrieval Evaluation2023 Ad-hoc Search](https://www-nlpir.nist.gov/projects/tvpubs/tv.pubs.23.org.html)**: 1st in automatic runs and interactive runs（2023.01-2023.11  Supervising teacher：[Chao Liang](https://cs.whu.edu.cn/info/1019/2832.htm)）
   + Lead person
   + Present a speech of our approach and experience in the online meeting in English
   

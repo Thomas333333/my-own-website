@@ -2,7 +2,6 @@
 时间：24.1.8
 
 ## 1.引言
-
  Static LM➡️ Network LM ➡️Pre-trained LM ➡️ Large LM
 
 PLM:预训练一个网络捕捉上下文的感知词表示。
