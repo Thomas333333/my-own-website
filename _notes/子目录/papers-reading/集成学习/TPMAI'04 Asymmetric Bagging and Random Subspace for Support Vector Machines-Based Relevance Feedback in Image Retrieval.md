@@ -14,4 +14,21 @@
 主要解决样本不平衡的问题，通过在负反馈中进行采样，使其数量保持和正反馈一致，分给不同的弱分类器进行训练，使他们具有多样性
 ![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240111163653.png)
 
-### 3.2 Random Subspace 
+### 3.2 Random Subspace .
+这个特征集难道是指 颜色直方图、饱和度、形状这些特征吗，不充分利用真的可行吗？
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240111173509.png)
+
+### 3.3 融合的两种方式
+1.
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240111173728.png)
+
+2.Bayes Sum Rule 
+
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240111173750.png)
+
+
+## 5.实验结果
++ SVM在小训练集下是不稳定的
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240111174035.png)
++ 对于不平衡的数据，SVM的超平面会发生偏移。会偏向具有更多训练个数的类别。
++ 
