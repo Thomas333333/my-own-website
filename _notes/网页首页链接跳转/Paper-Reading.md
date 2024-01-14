@@ -23,7 +23,7 @@
 ### 4. Large Language Model(LLM)
 + [[⭐ ⭐ ⭐ ⭐ ⭐ arxiv 2311' LLM_Survey_Chinese]]：很全面的综述，重点讲述最新的模型、训练方法、测试。
 + [[arxiv'21 How much can clip benefit vision-and-language Tasks]]：用CLIP的视觉编码器完成V&L的任务，实验较完整，理论无拓展。
-
++ [[⭐⭐⭐⭐⭐CLIP：Learning Transferable Visual Models From Natural Language Supervision]]：V&L的开山之作
 
 ## 待阅读合集
 ### 1.机器学习
