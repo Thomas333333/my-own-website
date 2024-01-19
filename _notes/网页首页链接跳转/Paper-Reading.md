@@ -18,6 +18,7 @@
 #### 应用
 + [[TPMAI'04 Asymmetric Bagging and Random Subspace for Support Vector Machines-Based Relevance Feedback in Image Retrieval]] ：简单的SVM+随机采样，用于消除CBIR中的数据量小或者不平衡。
 + [[Access'17 An_Ensemble_Deep_Learning_Method_for_Vehicle_Type_Classification_on_Visual_Traffic_Surveillance_Sensors]]：简单的ResNet+过采样解决数据集类别不均匀问题，集成采用max voting policy，还是解决分类问题。
++ 
 
 
 ### 4. Large Language Model(LLM)
@@ -25,6 +26,7 @@
 + [[arxiv'21 How much can clip benefit vision-and-language Tasks]]：用CLIP的视觉编码器完成V&L的任务，实验较完整，理论无拓展。
 + [[⭐⭐⭐⭐⭐CLIP：Learning Transferable Visual Models From Natural Language Supervision]]：V&L的开山之作
 + [[⭐⭐⭐⭐ECCV'22 SLIP：Self-supervision Meets Language-Image Pre-training]]
++ [[⭐⭐⭐⭐⭐ICML'22 BLIP Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation]]：应用效果会比SLIP更佳，论文写的也更清楚些。组合模块+数据清洗后增强
 
 ## 待阅读合集
 ### 1.机器学习

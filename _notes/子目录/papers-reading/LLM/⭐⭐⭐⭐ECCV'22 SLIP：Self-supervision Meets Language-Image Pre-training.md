@@ -36,5 +36,5 @@ CLIP + SimCLR：在训练时同时计算CLIP的损失和SSL（Self-Supervised Le
 
 ## 收获
 + 平均嵌入：提示模版+文字输入的每个类的平均作为最终的text feature。
-
++ 缺点：SSL用来抓取图片特征，但是在zero-shot的情况下怀疑他在新数据集并没有好的泛化能力。
 
