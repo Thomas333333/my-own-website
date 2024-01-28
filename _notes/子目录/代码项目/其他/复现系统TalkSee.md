@@ -174,3 +174,20 @@ if additional_data is not None:
 ```
 
 同时修改`searchListByImage(text, refresh, additional_data)`
+
+### 问题 1.27
+- [ ]  AVS任务提交数量
+- [x]  Enter？
+- [x]  VBS2022测试  
+- [x]  人员分配
+- [x]  UI界面
+
+#### 前端
+
++ VQA的提交按钮
++ 文本框变大变小
++ Enter直接search
+
+#### AVS 
+
+- [ ]  只展示同个视频
