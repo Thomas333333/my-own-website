@@ -190,7 +190,7 @@ if additional_data is not None:
 
 #### AVS 
 
-- [ ]  只展示同个视频
+- [x]  只展示同个视频
 
 
 new_engine
