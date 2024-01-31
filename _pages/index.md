@@ -16,6 +16,7 @@ permalink: /
     <li style="background: #f5f7ff;"><strong>[[Projects]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Algorithm and Classes]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Life]]</strong></li>
+  	<li style="background: #f5f7ff;"><strong><a href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/Thomas333333/my-own-website/master/_notes/CV-Chinese.pdf">CV</a></strong></li>
   </ol>
 
 ---
