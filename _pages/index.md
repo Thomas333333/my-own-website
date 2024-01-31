@@ -16,10 +16,6 @@ permalink: /
     <li style="background: #f5f7ff;"><strong>[[Projects]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Algorithm and Classes]]</strong></li>
     <li style="background: #f5f7ff;"><strong>[[Life]]</strong></li>
-
-
-
-
   </ol>
 
 ---
@@ -33,9 +29,13 @@ Previous research is about:
 
 + Multimodal compound semantics video retrieval
 + Quantum Computing
-+ Deep Learning
++ Video-Language pre-trained model
 
 Current research interests are focused on **Math in AI**、**all kinds of learning theory**、**NLP** **and** **Quantum computing cross application**.
+
+<p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;"> 
+    <strong>Especially use AI to achieve automatic reasoning, such as solving hard Math problems or Theorem Proof.</strong>
+        </p>
 
 **Codes**：<a href='https://github.com/Thomas333333?tab=repositories'>https://github.com/Thomas333333?tab=repositories </a>
 
@@ -49,9 +49,12 @@ Current research interests are focused on **Math in AI**、**all kinds of learni
 + **[TREC Video Retrieval Evaluation2023 Ad-hoc Search](https://www-nlpir.nist.gov/projects/tvpubs/tv.pubs.23.org.html)**: 1st in automatic runs and interactive runs（2023.01-2023.11  Supervising teacher：[Chao Liang](https://cs.whu.edu.cn/info/1019/2832.htm)）
   + Lead person
   + Present a speech of our approach and experience in the online meeting in English
-  
-+ 《Quantum Computing》**assistant**（2022.09-2023.09）
+
++ **《Quantum Computing》assistant**（2022.09-2023.09）
   + Build course content：Quantum neural network
++ Video Browser Showdown 2024  (2024.1.29)
+  + TBD
+
 
 ---
 
