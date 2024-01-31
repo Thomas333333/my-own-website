@@ -28,8 +28,7 @@
 + [[⭐⭐⭐⭐ECCV'22 SLIP：Self-supervision Meets Language-Image Pre-training]]
 + [[⭐⭐⭐⭐⭐ICML'22 BLIP Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation]]：应用效果会比SLIP更佳，论文写的也更清楚些。组合模块+数据清洗后增强
 
-## BOOK
-+ [[《黑客与画家》]] 
+
 
 ## 待阅读合集
 ### 1.机器学习
