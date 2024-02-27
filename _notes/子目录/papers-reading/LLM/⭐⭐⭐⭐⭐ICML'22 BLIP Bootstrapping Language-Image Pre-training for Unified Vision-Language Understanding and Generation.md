@@ -16,7 +16,7 @@
 
 ## 2.方法
 
-![image.png|525](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240118162324.png)
+![image.png|750](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20240118162324.png)
 ### 基本结构
 + **Self-Attention**：它允许输入序列的每个元素都与序列中的其他元素进行直接的比较和交互。"Bi Self-Att" 表示双向自注意力，它可以同时考虑序列中前面和后面的信息，这通常用于编码器部分。
 + Causal self-attention：单向自注意力，限制了模型只能注意到当前位置之前的信息。
