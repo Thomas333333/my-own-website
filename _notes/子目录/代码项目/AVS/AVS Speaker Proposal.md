@@ -1,3 +1,6 @@
+---
+---
+
 ## Interactive Ranking Aggregation of multiple results
 
 The Ad-hoc search task necessitates participants to appropriately model a user's text query to search for video shots that align with the textual description. After referencing last year's team's approach, we chose to utilize embedding models and incorporated some of the successful practices from the previous teams. For automatic runs,we applied classic  Language-Image pre-training models CLIP and its various variants:SLIP,BLIP,BLIP-2,LaCLIP. Besides, we also applied Diffusion model to turn text query into abundant generated pictures in order to attain so-called "mean image query". For those using feedback runs, we used Top-K Feedback and a new algorithm Quantum-Theoretic Interactive Ranking Aggregation (QT-IRA) that adjusts models' weight with relevance feedback.
