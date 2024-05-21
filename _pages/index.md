@@ -27,6 +27,10 @@ permalink: /
 
 ## Research Interests
 
+<style>     .container {         position: relative;         display: inline-block;     }     .caption {         position: absolute;         bottom: 0;         right: 0;         background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */         color: black;         padding: 5px;     }     img {         display: block; /* Removes bottom margin/whitespace */         width: 100%;         height: auto;     } </style><div class="container"><img src="https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/research.jpg" alt="描述性文字">
+<div class="caption">from Zhihu's user 少十七</div>
+    
+
 Previous research is about:
 
 + Multimodal compound semantics video retrieval
