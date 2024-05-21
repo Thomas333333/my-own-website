@@ -24,8 +24,8 @@ permalink: /
 
 
 
-<style>     .container {         display: flex;         align-items: center;  justify-content: space-between;   }          .container img {         width: 300px;         height: 300px;     } </style>  
-<div class="container">         <h2>Research Interests</h2> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/research.jpg' width="300" height="300"> </div>
+<style>     .container2 {         display: flex;         align-items: center;  justify-content: space-between;   }          .container2 img {         width: 300px;         height: 300px;     } </style>  
+<div class="container2">         <h2>Research Interests</h2> <img src='https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/research.jpg' width="300" height="300"> </div>
 
 
 
