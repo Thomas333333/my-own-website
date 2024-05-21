@@ -40,8 +40,7 @@ Current research interests are focused on **Math in AI**、**all kinds of learni
 <p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;"> 
     <strong>Especially use AI to achieve automatic reasoning, such as solving hard Math problems or Theorem Proof.</strong>
         </p>
-
-**Codes**：<a href='https://github.com/Thomas333333?tab=repositories'>https://github.com/Thomas333333?tab=repositories </a>
+**Codes**：[Github]( https://github.com/Thomas333333?tab=repositories )
 
 ---
 
