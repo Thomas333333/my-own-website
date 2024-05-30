@@ -1,6 +1,8 @@
 ---
 ---
 
+### 0. Solid Ideas
++ [Yoshua Bengio重新思考ML的投稿](https://yoshuabengio.org/2020/02/26/time-to-rethink-the-publication-process-in-machine-learning/)
 ### 1.Quantum Computing
 + [[TKDE'16_Relevance Feedback Algorithms Inspired By Quantum Detection]]
 
@@ -27,6 +29,9 @@
 + [[⭐⭐⭐⭐⭐CLIP：Learning Transferable Visual Models From Natural Language Supervision]]：V&L的开山之作
 + [[⭐⭐⭐⭐ECCV'22 SLIP：Self-supervision Meets Language-Image Pre-training]]
 + [[⭐⭐⭐⭐⭐ICML'22 BLIP Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation]]：应用效果会比SLIP更佳，论文写的也更清楚些。组合模块+数据清洗后增强
+
+### 5.Video Retrieval 
++ ⭐⭐⭐⭐[[Improving Interpretable Embeddings for Ad-hoc Video Search with Generative Captions and Multi-word Concept Bank]]：在表达上值得学习，想法好，但是实验结论不是很明显。
 
 
 
