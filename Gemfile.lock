@@ -63,7 +63,7 @@ GEM
 
 PLATFORMS
   ruby
-	@@ -84,7 +85,7 @@ DEPENDENCIES
+
   jekyll (~> 4.3)
   jekyll-last-modified-at!
   nokogiri
