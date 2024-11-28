@@ -66,4 +66,8 @@
 	- [ ] 尝试插件obsidian-git，我的工作区只设置在子文件_note下，没法跳出子文件夹进行push 
 	- [x] 使用bat文件，cmd运行 `taskschd.msc`添加自动运行的新任务，每天运行一次。
   
-	
+## 20241129
+突然发现几个月的更新都没有同步到网站上，发现是原github仓库对里面的依赖版本有了更新，在netlify官网构建的时候报错`Failed during stage 'Install dependencies': dependency_installation script returned non-zero exit code: 1`
++ 首先按照[原仓库](https://github.com/maximevaillancourt/digital-garden-jekyll-template)更新Gemfile和Gemfile.lock文件的依赖版本，再次构建，仍然初始化报错
++ 使用指令`bundle update jekyll`,这将会更新 `Gemfile.lock` 文件中的 Jekyll 版本，并确保 Jekyll 及其所有依赖项是最新的。
++ 
