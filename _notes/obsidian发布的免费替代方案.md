@@ -70,4 +70,5 @@
 突然发现几个月的更新都没有同步到网站上，发现是原github仓库对里面的依赖版本有了更新，在netlify官网构建的时候报错`Failed during stage 'Install dependencies': dependency_installation script returned non-zero exit code: 1`
 + 首先按照[原仓库](https://github.com/maximevaillancourt/digital-garden-jekyll-template)更新Gemfile和Gemfile.lock文件的依赖版本，再次构建，仍然初始化报错
 + 使用指令`bundle update jekyll`,这将会更新 `Gemfile.lock` 文件中的 Jekyll 版本，并确保 Jekyll 及其所有依赖项是最新的。
-+ 
++ 更新完成后，在本地对应终端运行`bundle exec jekyll serve`，根据报错来解决
++ 最后成功同步
