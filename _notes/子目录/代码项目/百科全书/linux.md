@@ -44,4 +44,18 @@ sudo mount --bind /mnt/data/.cache ~/.cache
 du -h --max-depth=1
 ```
 
-## 查看指定命令来源
+## 查看指定命令来源，并尝试kill
+```
+#根据关键词找到指定命令的进程ID，这里以关键词“python”举例
+ps aux | grep -E 'python'
+
+#根据进程ID来终止进程
+kill -9 <PID>
+
+```
+
+## 检查用户密码过期情况
+以下要求使用`root`权限
++ 查看具体情况 `chage -l username`
++ 如果密码过期，修改密码`passwd username` 
+
