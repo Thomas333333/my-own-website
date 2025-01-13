@@ -55,8 +55,8 @@ Current research interests are focused on **Math in AI**、**all kinds of learni
 
 + **《Quantum Computing》assistant**（2022.09-2023.09）
   + Build course content：Quantum neural network
-+ Video Browser Showdown 2024  (2024.1.29)
-  + TBD
++ **Video Browser Showdown 2024**  (2024.1.29) :  rank 6/12 
++ **TREC Video Retrieval Evaluation2024 Ad-hoc Search**(2024.02-2024.10): 
 
 
 ---
