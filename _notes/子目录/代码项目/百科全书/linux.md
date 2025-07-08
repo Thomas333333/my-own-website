@@ -59,3 +59,25 @@ kill -9 <PID>
 + 查看具体情况 `chage -l username`
 + 如果密码过期，修改密码`passwd username` 
 
+
+## windows下使用WSL2+Vscode 
+参考[CSDN博客](https://blog.csdn.net/m0_72515743/article/details/146019129?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522a1d6a7fb2e79a1ce97cc930410d6f822%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=a1d6a7fb2e79a1ce97cc930410d6f822&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~time_text~default-3-146019129-null-null.142^v102^pc_search_result_base8&utm_term=wsl%2Bvscode%20torch&spm=1018.2226.3001.4187)
++ 使用指令`wsl -d Ubuntu`在命令行启动，`wsl --shutdown`关闭
++ 使用`wsl --install Ubuntu`下载分发。默认是24.04
++ Ubuntu的版本信息![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20250317230420.png)
+
+## WSL2忘记密码
+
+```
+#进入root用户
+wsl.exe --user root 
+
+#重置密码  
+passwd your_username
+
+
+##不确定用户名的可以通过下面命令查找
+#cat /etc/passwd
+#或者wsl.exe -l -v
+```
+
