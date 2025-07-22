@@ -81,3 +81,15 @@ passwd your_username
 #或者wsl.exe -l -v
 ```
 
+## WSL2 ping不通外网
+
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20250721155446.png)
+
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20250721155454.png)
+
+## Linux下载速度太慢
+### 使用下载工具的多线程下载功能
+
+`wget` 本身功能比较基础，不支持多线程下载。但很多下载工具都支持。
+
+- **`axel` (Linux/macOS):** 这是一个命令行下载加速器，支持多线程。 安装：`sudo apt-get install axel` (Debian/Ubuntu) 或 `brew install axel` (macOS) 使用：`axel -n 10 https://developer.download.nvidia.com/your-file-path` (其中 `10` 是线程数，可以根据网络情况调整)
