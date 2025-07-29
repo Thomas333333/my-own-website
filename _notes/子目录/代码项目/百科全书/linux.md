@@ -93,3 +93,8 @@ passwd your_username
 `wget` 本身功能比较基础，不支持多线程下载。但很多下载工具都支持。
 
 - **`axel` (Linux/macOS):** 这是一个命令行下载加速器，支持多线程。 安装：`sudo apt-get install axel` (Debian/Ubuntu) 或 `brew install axel` (macOS) 使用：`axel -n 10 https://developer.download.nvidia.com/your-file-path` (其中 `10` 是线程数，可以根据网络情况调整)
+
+
+## WSL报错
+报错内容：# Could not load library libcudnn_cnn_infer.so.8. Error 
+参考[解决方案](https://blog.csdn.net/2401_83845654/article/details/146343987)，大概率是环境变量的设置问题，可以用`echo $PATH` 类似的指令进行查看。还有小部分可能是没有下载cudnn。
