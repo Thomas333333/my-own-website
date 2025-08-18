@@ -1,9 +1,11 @@
 
 
 今年的课程表查看： https://w5.hkust-gz.edu.cn/wcq/cgi-bin/2510/
+
 历年选课/有无final exam 查看：我的应用-教学科研-Final Examination Schedule
 
 ==Mphil最低学分要求：15个学分==
+
 以Artificial Intelligence这个专业为例（在对应自身情况时，把下面AIAA和INFH开头的课程替换成自己专业所需的，具体可查看 https://fytgs.hkust-gz.edu.cn/postgraduate-programs/postgraduate-program-catalog ）
 +  跨学科核心课程(2)
 	+ UCMP6050-Project-driven Collaborative Design Thinking  (2  )
