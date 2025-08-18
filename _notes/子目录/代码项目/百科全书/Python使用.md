@@ -39,4 +39,5 @@ o4-mini的回答：
 这个问题本质上是 Python 的模块搜索（import resolution）导致的：当你直接用`(wx_analyse) PS D:\GithubProject\PyWxDump> python .\pywxdump\cli.py ui`来运行 `cli.py` 时，Python 会把 `sys.path[0]` 设为 `D:\GithubProject\PyWxDump\pywxdump` 这个目录，而不是它的上一级 `D:\GithubProject\PyWxDump`。此时脚本内部如果写了类似`from pywxdump import some_module`
 或者直接 `import pywxdump`，Python 会先去 `sys.path[0]`（也就是 `...\pywxdump` 目录）寻找名为 `pywxdump` 的包。因为当前目录恰好已经是 `pywxdump` 目录本身，Python 并不会把它当做「包的父目录」去解析（也就是说，Python 在 `sys.path[0]` 找不到顶层的 `pywxdump` 包──它只能看到文件夹下的各个 `.py` 文件，却没有一个叫 `pywxdump` 的子文件夹），所以它就会退而求其次，到全局的 `site-packages` 里去找已经安装的 `pywxdump`。因此你看到的、被实际执行的永远是 `D:\Anaconda\envs\wx_analyse\Lib\site-packages\pywxdump` 中的版本，而不是你本地 `D:\GithubProject\PyWxDump\pywxdump` 里的代码。
 
-
+## flash-attention的使用，最好是下载whl文件
+参考链接： https://blog.csdn.net/Thomas33/article/details/149755381?spm=1011.2124.3001.6209

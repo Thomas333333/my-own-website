@@ -12,3 +12,22 @@
 + 一是删除这个lock文件，但对于我不适用
 + 而是使用指令`Kill VS Code Server on Host`重新登录。这会删除你之前在服务器的登录状态，而重新wget配置文件。
 + 我的vscode版本是1.85.2
+## 使用cline连接qwen3-coder-plus 
+参考阿里云模型[网站](https://bailian.console.aliyun.com/?spm=5176.12818093_47.overview_recent.2.57ea2cc9THRFZ8&tab=doc#/api/?type=model&url=https%3A%2F%2Fhelp.aliyun.com%2Fdocument_detail%2F2880898.html)
+
+1. 打开vscode，搜索插件cline
+![image.png](https://cdn.jsdelivr.net/gh/Thomas333333/MyPostImage/Images/20250802142844.png)
+2. 打不开，在网上查找原因，发现是自己的vscode版本1.85.2太老了（之前为了处理remote-ssh的问题必须降级）。参考这个[issue](https://github.com/cline/cline/issues/1124#issuecomment-2858302511)换了cline的版本2.2.2。
+3. 填写api-key 和模型名称
+4. 填写cutom instructinons，比如speak in chinese
+可用模型：
++ qwen3-coder-30b-a3b-instruct：额度100w
+
++ qwen3-coder-plus：100w
++ qwen3-coder-plus-2025-07-22：100w
+
++ qwen3-coder-480b-a35b-instruct：100w
+prompt测试：
++ 你能帮我创建一个html游戏吗：飞机击落前面飞来的障碍物，有对应的加分，要有基本的页面。
+
+还可以使用通义灵码

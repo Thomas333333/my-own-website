@@ -98,3 +98,36 @@ passwd your_username
 ## WSL报错
 报错内容：# Could not load library libcudnn_cnn_infer.so.8. Error 
 参考[解决方案](https://blog.csdn.net/2401_83845654/article/details/146343987)，大概率是环境变量的设置问题，可以用`echo $PATH` 类似的指令进行查看。还有小部分可能是没有下载cudnn。
+
+## Huggingface下载速度太慢
+可以设置镜像网站：
+**临时设置（只在当前终端有效）：** 在运行下载命令之前，先输入以下命令：
+```
+export HF_ENDPOINT=https://hf-mirror.com
+```
+然后正常执行你的下载命令：
+```
+huggingface-cli download xxx
+```
+
+##  `gdown` 的命令行工具来下载 Google Drive 文件
+
+```
+pip install gdown
+gdown --id 1jTcRCrVHS66ckOUfWRb-rXdzJ52XAWQH
+
+#支持断点续传
+gdown --id 1jTcRCrVHS66ckOUfWRb-rXdzJ52XAWQH -c
+```
+
+如果遇到问题参考[FAQ](https://github.com/wkentaro/gdown)，里面有介绍引入cookies的方法验证账户信息。
+
+## 使用`ninja` 进行编译
+
+```
+export CMAKE_GENERATOR=Ninja 
+#可以清楚地看到还剩多少部分（1/14）,相比单纯编译能看到进度
+pip install . -v
+```
+ 
+
