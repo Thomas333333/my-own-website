@@ -41,3 +41,10 @@ o4-mini的回答：
 
 ## flash-attention的使用，最好是下载whl文件
 参考链接： https://blog.csdn.net/Thomas33/article/details/149755381?spm=1011.2124.3001.6209
+
+## 读取json 
+
+```python 
+with open('data.json', 'r', encoding='utf-8') as file: # 使用 json.load() 解析 JSON 文件 
+	data = json.load(file)
+```
