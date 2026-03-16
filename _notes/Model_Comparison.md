@@ -10,9 +10,10 @@ title: 科研工具比较（1-2）——测试网页版模型的能力
 ## 测试的模型
 
 - GEMINI-3.1 Pro（网页版，模型来自 Google 官方，导出对话图片来自 [Gemini Voyage](https://voyager.nagi.fun/en/)）
-- GPT-5.3（网页版，来自 [SouruxGPT](https://www.soruxgpt.com)，导出对话图片为 SouruxGPT 自带）
-- Claude-Sonnet 4.6（网页版，来自 [SouruxGPT](https://www.soruxgpt.com)，导出对话pdf为 SouruxGPT 自带，后pdf转图片）
+- GPT-5.3（网页版，来自 [SoruxGPT](https://www.soruxgpt.com)，导出对话图片为 SouruxGPT 自带）
+- Claude-Sonnet 4.6（网页版，来自 [SoruxGPT](https://www.soruxgpt.com)，导出对话pdf为 SoruxGPT 自带，后pdf转图片）
 
+soruxGPT：推荐码是：74e136cb-c728-4977-94f3-70140f310af4 ( 使用推荐码推荐朋友注册购买，双方可以获得 5R 返现。 )
 ## 强调
 
 - **只做快速测试，反映模型基本能力**。如果 Prompt 设计得更精细，模型应该能发挥更好效果。
