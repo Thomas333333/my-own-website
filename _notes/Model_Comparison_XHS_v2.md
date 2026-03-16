@@ -2,8 +2,14 @@
 title: 三个网页版大模型科研对比（个人小结）
 ---
 
-> 这篇是我自己在科研场景下，用 **Gemini-3.1 Pro / GPT-5.3 / Claude-Sonnet 4.6** 做的一次小范围对比。  
-> 只看 3 个具体任务，样本很少，**结论只代表个人体验**。
+> 完整详细版（含截图与打分细则）可以在这里看到：  
+> [`https://thomas-s-ai-home.netlify.app/model-comparison`](https://thomas-s-ai-home.netlify.app/model-comparison)
+>
+> 本文是我在科研场景下，用 **Gemini-3.1 Pro / GPT-5.3 / Claude-Sonnet 4.6** 做的一次小范围对比，只看 3 个具体任务，**结论只代表个人体验**。
+>
+> 本文中 GPT / Claude 均通过 **SoruxGPT** 使用：  
+> - SoruxGPT 邀请码：**74e136cb-c728-4977-94f3-70140f310af4**（使用推荐码推荐朋友注册购买，双方可以获得 5R 返现）  
+> - SoruxGPT API 邀请码（含 Claude Code / Codex）：**VYGXW79F**
 
 ## 测试背景（尽量贴近日常科研）
 
@@ -140,7 +146,7 @@ title: 三个网页版大模型科研对比（个人小结）
 
 对「一起想实验怎么做」这个任务，目前我最常用的是 **GPT**，因为它更容易给出一条「可以直接写进实验计划」的路线。
 
-## 一个更冷静的总结
+## 一个更简单的总结
 
 从这次小范围测试里，我自己的结论是：
 
