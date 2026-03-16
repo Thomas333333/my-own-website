@@ -2,11 +2,12 @@
 title: 三个网页版大模型科研对比（个人小结）
 ---
 
-> 完整详细版（含截图与打分细则）可以在这里看到：  
-> [`https://thomas-s-ai-home.netlify.app/model-comparison`](https://thomas-s-ai-home.netlify.app/model-comparison)
+
 >
 > 本文是我在科研场景下，用 **Gemini-3.1 Pro / GPT-5.3 / Claude-Sonnet 4.6** 做的一次小范围对比，只看 3 个具体任务，**结论只代表个人体验**。
 >
+> 完整demo含模型回答截图与打分细则）可以在这里看到：  
+> [`https://thomas-s-ai-home.netlify.app/model-comparison`](https://thomas-s-ai-home.netlify.app/model-comparison)
 > 本文中 GPT / Claude 均通过 **SoruxGPT** 使用：  
 > - SoruxGPT 邀请码：**74e136cb-c728-4977-94f3-70140f310af4**（使用推荐码推荐朋友注册购买，双方可以获得 5R 返现）  
 > - SoruxGPT API 邀请码（含 Claude Code / Codex）：**VYGXW79F**
@@ -18,6 +19,9 @@ title: 三个网页版大模型科研对比（个人小结）
   2. 看懂新出的论文  
   3. 围绕自己手上的问题想下一步实验/idea
 - 每个场景各出 3 个 Prompt，分别让三个模型回答，然后我按统一标准打分。
+- 为了尽量贴近日常「直接对话」的使用方式：  
+  - **Gemini-3.1 Pro**：没有开启耗时的 Deep Research，只用普通聊天模式回答（即使它具备更重的检索/推理能力）；  
+  - **GPT-5.3 / Claude-Sonnet 4.6**：在需要联网的任务里开启网页搜索，在纯理解/想法类任务里关闭搜索，只看模型本身的能力。
 
 ## 模型与使用方式
 
