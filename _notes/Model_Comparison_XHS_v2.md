@@ -35,11 +35,32 @@ title: 三个网页版大模型科研对比（个人小结）
 
 我的平均打分（满分 10 分）：
 
-| 模型 | 平均得分 | 简短评价 |
-| --- | --- | --- |
-| Gemini-3.1 Pro | **6.33** | 内容有条理，但受限于检索能力，时效性一般 |
-| GPT-5.3 | **7.66** | 能比较快给到新论文，覆盖面也还可以 |
-| Claude-Sonnet 4.6 | **8.00** | 数量不算多，但常常能点中相对关键的几篇 |
+<table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+  <thead>
+    <tr>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">模型</th>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">平均得分</th>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">简短评价</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 4px;">Gemini-3.1 Pro</td>
+      <td style="padding: 4px; font-weight: bold;">6.33</td>
+      <td style="padding: 4px;">内容有条理，但受限于检索能力，时效性一般</td>
+    </tr>
+    <tr>
+      <td style="padding: 4px;">GPT-5.3</td>
+      <td style="padding: 4px; font-weight: bold;">7.66</td>
+      <td style="padding: 4px;">能比较快给到新论文，覆盖面也还可以</td>
+    </tr>
+    <tr>
+      <td style="padding: 4px;">Claude-Sonnet 4.6</td>
+      <td style="padding: 4px; font-weight: bold;">8.00</td>
+      <td style="padding: 4px;">数量不算多，但常常能点中相对关键的几篇</td>
+    </tr>
+  </tbody>
+</table>
 
 个人结论：  
 如果只是「先把相关论文找全一点」，我更倾向先用 **GPT** 做第一轮，再用 **Claude** 看它挑出的重点是否有补充价值。
@@ -52,11 +73,32 @@ title: 三个网页版大模型科研对比（个人小结）
 
 平均打分（满分 10 分）：
 
-| 模型 | 平均得分 | 简短评价 |
-| --- | --- | --- |
-| Gemini-3.1 Pro | **6.33** | 能大概说清楚，但不太深入 |
-| GPT-5.3 | **9.00** | 对结构、动机、方法讲得比较完整，有时会加一点自己的理解 |
-| Claude-Sonnet 4.6 | **7.33** | 可读性好，但技术细节不如 GPT 展开得多 |
+<table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+  <thead>
+    <tr>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">模型</th>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">平均得分</th>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">简短评价</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 4px;">Gemini-3.1 Pro</td>
+      <td style="padding: 4px; font-weight: bold;">6.33</td>
+      <td style="padding: 4px;">能大概说清楚，但不太深入</td>
+    </tr>
+    <tr>
+      <td style="padding: 4px;">GPT-5.3</td>
+      <td style="padding: 4px; font-weight: bold;">9.00</td>
+      <td style="padding: 4px;">对结构、动机、方法讲得比较完整，有时会加一点自己的理解</td>
+    </tr>
+    <tr>
+      <td style="padding: 4px;">Claude-Sonnet 4.6</td>
+      <td style="padding: 4px; font-weight: bold;">7.33</td>
+      <td style="padding: 4px;">可读性好，但技术细节不如 GPT 展开得多</td>
+    </tr>
+  </tbody>
+</table>
 
 个人感受：  
 如果是「快速搞清一篇论文值不值得细看」，我目前更习惯先丢给 **GPT** 看一版，再根据需要自己去原文核对。
@@ -69,11 +111,32 @@ title: 三个网页版大模型科研对比（个人小结）
 
 平均打分（满分 10 分）：
 
-| 模型 | 平均得分 | 简短评价 |
-| --- | --- | --- |
-| Gemini-3.1 Pro | **8.00** | 给出的路径比较稳妥，接近人类常规思路 |
-| GPT-5.3 | **9.66** | 会把问题拆得比较细，并给出一系列可以按优先级尝试的方案 |
-| Claude-Sonnet 4.6 | **6.66** | 提的建议偏保守，偶尔会有不错的角度，但整体不如 GPT 系统 |
+<table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+  <thead>
+    <tr>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">模型</th>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">平均得分</th>
+      <th style="border-bottom: 1px solid #ddd; padding: 4px;">简短评价</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 4px;">Gemini-3.1 Pro</td>
+      <td style="padding: 4px; font-weight: bold;">8.00</td>
+      <td style="padding: 4px;">给出的路径比较稳妥，接近人类常规思路</td>
+    </tr>
+    <tr>
+      <td style="padding: 4px;">GPT-5.3</td>
+      <td style="padding: 4px; font-weight: bold;">9.66</td>
+      <td style="padding: 4px;">会把问题拆得比较细，并给出一系列可以按优先级尝试的方案</td>
+    </tr>
+    <tr>
+      <td style="padding: 4px;">Claude-Sonnet 4.6</td>
+      <td style="padding: 4px; font-weight: bold;">6.66</td>
+      <td style="padding: 4px;">提的建议偏保守，偶尔会有不错的角度，但整体不如 GPT 系统</td>
+    </tr>
+  </tbody>
+</table>
 
 对「一起想实验怎么做」这个任务，目前我最常用的是 **GPT**，因为它更容易给出一条「可以直接写进实验计划」的路线。
 
