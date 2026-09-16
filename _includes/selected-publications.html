@@ -1,0 +1,10 @@
+{% assign first_author_papers = site.data.publications | where: 'home_group', 'first_author' %}
+{% assign venue_papers = site.data.publications | where: 'home_group', 'venue' %}
+<div class="publication-group" data-publication-group="first-author">
+<h3 class="publication-group-title">{% if lang == 'en' %}First- and co-first-author work{% else %}一作／共同一作成果{% endif %}</h3>
+{% include publication-list.html items=first_author_papers limit=100 %}
+</div>
+<div class="publication-group" data-publication-group="venue">
+<h3 class="publication-group-title">{% if lang == 'en' %}Other selected conference papers{% else %}其他高水平会议论文{% endif %}</h3>
+{% include publication-list.html items=venue_papers limit=100 %}
+</div>

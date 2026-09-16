@@ -1,0 +1,35 @@
+[
+  {
+    "year": "2023",
+    "title": {
+      "en": "1st Place · TRECVID 2023",
+      "zh": "双赛道第一 · TRECVID 2023"
+    },
+    "description": {
+      "en": "Automatic & interactive AVS tracks · Team award",
+      "zh": "AVS 自动与交互赛道 · 团队成绩"
+    }
+  },
+  {
+    "year": "2023",
+    "title": {
+      "en": "Best Newcomer · Video Browser Showdown",
+      "zh": "最佳新人奖 · Video Browser Showdown"
+    },
+    "description": {
+      "en": "QIVISE · Team award",
+      "zh": "QIVISE · 团队奖项"
+    }
+  },
+  {
+    "year": "2022",
+    "title": {
+      "en": "Meritorious Winner · Mathematical Contest in Modeling",
+      "zh": "Meritorious Winner · 美国大学生数学建模竞赛"
+    },
+    "description": {
+      "en": "Mathematical Contest in Modeling (MCM)",
+      "zh": "美国大学生数学建模竞赛（MCM）"
+    }
+  }
+]

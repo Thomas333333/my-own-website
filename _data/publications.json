@@ -1,0 +1,90 @@
+[
+  {
+    "year": "2026",
+    "title": "PhyAVBench: A Challenging Audio Physics-Sensitivity Benchmark for Physically Grounded Text-to-Audio-Video Generation",
+    "authors": "Tianxin Xie, Wentao Lei, Kai Jiang, …, <strong>Jiangshan He</strong>, …, Li Liu.",
+    "venue": "ACM Multimedia 2026",
+    "kind": "Paper",
+    "url": "https://arxiv.org/abs/2512.23994",
+    "topic": "Audio-visual evaluation",
+    "authorship": "coauthor",
+    "home_group": "venue"
+  },
+  {
+    "year": "2026",
+    "title": "Beyond Direct Gains: Matched Controls for Evaluating Concept Scaffolds",
+    "authors": "<strong>Jiangshan He</strong>, Song Dai, Xiaolong Qiao, Jungang Li, Yibo Yan, Xuming Hu.",
+    "venue": "ICML 2026 · AI4Math Workshop",
+    "kind": "Workshop",
+    "url": "https://openreview.net/forum?id=R3ltJC0uZN",
+    "topic": "Language model evaluation",
+    "authorship": "first",
+    "home_group": "first_author"
+  },
+  {
+    "year": "2025",
+    "title": "Interactive Video Search with Multi-modal LLM Video Captioning",
+    "authors": "Yu-Tong Cheng, Jiaxin Wu, Zhixin Ma, <strong>Jiangshan He</strong>, Xiao-Yong Wei, Chong-Wah Ngo.",
+    "venue": "MMM 2025",
+    "kind": "Paper",
+    "url": "https://doi.org/10.1007/978-981-96-2074-6_36",
+    "topic": "Video retrieval",
+    "authorship": "coauthor",
+    "home_group": null
+  },
+  {
+    "year": "2025",
+    "title": "HIRAR: Hierarchical Ranking Re-aggregation Method Driven by Multimodal Large Language Model for Ad-hoc Video Search",
+    "authors": "Zeyuan Zhang, <strong>Jiangshan He</strong>, Shiwei Feng, Gang Wu, Chunxia Xiao, Chao Liang.",
+    "venue": "Manuscript under revision · 修改中",
+    "kind": "Manuscript",
+    "url": "",
+    "topic": "Video retrieval",
+    "authorship": "coauthor",
+    "home_group": null
+  },
+  {
+    "year": "2024",
+    "title": "WHU-NERCMS at TRECVID2024: Ad-Hoc Video Search Task",
+    "authors": "Heng Liu, <strong>Jiangshan He</strong>, Zeyuan Zhang, Yuanyuan Xu, Chao Liang.",
+    "venue": "TRECVID 2024",
+    "kind": "Technical report",
+    "url": "https://trec.nist.gov/pubs/trec33/papers/WHU-NERCMS.avs.pdf",
+    "topic": "Video retrieval",
+    "authorship": "coauthor",
+    "home_group": null
+  },
+  {
+    "year": "2024",
+    "title": "TalkSee: Interactive Video Retrieval Engine Using Large Language Model",
+    "authors": "Guihe Gu, Zhengqian Wu, <strong>Jiangshan He</strong>, Lin Song, Zhongyuan Wang, Chao Liang.",
+    "venue": "MMM 2024",
+    "kind": "Paper",
+    "url": "https://doi.org/10.1007/978-3-031-53302-0_36",
+    "topic": "Interactive retrieval",
+    "authorship": "coauthor",
+    "home_group": null
+  },
+  {
+    "year": "2023",
+    "title": "WHU-NERCMS at TRECVID 2023: Ad-Hoc Video Search (AVS) and Deep Video Understanding (DVU) Tasks",
+    "authors": "<strong>Jiangshan He*</strong>, Ruizhe Li*, Jiahao Guo*, Hong Zhang, Mingxi Li, Zhengqian Wu, Zhongyuan Wang, Bo Du, Chao Liang.",
+    "venue": "TRECVID 2023",
+    "kind": "Technical report",
+    "url": "https://www-nlpir.nist.gov/projects/tvpubs/tv23.papers/whu-nercms.pdf",
+    "topic": "Video retrieval",
+    "authorship": "co_first",
+    "home_group": "first_author"
+  },
+  {
+    "year": "2023",
+    "title": "QIVISE: A Quantum-Inspired Interactive Video Search Engine in VBS2023",
+    "authors": "Weixi Song*, <strong>Jiangshan He*</strong>, Xinghan Li, Shiwei Feng, Chao Liang.",
+    "venue": "MMM 2023",
+    "kind": "Paper",
+    "url": "https://doi.org/10.1007/978-3-031-27077-2_52",
+    "topic": "Interactive retrieval",
+    "authorship": "co_first",
+    "home_group": "first_author"
+  }
+]

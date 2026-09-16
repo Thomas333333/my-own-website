@@ -1,6 +1,6 @@
-title:               My digital garden
+title:               Jiangshan He · 何姜杉
 include:             ['_pages']
-exclude:             ['_includes/notes_graph.json']
+exclude: ['assets/cv', '_notes/_notes', '_includes/notes_graph.json', 'docs', 'scripts', 'vendor', '.bundle', 'Gemfile', 'Gemfile.lock', 'README.md', 'sync_github.sh']
 # You may need to change the base URL depending on your deploy configuration.
 # Specifically, when using GitHub Pages, the baseurl should point to where GitHub
 # Pages deploys your repository (which is usually the repository name).
@@ -33,7 +33,7 @@ sass:
 collections:
   notes:
     output: true
-    permalink: /:slug
+    permalink: /:slug/
 
 defaults:
   - scope:
@@ -44,3 +44,6 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "note"
+
+url: https://thomas-s-ai-home.netlify.app
+description: "Jiangshan He — MPhil student at HKUST (Guangzhou). Multimodal retrieval, generative models, and language model evaluation."

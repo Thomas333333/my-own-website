@@ -1,0 +1,165 @@
+[
+  {
+    "id": "video-to-music",
+    "type": {
+      "en": "GENERATIVE MODELS",
+      "zh": "生成模型"
+    },
+    "title": {
+      "en": "From moving images to music",
+      "zh": "从视频内容到音乐生成"
+    },
+    "subtitle": {
+      "en": "Video-to-music generation",
+      "zh": "视频到音乐生成"
+    },
+    "date": "2026 — Present",
+    "status": {
+      "en": "Ongoing research",
+      "zh": "进行中"
+    },
+    "role": {
+      "en": "Project lead",
+      "zh": "项目负责人"
+    },
+    "summary": {
+      "en": "Exploring how video content can guide music generation, with an interest in extending the approach to longer videos.",
+      "zh": "探索如何利用视频内容引导音乐生成，并进一步研究面向长视频的配乐方法。"
+    },
+    "method": {
+      "en": "Reproducing a DiffRhythm-based baseline and investigating model improvements and evaluation for video-conditioned music generation.",
+      "zh": "复现基于 DiffRhythm 的基础模型，开展面向视频条件的音乐生成改进与评测。"
+    },
+    "contribution": {
+      "en": "Leading the project, including baseline reproduction, experimental iteration, and the design of a long-video scoring framework.",
+      "zh": "负责项目推进、基础模型复现与实验迭代，并探索长视频配乐框架。"
+    },
+    "result": {
+      "en": "Ongoing experiments. Quantitative results and audiovisual examples will accompany a future update.",
+      "zh": "目前处于实验阶段，定量结果与视听示例将在后续更新中补充。"
+    },
+    "tags": [
+      "Video-to-music",
+      "Generative models",
+      "PyTorch"
+    ],
+    "links": [],
+    "visual": "music"
+  },
+  {
+    "id": "trecvid",
+    "type": {
+      "en": "MULTIMODAL RETRIEVAL",
+      "zh": "多模态检索"
+    },
+    "title": {
+      "en": "Finding the right moment",
+      "zh": "在海量视频中找到目标片段"
+    },
+    "subtitle": {
+      "en": "TRECVID 2023 · Ad-hoc Video Search",
+      "zh": "TRECVID 2023 · 视频检索"
+    },
+    "date": "2023",
+    "status": {
+      "en": "1st · Both AVS tracks",
+      "zh": "AVS 双赛道第一"
+    },
+    "role": {
+      "en": "Project lead · Equal-contribution author",
+      "zh": "第一负责人 · 共同贡献作者"
+    },
+    "summary": {
+      "en": "Combining vision-language models, diffusion-generated image queries, and relevance feedback for ad-hoc video search.",
+      "zh": "融合视觉语言模型、扩散模型生成的图像查询与相关性反馈，完成复杂语义的视频检索。"
+    },
+    "method": {
+      "en": "The system combines CLIP-family models with generated image queries and ranking fusion. Relevance feedback adjusts the retrieval process through interactive re-ranking.",
+      "zh": "系统结合 CLIP 系列模型、生成式图像查询和排序融合，并使用相关性反馈优化交互式重排序。"
+    },
+    "contribution": {
+      "en": "Led the AVS project and contributed to the retrieval pipeline, experiments, technical report, and presentation of the approach.",
+      "zh": "负责 AVS 项目，参与检索流程、实验、技术报告撰写，并代表团队介绍方案与经验。"
+    },
+    "result": {
+      "en": "WHU-NERCMS ranked first in the automatic and interactive AVS tracks at TRECVID 2023.",
+      "zh": "WHU-NERCMS 团队在 TRECVID 2023 AVS 自动与交互两个赛道取得第一名。"
+    },
+    "tags": [
+      "Vision-language models",
+      "Diffusion",
+      "Ranking fusion"
+    ],
+    "links": [
+      {
+        "label": "Technical report",
+        "url": "https://www-nlpir.nist.gov/projects/tvpubs/tv23.papers/whu-nercms.pdf"
+      }
+    ],
+    "visual": "retrieval"
+  },
+  {
+    "id": "qivise",
+    "type": {
+      "en": "INTERACTIVE SYSTEMS",
+      "zh": "交互系统"
+    },
+    "title": {
+      "en": "Search, feedback, refine.",
+      "zh": "检索、反馈，再找到更好的结果"
+    },
+    "subtitle": {
+      "en": "QIVISE · Interactive Video Search",
+      "zh": "QIVISE · 交互式视频检索"
+    },
+    "date": "2022 — 2023",
+    "status": {
+      "en": "VBS 2023 · Best Newcomer",
+      "zh": "VBS 2023 · 最佳新人"
+    },
+    "role": {
+      "en": "Project lead · Co-first author",
+      "zh": "第一负责人 · 共同第一作者"
+    },
+    "summary": {
+      "en": "An interactive video search engine that brings multimodal embeddings and quantum-inspired relevance feedback into a working system.",
+      "zh": "将多模态表征与量子启发的相关性反馈方法整合为可操作的视频检索系统。"
+    },
+    "method": {
+      "en": "A text-image encoder supports multimodal search. Users select relevant and irrelevant clips to refine rankings through a quantum-inspired interaction method.",
+      "zh": "使用文本图像编码器实现多模态检索，用户通过标记相关与不相关片段，以量子启发的交互方法改进排序。"
+    },
+    "contribution": {
+      "en": "Contributed to the interactive retrieval algorithm and system development; co-first author of the MMM 2023 system paper.",
+      "zh": "参与交互式检索算法与系统开发，为 MMM 2023 系统论文共同第一作者。"
+    },
+    "result": {
+      "en": "The QIVISE team received the Best Newcomer award at Video Browser Showdown 2023.",
+      "zh": "QIVISE 团队获得 Video Browser Showdown 2023 最佳新人奖。"
+    },
+    "tags": [
+      "Multimodal search",
+      "Relevance feedback",
+      "Interactive system"
+    ],
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://doi.org/10.1007/978-3-031-27077-2_52"
+      },
+      {
+        "label": "Code",
+        "url": "https://github.com/nercms-mmap/VBS-QIVISE"
+      },
+      {
+        "label": "Demo",
+        "url": "https://www.youtube.com/watch?v=KV9m5hElxHI"
+      },
+      {
+        "label": "Award",
+        "url": "https://videobrowsershowdown.org/hall-of-fame/"
+      }
+    ],
+    "visual": "interaction"
+  }
+]

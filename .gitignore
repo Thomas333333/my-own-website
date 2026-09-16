@@ -13,3 +13,9 @@ _includes/notes_graph.json
 
 # Obsidian config
 .obsidian/
+
+# Retain local migration copies without adding them to a release.
+_notes/_notes/
+
+# Keep private CV files local until explicitly approved for publication.
+/assets/cv/

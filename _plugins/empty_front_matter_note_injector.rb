@@ -1,18 +1,15 @@
-# frozen_string_literal: true
-
-EMPTY_FRONT_MATTER = <<~JEKYLL
-  ---
-  ---
-
-JEKYLL
-
-# Inject empty front matter in notes that don't have any
-Jekyll::Hooks.register :site, :after_init do |site|
-  Dir.glob(site.collections['notes'].relative_directory + '/**/*.md').each do |filename|
-    raw_note_content = File.read(filename)
-    unless raw_note_content.start_with?('---')
-      raw_note_content.prepend(EMPTY_FRONT_MATTER)
-      File.write(filename, raw_note_content)
-    end
+# Read Obsidian Markdown in memory, without adding YAML to files on disk.
+Jekyll::Hooks.register :site, :post_read do |site|
+  collection = site.collections['notes']
+  next unless collection
+  known = collection.docs.map { |doc| File.expand_path(doc.path) }
+  Dir.glob(File.join(site.source, '_notes', '**', '*.md')).each do |path|
+    next if known.include?(File.expand_path(path)) || path.include?('/.obsidian/')
+    # Retain migration copies locally without ever publishing them.
+    next if path.start_with?(File.join(site.source, '_notes', '_notes') + '/')
+    doc = Jekyll::Document.new(path, :site => site, :collection => collection)
+    doc.read
+    collection.docs << doc if site.unpublished || doc.published?
   end
+  site.static_files.reject! { |file| file.path.start_with?(File.join(site.source, '_notes')) && file.extname == '.md' }
 end

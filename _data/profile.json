@@ -1,0 +1,15 @@
+{
+  "name": "Jiangshan He",
+  "name_zh": "何姜杉",
+  "email": "jhe367@connect.hkust-gz.edu.cn",
+  "github": "https://github.com/Thomas333333",
+  "scholar": "https://scholar.google.com/citations?user=okJwEZEAAAAJ",
+  "intro": {
+    "en": "I work on multimodal retrieval, generative models, and the evaluation of language models. Currently, I am exploring video-to-music generation.",
+    "zh": "我的研究与项目经历涵盖多模态检索、生成模型与大模型评测，目前正在探索视频到音乐生成。"
+  },
+  "bio": {
+    "en": "I am an MPhil student in Data Science and Analytics at HKUST (Guangzhou), with a BEng in Artificial Intelligence from Wuhan University. Previously, I worked as a research assistant at The Hong Kong Polytechnic University and HKUST (Guangzhou).",
+    "zh": "我目前在香港科技大学（广州）攻读数据科学与应用研究型硕士，本科毕业于武汉大学人工智能专业。此前曾在香港理工大学及香港科技大学（广州）担任研究助理。"
+  }
+}

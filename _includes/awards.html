@@ -1,0 +1,1 @@
+<div class="awards-list">{% for award in site.data.awards %}<article class="award-entry"><time>{{ award.year }}</time><div><h3>{{ award.title[lang] }}</h3>{% if award.description[lang] %}<p>{{ award.description[lang] }}</p>{% endif %}</div></article>{% endfor %}</div>

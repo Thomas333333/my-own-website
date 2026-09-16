@@ -1,7 +1,1 @@
-
-
-✉️ riverhill@whu.edu.cn<br>
- How to use obsidian and Netlify to deploy similar website： <a  href="https://thomas-s-ai-home.netlify.app/obsidian%E5%8F%91%E5%B8%83%E7%9A%84%E5%85%8D%E8%B4%B9%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88">Obsidian发布的免费替代方案</a> <br>
-Friend Link: <a href="https://timmygiorno.github.io/"> TimmyGio
-</a>  <br> 
-  <a class="internal-link" href="/about">About page</a> 
+<footer class="site-footer">{% if site.data.friends.size > 0 %}<nav class="friend-links" aria-label="{% if page.lang == 'en' %}Friends{% else %}友情链接{% endif %}"><span class="friend-links-label">{% if page.lang == 'en' %}Friends{% else %}友链{% endif %}</span><ul>{% for friend in site.data.friends %}<li><a href="{{ friend.url | escape }}">{{ friend.name | escape }} ↗</a></li>{% endfor %}</ul></nav>{% endif %}<span>© {{ site.time | date: '%Y' }} Jiangshan He · 何姜杉</span><div class="footer-links"><a href="mailto:{{ site.data.profile.email }}">Email</a><a href="{{ site.data.profile.github }}">GitHub</a><a href="{{ site.data.profile.scholar }}">Google Scholar</a></div></footer>

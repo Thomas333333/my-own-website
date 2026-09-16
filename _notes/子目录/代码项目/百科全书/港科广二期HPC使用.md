@@ -43,6 +43,7 @@ conda deactivate
 + sbatch能够让大家按队列动态地使用资源，避免资源占用和浪费。
 + 参考港科广[作业提交与管理](https://hpc.hkust-gz.edu.cn/docs/hpc12/slurm/job2)
 + 以下为参考模版`script.sh`，运行指令是`sbatch script.sh`。使用指令`squeue -u username`即可看所有作业的运行情况。
+
 ```bash 
 #!/bin/bash
 #SBATCH -p i64m1tga800u       # 指定GPU队列

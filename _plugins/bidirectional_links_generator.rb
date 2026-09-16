@@ -1,111 +1,126 @@
-# frozen_string_literal: true
+# Build a non-destructive, categorized library and resolve Obsidian links.
+require 'cgi'
+require 'json'
+require 'digest'
 class BidirectionalLinksGenerator < Jekyll::Generator
-  def generate(site)
-    graph_nodes = []
-    graph_edges = []
-
-    all_notes = site.collections['notes'].docs
-    all_pages = site.pages
-
-    all_docs = all_notes + all_pages
-
-    link_extension = !!site.config["use_html_extension"] ? '.html' : ''
-
-    # Convert all Wiki/Roam-style double-bracket link syntax to plain HTML
-    # anchor tag elements (<a>) with "internal-link" CSS class
-    all_docs.each do |current_note|
-      all_docs.each do |note_potentially_linked_to|
-        note_title_regexp_pattern = Regexp.escape(
-          File.basename(
-            note_potentially_linked_to.basename,
-            File.extname(note_potentially_linked_to.basename)
-          )
-        ).gsub('\_', '[ _]').gsub('\-', '[ -]').capitalize
-
-        title_from_data = note_potentially_linked_to.data['title']
-        if title_from_data
-          title_from_data = Regexp.escape(title_from_data)
-        end
-
-        new_href = "#{site.baseurl}#{note_potentially_linked_to.url}#{link_extension}"
-        anchor_tag = "<a class='internal-link' href='#{new_href}'>\\1</a>"
-
-        # Replace double-bracketed links with label using note title
-        # [[A note about cats|this is a link to the note about cats]]
-        current_note.content.gsub!(
-          /\[\[#{note_title_regexp_pattern}\|(.+?)(?=\])\]\]/i,
-          anchor_tag
-        )
-
-        # Replace double-bracketed links with label using note filename
-        # [[cats|this is a link to the note about cats]]
-        current_note.content.gsub!(
-          /\[\[#{title_from_data}\|(.+?)(?=\])\]\]/i,
-          anchor_tag
-        )
-
-        # Replace double-bracketed links using note title
-        # [[a note about cats]]
-        current_note.content.gsub!(
-          /\[\[(#{title_from_data})\]\]/i,
-          anchor_tag
-        )
-
-        # Replace double-bracketed links using note filename
-        # [[cats]]
-        current_note.content.gsub!(
-          /\[\[(#{note_title_regexp_pattern})\]\]/i,
-          anchor_tag
-        )
-      end
-
-      # At this point, all remaining double-bracket-wrapped words are
-      # pointing to non-existing pages, so let's turn them into disabled
-      # links by greying them out and changing the cursor
-      current_note.content = current_note.content.gsub(
-        /\[\[([^\]]+)\]\]/i, # match on the remaining double-bracket links
-        <<~HTML.delete("\n") # replace with this HTML (\\1 is what was inside the brackets)
-          <span title='There is no note that matches this link.' class='invalid-link'>
-            <span class='invalid-link-brackets'>[[</span>
-            \\1
-            <span class='invalid-link-brackets'>]]</span></span>
-        HTML
-      )
-    end
-
-    # Identify note backlinks and add them to each note
-    all_notes.each do |current_note|
-      # Nodes: Jekyll
-      notes_linking_to_current_note = all_notes.filter do |e|
-        e.content.include?(current_note.url)
-      end
-
-      # Nodes: Graph
-      graph_nodes << {
-        id: note_id_from_note(current_note),
-        path: "#{site.baseurl}#{current_note.url}#{link_extension}",
-        label: current_note.data['title'],
-      } unless current_note.path.include?('_notes/index.html')
-
-      # Edges: Jekyll
-      current_note.data['backlinks'] = notes_linking_to_current_note
-
-      # Edges: Graph
-      notes_linking_to_current_note.each do |n|
-        graph_edges << {
-          source: note_id_from_note(n),
-          target: note_id_from_note(current_note),
-        }
-      end
-    end
-
-    File.write('_includes/notes_graph.json', JSON.dump({
-      edges: graph_edges,
-      nodes: graph_nodes,
-    }))
+  priority :highest
+  CATEGORIES = {
+    'papers' => ['论文阅读', 'Papers & reading'],
+    'projects' => ['项目记录', 'Project logs'],
+    'algorithms' => ['算法与课程', 'Algorithms & courses'],
+    'tools' => ['工具与方法', 'Tools & workflow'],
+    'life' => ['生活与随笔', 'Life & reflections'],
+    'weekly' => ['研究周报', 'Research journal']
+  }.freeze
+  LEGACY = {'Projects'=>'projects','Paper-Reading'=>'papers','Algorithm and Classes'=>'algorithms','Life'=>'life','Weekly-summary'=>'weekly'}.freeze
+  def canonical_path(doc)
+    doc.relative_path.sub(%r{\A/?_notes/}, '').sub(%r{\A_notes/}, '')
   end
-
-  def note_id_from_note(note)
-    note.data['title'].bytes.join
+  def category(doc)
+    path = canonical_path(doc)
+    return 'weekly' if path.include?('weekly-summary')
+    return 'life' if path.include?('生活/') || path.include?('papers-reading/黑客与画家')
+    return 'papers' if path.include?('papers-reading')
+    return 'algorithms' if path.include?('算法知识') || path.include?('智能机器与控制')
+    return 'tools' if path.include?('百科全书') || path.include?('小技巧') || path.include?('obsidian') || path.include?('Model_Comparison')
+    'projects'
+  end
+  def generate(site)
+    notes = site.collections['notes'].docs
+    audit = []
+    chosen = notes.group_by { |d| canonical_path(d) }.map do |path, variants|
+      # Use the original source; migration copies are excluded from the build.
+      selected = variants.min_by { |d| [d.relative_path.count('/'), d.relative_path] }
+      variants.reject { |d| d == selected }.each do |d|
+        audit << {'selected'=>selected.relative_path, 'retained_source'=>d.relative_path,
+                  'identical'=>d.content.strip == selected.content.strip}
+      end
+      selected
+    end
+    site.collections['notes'].docs.replace(chosen)
+    library = []
+    chosen.each do |doc|
+      raw = File.read(doc.path)
+      explicit_title = raw.start_with?('---') && raw.split(/^---\s*$/, 3)[1].to_s.match?(/^title:/)
+      doc.data['title'] = File.basename(doc.path, '.md') unless explicit_title
+      name = File.basename(doc.path, '.md')
+      group = category(doc)
+      doc.data['library_category'] = group
+      doc.data['category_label'] = CATEGORIES[group][0]
+      doc.data['lang'] ||= 'zh'
+      doc.data['translation_url'] = '/'
+      # Obsidian delimiters in snippets must not be interpreted as Liquid templates.
+      doc.data['render_with_liquid'] = false
+      if LEGACY.key?(name) && canonical_path(doc).include?('网页首页链接跳转')
+        doc.data['permalink'] = '/notes/project-log-index/' if name == 'Projects'
+        doc.content = "<p>笔记已按主题整理。<a href='#{site.baseurl}/notes/##{LEGACY[name]}'>打开#{CATEGORIES[LEGACY[name]][0]} →</a></p>"
+        doc.data['library_hidden'] = true
+      end
+      if %w[test your-first-note].include?(name) || canonical_path(doc).start_with?('模板/')
+        doc.data['library_hidden'] = true
+        doc.content = "<p>这是一篇旧模板。<a href='#{site.baseurl}/notes/'>进入笔记库 →</a></p>"
+      end
+      next if doc.data['library_hidden']
+      library << {'title'=>doc.data['title'], 'url'=>doc.url, 'category'=>group,
+                  'path'=>doc.relative_path, 'date'=>File.mtime(doc.path).strftime('%Y-%m-%d')}
+    end
+    # Explicit path aliases first; ambiguous bare names resolve deterministically.
+    aliases = {}
+    chosen.each do |doc|
+      [canonical_path(doc).sub(/\.md\z/, ''), doc.relative_path.sub(%r{\A/}, '').sub(/\.md\z/, '')].each { |s| aliases[s.downcase] = doc }
+    end
+    chosen.each do |doc|
+      [File.basename(doc.path, '.md'), doc.data['title']].each { |s| aliases[s.to_s.downcase] ||= doc }
+    end
+    all_docs = chosen + site.pages
+    outgoing = Hash.new { |h,k| h[k] = [] }
+    unresolved = []
+    all_docs.each do |doc|
+      next unless doc.respond_to?(:content)
+      # Leave code fences, inline code, and existing HTML attributes untouched.
+      segments = doc.content.split(/(```.*?```|~~~.*?~~~|`[^`\n]+`)/m)
+      doc.content = segments.map.with_index do |part, index|
+        next part if index.odd?
+        part.gsub(/(!?)\[\[([^\]\n]+)\]\]/) do
+          embed = Regexp.last_match(1) == '!'
+          raw = Regexp.last_match(2)
+          target, label = raw.split('|', 2)
+          filename, heading = target.split('#', 2)
+          linked = filename.empty? ? doc : aliases[filename.sub(/\.md\z/, '').downcase]
+          if linked
+            outgoing[doc] << linked unless linked == doc
+            anchor = heading ? "##{Jekyll::Utils.slugify(heading, mode: 'default')}" : ''
+            text = label || linked.data['title'] || filename
+            "<a class='internal-link' href='#{CGI.escapeHTML(site.baseurl + linked.url + anchor)}'>#{CGI.escapeHTML(text)}</a>"
+          elsif embed
+            asset = site.static_files.find { |f| f.name == File.basename(filename) }
+            if asset && filename.match?(/\.(png|jpe?g|gif|webp|svg)\z/i)
+              "<img loading='lazy' src='#{CGI.escapeHTML(site.baseurl + asset.url)}' alt='#{CGI.escapeHTML(File.basename(filename))}'>"
+            else
+              unresolved << {'source'=>doc.path,'target'=>target}
+              "<span class='invalid-link'>#{CGI.escapeHTML(label || filename)}</span>"
+            end
+          else
+            unresolved << {'source'=>doc.path,'target'=>target}
+            "<span class='invalid-link' title='原始笔记库中暂无对应页面'>#{CGI.escapeHTML(label || target)}</span>"
+          end
+        end
+      end.join
+    end
+    chosen.each do |doc|
+      doc.data['backlinks'] = chosen.select { |other| outgoing[other].include?(doc) && !other.data['library_hidden'] }
+      doc.data['outgoing_notes'] = outgoing[doc].uniq
+    end
+    redirects = Jekyll::PageWithoutAFile.new(site, site.source, '', '_redirects')
+    redirects.data['layout'] = nil
+    redirects.content = "/projects.html /notes/#projects 301\n" + chosen.map { |doc| "#{doc.url.chomp('/')}.html #{doc.url} 301" }.join("\n") + "\n"
+    site.pages << redirects
+    site.data['library'] = library.sort_by { |n| [n['category'], n['title'].downcase] }
+    site.data['note_categories'] = CATEGORIES.map { |id,labels| {'id'=>id,'title'=>labels[0],'en'=>labels[1]} }
+    # Diagnostic output stays outside the published site (docs/ is excluded).
+    report_dir = File.join(site.source, 'docs')
+    FileUtils.mkdir_p(report_dir)
+    File.write(File.join(report_dir, 'notes-audit.json'), JSON.pretty_generate({'source_documents'=>notes.size + audit.size,'library_documents'=>library.size,'duplicates'=>audit,'unresolved_links'=>unresolved}))
+    Jekyll.logger.info 'Notes library:', "#{library.size} entries, #{audit.size} duplicate copies retained on disk; #{unresolved.size} unresolved legacy links"
   end
 end

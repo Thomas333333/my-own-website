@@ -1,24 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-  {% include head.html %}
-  <body>
-    <nav>{% include nav.html %}</nav>
-    <div class="wrapper">
-      <main>{{ content }}</main>
-      <footer>{% include footer.html %}</footer>
-    </div>
-
-    {% include link-previews.html wrapperQuerySelector="content" %}
-  </body>
-</html>
-
-<script>
-    function rep() 
-    {
-        document.body.innerHTML
-            = document.body.innerHTML
-            .replaceAll("<em>", "_").replaceAll("</em>", "_")
-        
-    }
-    rep()
-</script>
+<html lang="{{ page.lang | default: 'zh-CN' }}">
+{% include head.html %}
+<body class="{% if page.layout == 'note' %}note-page{% endif %}">
+<a class="skip-link" href="#main">Skip to content / 跳至正文</a>
+{% include nav.html %}
+<main id="main" class="site-main">{{ content }}</main>
+{% include footer.html %}
+</body></html>

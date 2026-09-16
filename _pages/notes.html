@@ -1,0 +1,13 @@
+---
+layout: page
+title: 笔记库
+id: notes
+lang: zh
+permalink: /notes/
+translation_url: /
+---
+<header class="page-heading"><h1>笔记</h1><p>论文阅读、项目记录、工具方法与生活随笔。</p></header>
+<div class="library-toolbar"><label class="search-wrap"><span class="sr-only">搜索笔记标题</span><input type="search" id="note-search" placeholder="搜索笔记标题…" autocomplete="off"></label><span class="library-count" id="note-count" aria-live="polite">{{ site.data.library.size }} 篇笔记</span></div>
+<div class="filter-bar" aria-label="笔记分类"><button type="button" data-category="all" aria-pressed="true">全部</button>{% for category in site.data.note_categories %}<button type="button" data-category="{{ category.id }}" aria-pressed="false">{{ category.title }}</button>{% endfor %}</div>
+{% for category in site.data.note_categories %}<section class="library-group" data-group="{{ category.id }}"><h2>{{ category.title }} <span>{{ category.en }}</span></h2><ul class="note-list">{% for note in site.data.library %}{% if note.category == category.id %}<li data-note data-title="{{ note.title | escape }}" data-category="{{ note.category }}"><a class="internal-link" href="{{ note.url | relative_url }}">{{ note.title }}</a><small>↗</small></li>{% endif %}{% endfor %}</ul></section>{% endfor %}
+<p class="empty-state" id="empty-notes" hidden>没有找到匹配的笔记。试试其他关键词，或切换到“全部”。</p>

@@ -1,0 +1,4 @@
+<nav class="notes-entry" aria-label="{% if lang == 'en' %}Browse notes{% else %}浏览笔记{% endif %}">
+<div class="notes-entry-heading"><div><a class="notes-entry-title" href="{{ '/notes/' | relative_url }}">{% if lang == 'en' %}Notes{% else %}笔记{% endif %}</a><span class="notes-entry-count">{{ site.data.library.size }} {% if lang == 'en' %}entries{% else %}篇记录{% endif %}</span></div><a class="notes-entry-all" href="{{ '/notes/' | relative_url }}">{% if lang == 'en' %}Browse all{% else %}查看全部{% endif %} →</a></div>
+<div class="notes-entry-categories">{% for category in site.data.note_categories %}{% assign category_notes = site.data.library | where: 'category', category.id %}<a href="{{ '/notes/' | relative_url }}#{{ category.id }}"><span>{% if lang == 'en' %}{{ category.en }}{% else %}{{ category.title }}{% endif %}</span><span class="notes-entry-meta">{{ category_notes.size }} <span aria-hidden="true">↗</span></span></a>{% endfor %}</div>
+</nav>

@@ -1,3 +1,3 @@
-<div>
-    <a class="internal-link" href="{{ site.baseurl }}/"><b>{{ site.title }}</b></a>
-</div>
+{% assign lang = page.lang | default: 'zh' %}{% assign root = '' %}{% if lang == 'zh' %}{% assign root = '/zh' %}{% endif %}
+<header class="site-header"><a class="brand" href="{{ root | append: '/' | relative_url }}"><span>Jiangshan He <span class="brand-cn">何姜杉</span></span></a>
+<nav aria-label="Main navigation"><a href="{{ root | append: '/' | relative_url }}" {% if page.id == 'home' %}aria-current="page"{% endif %}>{% if lang == 'en' %}About{% else %}关于{% endif %}</a><a href="{{ root | append: '/projects/' | relative_url }}" {% if page.id == 'projects' %}aria-current="page"{% endif %}>{% if lang == 'en' %}Projects{% else %}项目{% endif %}</a><a href="{{ root | append: '/publications/' | relative_url }}" {% if page.id == 'publications' %}aria-current="page"{% endif %}>{% if lang == 'en' %}Publications{% else %}论文{% endif %}</a><a href="{{ '/notes/' | relative_url }}" {% if page.id == 'notes' %}aria-current="page"{% endif %}>{% if lang == 'en' %}Notes{% else %}笔记{% endif %}</a><a class="lang-switch" href="{{ page.translation_url | default: '/' | relative_url }}">{% if lang == 'en' %}中文{% else %}EN{% endif %}</a></nav></header>
