@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#074bc4">
+  <title>让语言被看见 · Mandarin Cued Speech</title>
+  <meta name="description" content="认识 Mandarin Cued Speech，体验双向交流，探索声音、动作与同步。HKUST(GZ) Red Bird MPhil 展览。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='22' fill='%23074bc4'/%3E%3Cpath d='M18 45V35m11 20V25m11 38V17m11 38V25m11 20V35' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">跳到内容</a>
+<header class="topbar"><a class="brand" href="#" aria-label="Visible Language home"><span class="brand-icon" aria-hidden="true">ııı</span><span>VISIBLE LANGUAGE<small>HKUST(GZ) · RED BIRD MPHIL</small></span></a><div class="top-actions"><span class="edition" data-i18n="edition">POSTER EXPERIENCE / 01</span><button id="language" class="language" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button></div></header>
+<main id="main">
+ <section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero-copy"><p class="eyebrow"><span class="blue-dot"></span><span data-i18n="heroKicker">中文线索语 · 一场关于交流的探索</span></p><h1 id="hero-title" data-i18n-html="heroTitle">让语言<br>被<span class="blue">看见。</span></h1><p class="hero-description" data-i18n="heroDesc">口型与手部线索，让普通话有了可见的表达。</p><a class="primary" href="#discover"><span data-i18n="start">开始 90 秒体验</span><span aria-hidden="true">↗</span></a><div class="hero-meta"><span data-i18n="noPermission">无需麦克风或摄像头</span><span data-i18n="soundOptional">可静音浏览</span></div></div>
+  <div class="hero-visual"><div class="video-topline"><span class="live-dot"></span><span>MANDARIN CUED SPEECH</span><span class="film-number">01 / MCS</span></div><video id="hero-video" poster="assets/reply-poster.jpg" controls muted playsinline preload="none" aria-label="Mandarin Cued Speech sample" src="assets/reply.mp4"></video><div class="video-caption"><div><span class="caption-small" data-i18n="visibleReply">一段看得见的回应</span><strong>我明天过来接你。</strong><span class="translation">I'll come and pick you up tomorrow.</span></div><span class="play-symbol" aria-hidden="true">↗</span></div><a class="source-inline" href="https://mccs-2023.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="sampleCredit">真人参考视频：MCCSD 公开样例 ↗</a></div>
+ </section>
+ <nav class="chapter-nav" aria-label="体验章节"><div class="wrap"><a href="#discover"><span>01</span><b data-i18n="navDiscover">认识 MCS</b></a><a href="#conversation"><span>02</span><b data-i18n="navConversation">完成一次交流</b></a><a href="#explore"><span>03</span><b data-i18n="navExplore">不止于文字</b></a><a href="#team"><span>04</span><b data-i18n="navTeam">认识团队</b></a></div></nav>
+ <section id="discover" class="section wrap">
+  <div class="section-heading"><p class="eyebrow">01 / DISCOVER</p><h2 data-i18n-html="discoverTitle">多一种线索，<br>多一份理解。</h2><p data-i18n="discoverDesc">Mandarin Cued Speech（MCS）结合口型、手形和位置，提供可见的语音线索。</p></div>
+  <div class="discover-layout"><div class="observation"><div class="observation-stage" id="observation-stage"><video id="learn-video" src="assets/reply.mp4" poster="assets/reply-poster.jpg" muted playsinline preload="none" aria-label="观察口型和手部线索"></video><span class="view-label" id="view-label" data-i18n="fullView">完整视图</span></div><div class="observation-controls"><button id="learn-play" class="text-button"><span aria-hidden="true">▷</span> <span data-i18n="playClip">播放片段</span></button><div class="segmented" role="group" aria-label="观察视图"><button id="mouth-view" aria-pressed="false" data-i18n="mouthOnly">只看口型</button><button id="full-view" aria-pressed="true" data-i18n="withHands">加入手部线索</button></div></div></div>
+  <div class="cues"><button class="cue active" data-cue="mouth" aria-pressed="true"><span class="cue-number">01</span><span><strong data-i18n="mouth">口型</strong><small data-i18n="mouthDesc">观察发音时的口部动作。</small></span><span aria-hidden="true">↗</span></button><button class="cue" data-cue="hand" aria-pressed="false"><span class="cue-number">02</span><span><strong data-i18n="hand">手形</strong><small data-i18n="handDesc">不同手形提示不同的声母分组。</small></span><span aria-hidden="true">↗</span></button><button class="cue" data-cue="position" aria-pressed="false"><span class="cue-number">03</span><span><strong data-i18n="position">位置</strong><small data-i18n="positionDesc">手相对面部的位置提示韵母分组。</small></span><span aria-hidden="true">↗</span></button><p class="cue-insight" id="cue-insight" aria-live="polite"></p></div></div>
+  <p class="respect-note" data-i18n="respect">MCS 与手语是不同的交流方式。请和交流伙伴一起选择合适的方式。</p>
+ </section>
+ <section id="conversation" class="conversation-section section"><div class="wrap"><div class="section-heading"><p class="eyebrow">02 / CONNECT</p><h2 data-i18n="conversationTitle">从一句话，到一次对话。</h2><p data-i18n="conversationDesc">试着约定明天见面。你发出文字，对方用 MCS 回应。</p></div>
+  <div class="conversation-app"><div class="conversation-header"><span class="scenario-icon" aria-hidden="true">↔</span><div><strong data-i18n="scenario">明天见面</strong><span data-i18n="preset">预设场景 · 双向流程演示</span></div><button id="reset-conversation" class="text-button" data-i18n="restart">重新体验</button></div>
+   <ol class="flow-progress" aria-label="交流步骤"><li class="active" data-flow="0"><b>1</b><span data-i18n="stepSend">发送文字</span></li><li data-flow="1"><b>2</b><span data-i18n="stepSee">看见回应</span></li><li data-flow="2"><b>3</b><span data-i18n="stepHear">听到表达</span></li></ol>
+   <div id="conversation-stage" class="conversation-stage" aria-live="polite"></div>
+   <div class="conversation-bottom"><span id="conversation-status"></span><button id="conversation-next" class="primary"></button></div>
+  </div><p class="demo-note" data-i18n="demoNote">文字→视频：原型素材编排。视频→文字：已标注样例匹配。此页播放预先准备的结果，不进行现场识别。</p>
+ </div></section>
+ <section id="explore" class="section wrap"><div class="section-heading"><p class="eyebrow">03 / LOOK CLOSER</p><h2 data-i18n="exploreTitle">交流，不止于文字。</h2><p data-i18n="exploreDesc">海报中的三个研究问题，在这里变成可以观察的小实验。</p></div>
+  <div class="experiment-tabs" role="group" aria-label="研究体验"><button data-experiment="voice" aria-pressed="true"><span>01</span><b data-i18n="voiceTab">声音与情绪</b></button><button data-experiment="motion" aria-pressed="false"><span>02</span><b data-i18n="motionTab">动作与节奏</b></button><button data-experiment="alignment" aria-pressed="false"><span>03</span><b data-i18n="alignmentTab">声音与画面</b></button></div>
+  <div id="experiment-content" class="experiment-content"></div>
+ </section>
+ <section id="team" class="team-section section"><div class="wrap"><div class="section-heading team-heading"><div><p class="eyebrow">04 / MEET THE TEAM</p><h2 data-i18n="teamTitle">四个方向，一起连接。</h2></div><p data-i18n="teamDesc">从声音、视频到动作与同步，共同探索更自然的双向交流。</p></div><div class="team-grid" id="team-grid"></div><div class="supervisors"><span>Project Supervisor <b>Jingwei Yang</b></span><span>Academic Supervisors <b>Zixin Zhong · Zhiming Hu · Yingcong Chen · Li Liu</b></span></div>
+  <details class="project-details"><summary data-i18n="statusTitle">现在做到了什么？接下来呢？</summary><div><p data-i18n="statusCurrent">当前：双向流程原型、素材编排、参考样例匹配与基础质量检查。</p><p data-i18n="statusNext">下一步：情感语音、更自然的动作衔接、可靠的跨模态对齐与生成内容水印。</p><p data-i18n="statusLimit">任意人物、任意句子的实时 MCS 识别仍在研究中。可读性和实际使用效果需要更多用户参与验证。</p></div></details>
+  <div class="closing"><span class="blue-dot"></span><p data-i18n="closing">让更多表达，被彼此理解。</p><a href="#" class="text-button" data-i18n="backTop">回到开头 ↑</a></div>
+ </div></section>
+</main>
+<footer class="wrap footer"><div><strong>Safe, Immersive, and Robust Audio-Visual Intelligence<br>for Human-Centered AI Systems</strong><p>HKUST(GZ) · College of Future Technology · Red Bird MPhil<br>Group Project T20250692 · Exhibition edition 1.0</p></div><div><a href="https://mccs-2023.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="sourceLink">参考视频与标注：MCCSD ↗</a><p data-i18n="baseCredit">基于 Q语通原型 · 不收集录音或录像</p></div></footer>
+<div id="media-notice" class="toast" role="status" hidden></div>
+<noscript><p>请启用 JavaScript 体验互动。MCS 结合口型、手形和位置提供语音线索。Mandarin Cued Speech combines mouth movements and hand cues. The videos above remain available.</p></noscript>
+</body>
+</html>
