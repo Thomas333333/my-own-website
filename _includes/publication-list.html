@@ -1,1 +1,17 @@
-<div class="publication-list">{% if include.items %}{% assign publication_items = include.items %}{% else %}{% assign publication_items = site.data.publications %}{% endif %}{% for pub in publication_items limit: include.limit %}<article class="publication"><div class="pub-year">{{ pub.year }}</div><div><div class="pub-meta"><span>{{ pub.venue }}</span><span class="pub-kind">{% if lang == 'zh' and pub.kind == 'Technical report' %}技术报告{% else %}{{ pub.kind }}{% endif %}</span>{% if pub.authorship == 'first' %}<span class="pub-authorship">{% if lang == 'en' %}First author{% else %}第一作者{% endif %}</span>{% elsif pub.authorship == 'co_first' %}<span class="pub-authorship">{% if lang == 'en' %}Co-first author{% else %}共同第一作者{% endif %}</span>{% endif %}</div><h3>{% if pub.url != '' %}<a href="{{ pub.url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</h3><p class="authors">{{ pub.authors }}</p>{% if pub.url != '' %}<a class="text-link" href="{{ pub.url }}">{% if lang == 'en' %}Read paper{% else %}查看原文{% endif %} ↗</a>{% endif %}</div></article>{% endfor %}</div>
+<div class="publication-list">
+{% if include.items %}{% assign publication_items = include.items %}{% else %}{% assign publication_items = site.data.publications %}{% endif %}
+{% for pub in publication_items limit: include.limit %}
+<article class="publication{% if pub.image %} publication-illustrated{% endif %}">
+  {% if pub.image %}
+  <a class="publication-figure" href="{{ pub.image | relative_url }}" aria-label="{% if lang == 'en' %}View figure: {% else %}查看配图：{% endif %}{{ pub.image_alt[lang] | escape }}"><img src="{{ pub.image | relative_url }}" alt="{{ pub.image_alt[lang] | escape }}" loading="lazy" width="640" height="400"><span>{{ pub.image_alt[lang] }} ↗</span></a>
+  {% else %}<div class="pub-year">{{ pub.year }}</div>{% endif %}
+  <div class="publication-copy">
+    <div class="pub-meta"><span>{{ pub.venue }}</span>{% unless pub.kind == 'Paper' or pub.kind == 'Workshop' %}<span class="pub-kind">{% if lang == 'zh' and pub.kind == 'Technical report' %}技术报告{% else %}{{ pub.kind }}{% endif %}</span>{% endunless %}<span>{{ pub.year }}</span>{% if pub.authorship == 'first' %}<span class="pub-authorship">{% if lang == 'en' %}First author{% else %}第一作者{% endif %}</span>{% elsif pub.authorship == 'co_first' %}<span class="pub-authorship">{% if lang == 'en' %}Co-first author{% else %}共同第一作者{% endif %}</span>{% endif %}</div>
+    <h3>{% if pub.url != '' %}<a href="{{ pub.url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</h3>
+    <p class="authors">{{ pub.authors }}</p>
+    {% if pub.summary %}<p class="publication-summary">{{ pub.summary[lang] }}</p>{% endif %}
+    <div class="resource-links">{% if pub.url != '' %}<a href="{{ pub.url }}">{% if pub.kind == 'Technical report' %}{% if lang == 'en' %}Report{% else %}技术报告{% endif %}{% else %}Paper{% endif %} ↗</a>{% endif %}{% for link in pub.links %}<a href="{{ link.url }}">{{ link.label }} ↗</a>{% endfor %}</div>
+  </div>
+</article>
+{% endfor %}
+</div>

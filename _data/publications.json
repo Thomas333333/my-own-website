@@ -8,7 +8,22 @@
     "url": "https://arxiv.org/abs/2512.23994",
     "topic": "Audio-visual evaluation",
     "authorship": "coauthor",
-    "home_group": "venue"
+    "home_group": "venue",
+    "image": "/assets/research/phyav-pipeline.png",
+    "image_alt": {
+      "zh": "论文中的数据构建流程",
+      "en": "Data curation pipeline from the paper"
+    },
+    "summary": {
+      "zh": "通过控制物理条件变化，评测音视频生成模型对声音物理规律的响应。",
+      "en": "Evaluates whether generated sounds respond correctly to controlled changes in physical conditions."
+    },
+    "links": [
+      {
+        "label": "Code & Data",
+        "url": "https://github.com/imxtx/PhyAVBench"
+      }
+    ]
   },
   {
     "year": "2026",
@@ -19,7 +34,17 @@
     "url": "https://openreview.net/forum?id=R3ltJC0uZN",
     "topic": "Language model evaluation",
     "authorship": "first",
-    "home_group": "first_author"
+    "home_group": "first_author",
+    "image": "/assets/research/concept-controls-paper.png",
+    "image_alt": {
+      "zh": "论文 Figure 1 · 匹配对照评测框架",
+      "en": "Paper Figure 1 · Matched-control evaluation protocol"
+    },
+    "summary": {
+      "zh": "通过格式、有效提示、误导提示等对照，区分概念提示本身的作用与提示格式带来的影响。",
+      "en": "Uses matched controls to separate the effects of concept content from prompt format."
+    },
+    "links": []
   },
   {
     "year": "2025",
@@ -74,7 +99,17 @@
     "url": "https://www-nlpir.nist.gov/projects/tvpubs/tv23.papers/whu-nercms.pdf",
     "topic": "Video retrieval",
     "authorship": "co_first",
-    "home_group": "first_author"
+    "home_group": "first_author",
+    "image": "/assets/research/trecvid-framework.png",
+    "image_alt": {
+      "zh": "技术报告中的检索框架",
+      "en": "Retrieval framework from the technical report"
+    },
+    "summary": {
+      "zh": "融合多种视觉语言模型与生成式图像查询，并通过相关性反馈优化视频检索排序。",
+      "en": "Combines vision-language models, generated image queries, and relevance feedback for video search."
+    },
+    "links": []
   },
   {
     "year": "2023",
@@ -85,6 +120,25 @@
     "url": "https://doi.org/10.1007/978-3-031-27077-2_52",
     "topic": "Interactive retrieval",
     "authorship": "co_first",
-    "home_group": "first_author"
+    "home_group": "first_author",
+    "image": "/assets/research/qivise-method.png",
+    "image_alt": {
+      "zh": "官方仓库中的交互方法图",
+      "en": "Interaction method from the official repository"
+    },
+    "summary": {
+      "zh": "利用用户对相关和不相关视频片段的反馈，迭代改进多模态检索结果。",
+      "en": "Refines multimodal video retrieval through user feedback on relevant and irrelevant clips."
+    },
+    "links": [
+      {
+        "label": "Code",
+        "url": "https://github.com/nercms-mmap/VBS-QIVISE"
+      },
+      {
+        "label": "Demo",
+        "url": "https://www.youtube.com/watch?v=KV9m5hElxHI"
+      }
+    ]
   }
 ]

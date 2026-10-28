@@ -6,8 +6,8 @@
       "zh": "生成模型"
     },
     "title": {
-      "en": "From moving images to music",
-      "zh": "从视频内容到音乐生成"
+      "en": "Video-to-music generation",
+      "zh": "视频到音乐生成"
     },
     "subtitle": {
       "en": "Video-to-music generation",
@@ -44,7 +44,11 @@
       "PyTorch"
     ],
     "links": [],
-    "visual": "music"
+    "visual": "music",
+    "highlight": {
+      "zh": "负责基础模型复现与实验迭代，探索面向长视频的配乐方法。",
+      "en": "Leading baseline reproduction and experimental iteration for video-conditioned music generation."
+    }
   },
   {
     "id": "trecvid",
@@ -53,8 +57,8 @@
       "zh": "多模态检索"
     },
     "title": {
-      "en": "Finding the right moment",
-      "zh": "在海量视频中找到目标片段"
+      "en": "TRECVID 2023 · Ad-hoc Video Search",
+      "zh": "TRECVID 2023 · 视频检索"
     },
     "subtitle": {
       "en": "TRECVID 2023 · Ad-hoc Video Search",
@@ -96,7 +100,11 @@
         "url": "https://www-nlpir.nist.gov/projects/tvpubs/tv23.papers/whu-nercms.pdf"
       }
     ],
-    "visual": "retrieval"
+    "visual": "retrieval",
+    "highlight": {
+      "zh": "负责 AVS 项目推进，参与检索流程、实验与技术报告撰写。",
+      "en": "Led the AVS project, contributing to the retrieval pipeline, experiments, and technical report."
+    }
   },
   {
     "id": "qivise",
@@ -105,8 +113,8 @@
       "zh": "交互系统"
     },
     "title": {
-      "en": "Search, feedback, refine.",
-      "zh": "检索、反馈，再找到更好的结果"
+      "en": "QIVISE · Interactive Video Search",
+      "zh": "QIVISE · 交互式视频检索"
     },
     "subtitle": {
       "en": "QIVISE · Interactive Video Search",
@@ -160,6 +168,10 @@
         "url": "https://videobrowsershowdown.org/hall-of-fame/"
       }
     ],
-    "visual": "interaction"
+    "visual": "interaction",
+    "highlight": {
+      "zh": "参与交互式检索算法与系统开发，系统论文共同第一作者。",
+      "en": "Contributed to interactive retrieval algorithms and system development; co-first author of the system paper."
+    }
   }
 ]
