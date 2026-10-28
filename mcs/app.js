@@ -1,67 +1,140 @@
 'use strict';
-const $ = (s, root=document) => root.querySelector(s);
-const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const translations = {
- en: {
- skip:'Skip to content',edition:'POSTER EXPERIENCE / 01',heroKicker:'MANDARIN CUED SPEECH · AN EXPLORATION',heroTitle:'Language,<br>made <span class="blue">visible.</span>',heroDesc:'Mouth movements and hand cues bring spoken Mandarin into view.',start:'Start the 90-second experience',noPermission:'No camera or microphone',soundOptional:'Explore with sound off',visibleReply:'A response you can see',sampleCredit:'Reference video: public MCCSD sample ↗',navDiscover:'Discover MCS',navConversation:'Try a conversation',navExplore:'Beyond words',navTeam:'Meet the team',discoverTitle:'Another cue.<br>A clearer connection.',discoverDesc:'Mandarin Cued Speech (MCS) combines mouth movements, hand shapes and hand positions to make speech sounds visible.',fullView:'Mouth + hand cues',playClip:'Play clip',mouthOnly:'Mouth only',withHands:'Add hand cues',mouth:'Mouth movements',mouthDesc:'Observe how the mouth moves during speech.',hand:'Hand shapes',handDesc:'Different shapes cue groups of consonants.',position:'Hand positions',positionDesc:'Positions relative to the face cue groups of vowels.',respect:'MCS and sign languages are different communication approaches. Choose an approach together with your communication partner.',conversationTitle:'From a sentence to a conversation.',conversationDesc:'Make a plan to meet tomorrow. Send a message and see a reply in MCS.',scenario:'See you tomorrow',preset:'Preset scene · Bidirectional workflow',restart:'Start again',stepSend:'Send text',stepSee:'See the reply',stepHear:'Hear the message',demoNote:'Text → video: arranged recorded clips. Video → text: a match to an annotated sample. This page plays prepared results; it does not perform live recognition.',exploreTitle:'Communication goes beyond words.',exploreDesc:'Explore three research questions from our poster through short, concrete comparisons.',voiceTab:'Voice & feeling',motionTab:'Motion & rhythm',alignmentTab:'Sound & vision',teamTitle:'Four directions. One connection.',teamDesc:'Bringing together voice, video, motion and alignment for more natural bidirectional communication.',statusTitle:'Where are we now? What comes next?',statusCurrent:'Current: a bidirectional prototype workflow, clip composition, reference-sample matching and basic quality checks.',statusNext:'Next: expressive speech, more natural transitions, reliable cross-modal alignment and generated-media watermarking.',statusLimit:'General real-time MCS recognition across new people and sentences remains a research challenge. Readability and practical value need further evaluation with users.',closing:'Making more expressions understood.',backTop:'Back to top ↑',sourceLink:'Reference video and annotation: MCCSD ↗',baseCredit:'Built on the Q语通 prototype · No audio or video collection',mouthInsight:'A mouth shape alone can be ambiguous. Try adding the hand cues to see the complete expression.',handInsight:'Hand shapes work together with the mouth. Recognizing a shape alone is not the same as understanding a sentence.',positionInsight:'Watch where the hand moves relative to the face. Position and shape work together with mouth movements.',speakerA:'A · TEXT / SPEECH',draftHint:'Start with a short message. See it become a visible expression.',sendAction:'Send & view MCS →',sendStatus:'Task A · Text → MCS video',greetingLabel:'Prepared prototype output · Clip composition',greetingText:'See you tomorrow.',replyAction:'See their MCS reply →',replyStatus:'Task B · MCS video → text / speech',replyLabel:'Reference sample · MCCSD LF-0029',replyText:"I’ll come and pick you up tomorrow.",speakAction:'Reveal text & play speech →',completeStatus:'A complete round trip · Prepared demonstration',againAction:'Try again ↺',voiceResult:'Annotated sample text · Synthesized speech',voiceKicker:'PROSODY / RESEARCH QUESTION',voiceTitle:'The words match. Does the feeling?',voiceDesc:'Listen to the same sentence in a recorded human voice and our current baseline speech synthesis.',voiceOriginal:'Human voice',voiceOriginalSmall:'Original audio from this clip',voiceBaseline:'Current synthesized voice',voiceBaselineSmall:'Baseline · Neutral style',voiceNext:'Expressive synthesis is a next step. These samples illustrate the current gap; they are not an emotion-controlled model demo.',motionKicker:'MOTION / OBSERVE',motionTitle:'See what happens between syllables.',motionDesc:'Replay “明天见” at normal or slower speed. Watch the hand movements as one syllable leads into the next.',motionNext:'This is our current clip-composition output. Slow playback helps inspect transitions; it is not a smoothing algorithm.',normalSpeed:'Normal · 1×',slowSpeed:'Slow · 0.6×',alignmentKicker:'ALIGNMENT / COMPARE',alignmentTitle:'Same sentence. Different timing.',alignmentDesc:'Switch between the original recording and a version with its audio delayed by 0.75 seconds. Observe how sound and mouth movements relate.',alignmentNext:'The delayed version is a deliberately modified comparison, not a model result or a gesture-correctness score.',originalTiming:'Original audio',delayedTiming:'Audio +0.75 s',previewNotice:'Tap the player to start playback.',mediaError:'This media could not load. Please check your connection and reload.',pauseClip:'Pause clip',voiceRole:'Prosody & speech',videoRole:'Controllable video generation',motionRole:'Motion transitions',alignmentRole:'Alignment & safety',academic:'Academic Supervisor',replayAudio:'Play speech',silenceHint:'This generated video is silent. Follow the visible cues.',replyHint:'The reply is shown silently. Continue to reveal its text and synthesized voice.'
- }
+  en: {
+    skip:'Skip to content', brandSub:'MANDARIN CUED SPEECH · HKUST(GZ)', navDemo:'Try it', navTeam:'Team',
+    heroTitle:'Read the words.<br><em>What is missing?</em>', heroDesc:'Text conveys the message. Mouth movements, hand cues and tone carry more.', heroLink:'Why Cued Speech?', heroNote:'Switch views to compare the same sentence.',
+    sameSentence:'ONE SENTENCE / THREE VIEWS', textView:'Text captions', mouthView:'Mouth only', captionKicker:'CAPTION', silent:'Sound off', playClip:'Play clip', pauseClip:'Pause clip', comparisonNote:'Different views of one recording, not a recognition accuracy test.',
+    textGain:'You know what was said.', textLimit:'The words alone do not show how it was pronounced or spoken.',
+    mouthGain:'You can see the mouth movements.', mouthLimit:'Similar-looking mouth movements can represent different speech sounds.',
+    cuedGain:'Mouth + hand shape + hand position.', cuedLimit:'Hand cues help distinguish speech sounds. Understanding them takes learning.',
+    whyTitle:'Beyond the message: access to speech sounds.', whyDesc:'Two scenes from our poster: feeling the tone in a film, and learning Mandarin pronunciation.',
+    captionTitle:'Captions / ASR', captionBenefit:'Read what someone says.', captionLimit:'Plain text does not automatically retain vocal tone and rhythm.',
+    lipTitle:'Lipreading', lipBenefit:'See the mouth movements of speech.', lipLimit:'Similar mouth shapes can stand for different sounds.',
+    signTitle:'Sign languages', signBenefit:'Express meaning and emotion fully, with their own grammar.', signLimit:'Not designed to map Mandarin pronunciation syllable by syllable.',
+    cuedBenefit:'Mouth movements and hand cues distinguish speech sounds.', cuedLimit:'Adds visible pronunciation cues; requires learning.',
+    researchBridge:'Our goal: translate both ways between Mandarin and MCS, while preserving prosody, rhythm and audiovisual timing.', comparisonScope:'Different purposes, not a ranking of languages. Captions can also describe sounds and emotions.',
+    conversationTitle:'A conversation, both ways.', conversationDesc:'Text → Cued Speech → text and speech.', preset:'Preset dialogue · Meeting tomorrow', restart:'Reset', stepSend:'Send text', stepSee:'Get a reply', stepHear:'Hear it', demoNote:'Prepared prototype output and an annotated sample; no live recognition on this page.',
+    speakerA:'YOUR MESSAGE', draftHint:'Send this message as a Cued Speech video.', sendAction:'View Cued Speech →', sendStatus:'Text → MCS', greetingLabel:'Prototype output · Recorded clips', greetingText:'See you tomorrow.', replyAction:'See the reply →', replyStatus:'MCS → text / speech', replyLabel:'Recorded reply · MCCSD LF-0029', replyText:'I’ll come and pick you up tomorrow.', speakAction:'Reveal & speak →', completeStatus:'Round trip complete', againAction:'Try again ↺', voiceResult:'Annotated text · Synthesized speech', silenceHint:'Silent video', replyHint:'Continue to reveal the text and hear the synthesized voice.',
+    exploreTitle:'Making it more natural.', voiceTab:'Expressive speech', motionTab:'Transitions', alignmentTab:'Audiovisual timing',
+    voiceTitle:'Same words. Different delivery.', voiceDesc:'“我明天过来接你。” Compare the human recording with our current synthesized voice.', voiceOriginal:'Human recording', voiceOriginalSmall:'Original audio', voiceBaseline:'Current synthesis', voiceBaselineSmall:'Neutral baseline', voiceNext:'Expressive synthesis is still in development. This comparison shows the current gap.',
+    motionTitle:'Watch between syllables.', motionDesc:'Play “明天见” at normal or slower speed to inspect the transitions.', motionNext:'Current clip composition. Slow playback is for observation, not motion smoothing.', normalSpeed:'Normal · 1×', slowSpeed:'Slow · 0.6×',
+    alignmentTitle:'A small delay makes a difference.', alignmentDesc:'Compare the original recording with audio delayed by 0.75 seconds.', alignmentNext:'The delay is deliberately added for comparison; it is not a model result.', originalTiming:'Original', delayedTiming:'Audio +0.75 s',
+    teamTitle:'The team', voiceRole:'Prosody & speech', videoRole:'Video generation', motionRole:'Motion transitions', alignmentRole:'Alignment & safety', academic:'Academic Supervisor',
+    statusTitle:'Progress & sources', statusCurrent:'Full prototype: bidirectional workflow, clip composition, sample matching and basic quality checks.', statusNext:'Expressive synthesis, motion interpolation and watermarking are in development. General real-time recognition is not yet implemented.', sourceLink:'Video and annotation: public MCCSD sample ↗', privacy:'No recording · No visitor tracking', backTop:'Back to top ↑', previewNotice:'Tap the player to start playback.', mediaError:'Media could not load. Please check your connection and try again.'
+  },
+  zh: {
+    textGain:'读懂了内容。', textLimit:'仅凭这行字，看不到发音动作，也听不到原声语气。',
+    mouthGain:'看到了口部动作。', mouthLimit:'但相似的口型，可能对应不同的语音。',
+    cuedGain:'口型 + 手形 + 位置。', cuedLimit:'手部线索帮助区分语音；理解这些线索需要学习。',
+    playClip:'播放片段', pauseClip:'暂停片段', speakerA:'你发出的消息', draftHint:'将这句话转换为 Cued Speech 视频。', sendAction:'查看 Cued Speech →', sendStatus:'文字 → MCS', greetingLabel:'原型结果 · 录制素材编排', greetingText:'See you tomorrow.', replyAction:'查看对方回应 →', replyStatus:'MCS → 文字 / 语音', replyLabel:'真人回应 · MCCSD LF-0029', replyText:'I’ll come and pick you up tomorrow.', speakAction:'查看文字并播报 →', completeStatus:'完成一次来回', againAction:'再体验一次 ↺', voiceResult:'样例标注文字 · 合成语音', silenceHint:'静音视频', replyHint:'继续查看文字，并听到合成语音。',
+    voiceTitle:'同一句话，语气不一样。', voiceDesc:'“我明天过来接你。”听听真人录音与当前合成语音的差别。', voiceOriginal:'真人录音', voiceOriginalSmall:'视频原声', voiceBaseline:'当前合成', voiceBaselineSmall:'中性基础版本', voiceNext:'情感合成仍在开发。这里展示的是当前差距。',
+    motionTitle:'留意音节之间。', motionDesc:'正常或慢速播放“明天见”，观察动作衔接。', motionNext:'当前素材拼接结果。慢放用于观察，不代表已实现动作平滑。', normalSpeed:'正常 · 1×', slowSpeed:'慢速 · 0.6×',
+    alignmentTitle:'差一点时间，也很明显。', alignmentDesc:'比较原始视频与声音延后 0.75 秒的版本。', alignmentNext:'延迟为人为设置的对照，不是模型结果。', originalTiming:'原始音画', delayedTiming:'声音 +0.75 秒',
+    voiceRole:'韵律与语音', videoRole:'视频生成', motionRole:'动作衔接', alignmentRole:'对齐与安全', academic:'Academic Supervisor', previewNotice:'请点击播放器开始播放。', mediaError:'媒体加载失败，请检查网络后重试。'
+  }
 };
-const zhDynamic = {
- mouthInsight:'单看口型可能存在歧义。试着加入手部线索，观察完整表达。',handInsight:'手形需要与口型结合。辨认出一个手形，并不等于理解了整句话。',positionInsight:'留意手在面部附近的移动。位置、手形和口型共同提供线索。',speakerA:'A · 文字 / 语音一方',draftHint:'从一句简单的约定开始，看看它如何变成可见的表达。',sendAction:'发送并查看 MCS →',sendStatus:'Task A · 文字 → MCS 视频',greetingLabel:'原型预生成结果 · 录制素材编排',greetingText:'See you tomorrow.',replyAction:'查看对方的 MCS 回应 →',replyStatus:'Task B · MCS 视频 → 文字 / 语音',replyLabel:'真人参考样例 · MCCSD LF-0029',replyText:"I’ll come and pick you up tomorrow.",speakAction:'查看文字并播放语音 →',completeStatus:'完成一次双向交流 · 预设示例',againAction:'再体验一次 ↺',voiceResult:'已标注样例文字 · 合成语音',voiceKicker:'PROSODY / 声音中的信息',voiceTitle:'文字一样，感觉也一样吗？',voiceDesc:'听一听同一句话的真人原声和当前基础合成语音，感受语气与节奏的差别。',voiceOriginal:'真人原声',voiceOriginalSmall:'来自这段视频的原始音轨',voiceBaseline:'当前合成语音',voiceBaselineSmall:'基础版本 · 中性表达',voiceNext:'情感语音是下一步的升级方向。这里展示当前差距，不是情绪控制模型的演示。',motionKicker:'MOTION / 观察动作',motionTitle:'音节之间，发生了什么？',motionDesc:'用正常或慢速播放“明天见”，留意手部动作如何从一个音节过渡到下一个。',motionNext:'这是当前素材编排结果。慢速播放便于观察衔接，不代表已经实现动作平滑。',normalSpeed:'正常 · 1×',slowSpeed:'慢速 · 0.6×',alignmentKicker:'ALIGNMENT / 对比体验',alignmentTitle:'同一句话，差一点时间。',alignmentDesc:'在原声视频与声音延后 0.75 秒的版本间切换，观察声音和口部动作的关系。',alignmentNext:'延迟版是人为修改的对照，不是模型输出，也不用于判断手势是否正确。',originalTiming:'原始音画',delayedTiming:'声音延后 0.75 秒',previewNotice:'请点击播放器开始播放。',mediaError:'媒体暂未加载成功，请检查网络后刷新。',pauseClip:'暂停片段',voiceRole:'韵律与语音',videoRole:'可控视频生成',motionRole:'动作衔接',alignmentRole:'对齐与安全',academic:'Academic Supervisor',silenceHint:'这段生成视频没有声音，请观察可见的线索。',replyHint:'回应先以静音展示，继续即可查看文字并听到合成语音。'
-};
-const chinese = {...zhDynamic};
-$$('[data-i18n]').forEach(el => {chinese[el.dataset.i18n]=el.textContent;});
-$$('[data-i18n-html]').forEach(el => {chinese[el.dataset.i18nHtml]=el.innerHTML;});
-translations.zh=chinese;
-let lang='zh', stage=0, experiment='voice', cue='mouth';
-let toastTimer;
-const t=k=>translations[lang][k]||translations.zh[k]||k;
-function notice(key){const el=$('#media-notice');el.textContent=t(key);el.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{el.hidden=true;},5000);}
-function pauseAll(except){$$('video,audio').forEach(m=>{if(m!==except)m.pause();});}
-function play(m){if(!m)return;pauseAll(m);const p=m.play();if(p)p.catch(()=>notice('previewNotice'));}
-document.addEventListener('play',e=>{if(e.target.matches('video,audio'))pauseAll(e.target);},true);
-document.addEventListener('error',e=>{if(e.target.matches('video,audio'))notice('mediaError');},true);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseAll();});
-function setCue(next){cue=next;$$('[data-cue]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.cue===cue));b.classList.toggle('active',b.dataset.cue===cue);});$('#cue-insight').textContent=t(cue+'Insight');}
-$$('[data-cue]').forEach(b=>b.addEventListener('click',()=>setCue(b.dataset.cue)));
-function setView(mouth){$('#observation-stage').classList.toggle('mouth-view',mouth);$('#mouth-view').setAttribute('aria-pressed',String(mouth));$('#full-view').setAttribute('aria-pressed',String(!mouth));$('#view-label').textContent=t(mouth?'mouthOnly':'fullView');}
-$('#mouth-view').addEventListener('click',()=>{setView(true);setCue('mouth');});
-$('#full-view').addEventListener('click',()=>{setView(false);setCue('hand');});
-$('#learn-play').addEventListener('click',()=>{const v=$('#learn-video');if(v.paused){if(v.ended)v.currentTime=0;play(v);}else v.pause();});
-function updateLearnButton(){const playing=!$('#learn-video').paused;$('#learn-play').innerHTML=`<span aria-hidden="true">${playing?'Ⅱ':'▷'}</span> <span>${t(playing?'pauseClip':'playClip')}</span>`;}
-['play','pause','ended'].forEach(evt=>$('#learn-video').addEventListener(evt,updateLearnButton));
+$$('[data-i18n]').forEach(el => { translations.zh[el.dataset.i18n] = el.textContent; });
+$$('[data-i18n-html]').forEach(el => { translations.zh[el.dataset.i18nHtml] = el.innerHTML; });
+let lang = 'zh', view = 'text', stage = 0, experiment = 'voice', toastTimer;
+const t = key => translations[lang][key] || translations.zh[key] || key;
+function notice(key) {
+  const el = $('#media-notice'); el.textContent = t(key); el.hidden = false;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { el.hidden = true; }, 5000);
+}
+function pauseAll(except) { $$('video,audio').forEach(m => { if (m !== except) m.pause(); }); }
+function play(media) {
+  if (!media) return;
+  pauseAll(media);
+  const promise = media.play();
+  if (promise) promise.catch(() => notice('previewNotice'));
+}
+document.addEventListener('play', e => { if (e.target.matches('video,audio')) pauseAll(e.target); }, true);
+document.addEventListener('error', e => { if (e.target.matches('video,audio')) notice('mediaError'); }, true);
+document.addEventListener('visibilitychange', () => { if (document.hidden) pauseAll(); });
 
-function renderConversation(auto=false){
- pauseAll();const box=$('#conversation-stage');
- const progress=stage<2?0:stage===2?1:2;
- $$('[data-flow]').forEach(li=>li.classList.toggle('active',Number(li.dataset.flow)<=progress));
- if(stage===0){box.innerHTML=`<div class="message-composer"><span class="speaker-label">${t('speakerA')}</span><div class="draft-bubble"><strong>明天见。</strong><p>See you tomorrow.</p></div><p class="stage-hint">${t('draftHint')}</p></div>`;}
- if(stage===1){box.innerHTML=`<span class="stage-label">${t('greetingLabel')}</span><video class="stage-video" src="assets/greeting.mp4" poster="assets/greeting-poster.jpg" controls muted playsinline preload="metadata"></video><p class="transcript">明天见。</p><p class="stage-translation">${t('greetingText')}</p><p class="stage-hint">${t('silenceHint')}</p>`;}
- if(stage===2){box.innerHTML=`<span class="stage-label">${t('replyLabel')}</span><video class="stage-video" src="assets/reply.mp4" poster="assets/reply-poster.jpg" controls muted playsinline preload="metadata"></video><p class="stage-hint">${t('replyHint')}</p>`;}
- if(stage===3){box.innerHTML=`<div class="audio-result"><span class="complete-mark" aria-hidden="true">✓</span><span class="speaker-label">${t('voiceResult')}</span><p class="transcript">我明天过来接你。</p><p class="stage-translation">${t('replyText')}</p><audio src="assets/reply-voice.m4a" controls preload="metadata" aria-label="我明天过来接你 · 合成语音"></audio></div>`;}
- $('#conversation-status').textContent=t(stage<2?'sendStatus':stage===2?'replyStatus':'completeStatus');
- $('#conversation-next').textContent=t(['sendAction','replyAction','speakAction','againAction'][stage]);
- if(auto&&stage>0)play($('video,audio',box));
+function updateCompareButton() { $('#comparison-play').textContent = t($('#comparison-video').paused ? 'playClip' : 'pauseClip'); }
+function renderComparison() {
+  const video = $('#comparison-video'); video.pause();
+  $$('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+  $('#comparison-count').textContent = `0${['text','mouth','cued'].indexOf(view) + 1} / 03`;
+  $('#caption-view').hidden = view !== 'text';
+  video.hidden = view === 'text';
+  $('#comparison-play').hidden = view === 'text';
+  $('#silent-label').hidden = view === 'text';
+  $('#comparison-stage').classList.toggle('mouth-view', view === 'mouth');
+  $('#comparison-gain').textContent = t(view + 'Gain');
+  $('#comparison-limit').textContent = t(view + 'Limit');
+  updateCompareButton();
 }
-$('#conversation-next').addEventListener('click',()=>{stage=(stage+1)%4;renderConversation(true);});
-$('#reset-conversation').addEventListener('click',()=>{stage=0;renderConversation();});
-function renderExperiment(){
- const box=$('#experiment-content');$$('video,audio',box).forEach(m=>m.pause());
- $$('[data-experiment]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.experiment===experiment)));
- const copy=(prefix)=>`<div class="experiment-copy"><span class="small-label">${t(prefix+'Kicker')}</span><h3>${t(prefix+'Title')}</h3><p>${t(prefix+'Desc')}</p><p class="research-note">${t(prefix+'Next')}</p></div>`;
- if(experiment==='voice'){
-  box.innerHTML=copy('voice')+`<div class="voice-options"><div class="voice-option"><div><strong>${t('voiceOriginal')}</strong><span>${t('voiceOriginalSmall')}</span></div><audio src="assets/reply-original.m4a" controls preload="none" aria-label="${t('voiceOriginal')}"></audio></div><div class="voice-option"><div><strong>${t('voiceBaseline')}</strong><span>${t('voiceBaselineSmall')}</span></div><audio src="assets/reply-voice.m4a" controls preload="none" aria-label="${t('voiceBaseline')}"></audio></div><p class="stage-translation">我明天过来接你。<br>${t('replyText')}</p></div>`;
- }else if(experiment==='motion'){
-  box.innerHTML=copy('motion')+`<div class="experiment-media"><video id="motion-video" src="assets/greeting.mp4" poster="assets/greeting-poster.jpg" controls muted playsinline preload="none" aria-label="明天见 · 动作观察"></video><div class="segmented" role="group" aria-label="Playback speed"><button data-speed="1" aria-pressed="true">${t('normalSpeed')}</button><button data-speed="0.6" aria-pressed="false">${t('slowSpeed')}</button></div></div>`;
-  $$('[data-speed]',box).forEach(b=>b.addEventListener('click',()=>{const v=$('#motion-video');v.playbackRate=Number(b.dataset.speed);$$('[data-speed]',box).forEach(x=>x.setAttribute('aria-pressed',String(x===b)));play(v);}));
- }else{
-  box.innerHTML=copy('alignment')+`<div class="experiment-media"><video id="alignment-video" src="assets/reply.mp4" poster="assets/reply-poster.jpg" controls playsinline preload="none" aria-label="Audio visual alignment comparison"></video><div class="segmented" role="group" aria-label="Audio timing"><button data-timing="original" aria-pressed="true">${t('originalTiming')}</button><button data-timing="delayed" aria-pressed="false">${t('delayedTiming')}</button></div></div>`;
-  $$('[data-timing]',box).forEach(b=>b.addEventListener('click',()=>{const v=$('#alignment-video');v.pause();v.src=b.dataset.timing==='original'?'assets/reply.mp4':'assets/reply-delayed.mp4';$$('[data-timing]',box).forEach(x=>x.setAttribute('aria-pressed',String(x===b)));play(v);}));
- }
+$$('[data-view]').forEach(button => button.addEventListener('click', () => { view = button.dataset.view; renderComparison(); }));
+$('#comparison-play').addEventListener('click', () => {
+  const video = $('#comparison-video');
+  if (!video.paused) { video.pause(); return; }
+  // Attach the media URL only after an explicit play gesture; scanning downloads no videos.
+  if (!video.getAttribute('src')) video.src = 'assets/reply.mp4';
+  if (video.ended) video.currentTime = 0;
+  play(video);
+});
+['play','pause','ended'].forEach(event => $('#comparison-video').addEventListener(event, updateCompareButton));
+
+function renderConversation(auto = false) {
+  pauseAll();
+  const box = $('#conversation-stage');
+  const progress = stage < 2 ? 0 : stage === 2 ? 1 : 2;
+  $$('[data-flow]').forEach(li => li.classList.toggle('active', Number(li.dataset.flow) <= progress));
+  if (stage === 0) box.innerHTML = `<div class="message-composer"><span class="speaker-label">${t('speakerA')}</span><div class="draft-bubble"><strong>明天见。</strong><p>See you tomorrow.</p></div><p class="stage-hint">${t('draftHint')}</p></div>`;
+  if (stage === 1) box.innerHTML = `<span class="stage-label">${t('greetingLabel')}</span><video class="stage-video" src="assets/greeting.mp4" poster="assets/greeting-poster.jpg" controls muted playsinline preload="none" aria-label="明天见"></video><p class="transcript">明天见。</p><p class="stage-translation">${t('greetingText')}</p><p class="stage-hint">${t('silenceHint')}</p>`;
+  if (stage === 2) box.innerHTML = `<span class="stage-label">${t('replyLabel')}</span><video class="stage-video" src="assets/reply.mp4" poster="assets/reply-poster.jpg" controls muted playsinline preload="none" aria-label="Cued Speech reply"></video><p class="stage-hint">${t('replyHint')}</p>`;
+  if (stage === 3) box.innerHTML = `<div class="audio-result"><span class="complete-mark" aria-hidden="true">✓</span><span class="speaker-label">${t('voiceResult')}</span><p class="transcript">我明天过来接你。</p><p class="stage-translation">${t('replyText')}</p><audio src="assets/reply-voice.m4a" controls preload="none" aria-label="我明天过来接你 · Synthesized speech"></audio></div>`;
+  $('#conversation-status').textContent = t(stage < 2 ? 'sendStatus' : stage === 2 ? 'replyStatus' : 'completeStatus');
+  $('#conversation-next').textContent = t(['sendAction','replyAction','speakAction','againAction'][stage]);
+  if (auto && stage > 0) play($('video,audio', box));
 }
-$$('[data-experiment]').forEach(b=>b.addEventListener('click',()=>{experiment=b.dataset.experiment;renderExperiment();}));
-const members=[{name:'Jiangshan He',image:'jiangshan-he',role:'voiceRole',supervisor:'Zixin Zhong'},{name:'Yihua Du',image:'yihua-du',role:'videoRole',supervisor:'Yingcong Chen'},{name:'Xinya Lu',image:'xinya-lu',role:'motionRole',supervisor:'Zhiming Hu'},{name:'Xiaoyang Feng',image:'xiaoyang-feng',role:'alignmentRole',supervisor:'Li Liu'}];
-function renderTeam(){$('#team-grid').innerHTML=members.map(m=>`<article class="member"><img src="assets/${m.image}.jpg" alt="${m.name}" loading="lazy" width="320" height="352"><h3>${m.name}</h3><p>${t(m.role)}</p><small>${t('academic')}<br>${m.supervisor}</small></article>`).join('');}
-function setLanguage(next){lang=next;document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.title=lang==='zh'?'让语言被看见 · Mandarin Cued Speech':'Visible Language · Mandarin Cued Speech';$$('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));$$('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));$('#language').innerHTML=(lang==='zh'?'EN':'中文')+' <span aria-hidden="true">↗</span>';$('#language').setAttribute('aria-label',lang==='zh'?'Switch to English':'切换到中文');setCue(cue);setView($('#observation-stage').classList.contains('mouth-view'));renderConversation();renderExperiment();renderTeam();updateLearnButton();}
-$('#language').addEventListener('click',()=>setLanguage(lang==='zh'?'en':'zh'));
+$('#conversation-next').addEventListener('click', () => { stage = (stage + 1) % 4; renderConversation(true); });
+$('#reset-conversation').addEventListener('click', () => { stage = 0; renderConversation(); });
+
+function renderExperiment() {
+  const box = $('#experiment-content');
+  $$('video,audio', box).forEach(m => m.pause());
+  $$('[data-experiment]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.experiment === experiment)));
+  const copy = prefix => `<div class="experiment-copy"><h3>${t(prefix + 'Title')}</h3><p>${t(prefix + 'Desc')}</p><p class="research-note">${t(prefix + 'Next')}</p></div>`;
+  if (experiment === 'voice') {
+    box.innerHTML = copy('voice') + `<div class="voice-options"><div class="voice-option"><div><strong>${t('voiceOriginal')}</strong><span>${t('voiceOriginalSmall')}</span></div><audio src="assets/reply-original.m4a" controls preload="none" aria-label="${t('voiceOriginal')}"></audio></div><div class="voice-option"><div><strong>${t('voiceBaseline')}</strong><span>${t('voiceBaselineSmall')}</span></div><audio src="assets/reply-voice.m4a" controls preload="none" aria-label="${t('voiceBaseline')}"></audio></div></div>`;
+  } else if (experiment === 'motion') {
+    box.innerHTML = copy('motion') + `<div class="experiment-media"><video id="motion-video" src="assets/greeting.mp4" poster="assets/greeting-poster.jpg" controls muted playsinline preload="none" aria-label="明天见 · Motion transitions"></video><div class="segmented" role="group" aria-label="Playback speed"><button data-speed="1" aria-pressed="true">${t('normalSpeed')}</button><button data-speed="0.6" aria-pressed="false">${t('slowSpeed')}</button></div></div>`;
+    $$('[data-speed]', box).forEach(b => b.addEventListener('click', () => {
+      const v = $('#motion-video'); v.playbackRate = Number(b.dataset.speed);
+      $$('[data-speed]', box).forEach(x => x.setAttribute('aria-pressed', String(x === b))); play(v);
+    }));
+  } else {
+    box.innerHTML = copy('alignment') + `<div class="experiment-media"><video id="alignment-video" src="assets/reply.mp4" poster="assets/reply-poster.jpg" controls playsinline preload="none" aria-label="Audiovisual timing"></video><div class="segmented" role="group" aria-label="Audio timing"><button data-timing="original" aria-pressed="true">${t('originalTiming')}</button><button data-timing="delayed" aria-pressed="false">${t('delayedTiming')}</button></div></div>`;
+    $$('[data-timing]', box).forEach(b => b.addEventListener('click', () => {
+      const v = $('#alignment-video'); v.pause();
+      v.src = b.dataset.timing === 'original' ? 'assets/reply.mp4' : 'assets/reply-delayed.mp4';
+      $$('[data-timing]', box).forEach(x => x.setAttribute('aria-pressed', String(x === b))); play(v);
+    }));
+  }
+}
+$$('[data-experiment]').forEach(b => b.addEventListener('click', () => { experiment = b.dataset.experiment; renderExperiment(); }));
+const members = [
+  {name:'Jiangshan He', image:'jiangshan-he', role:'voiceRole', supervisor:'Zixin Zhong'},
+  {name:'Yihua Du', image:'yihua-du', role:'videoRole', supervisor:'Yingcong Chen'},
+  {name:'Xinya Lu', image:'xinya-lu', role:'motionRole', supervisor:'Zhiming Hu'},
+  {name:'Xiaoyang Feng', image:'xiaoyang-feng', role:'alignmentRole', supervisor:'Li Liu'}
+];
+function renderTeam() {
+  $('#team-grid').innerHTML = members.map(m => `<article class="member"><img src="assets/${m.image}.jpg" alt="${m.name}" loading="lazy" width="320" height="336"><h3>${m.name}</h3><p>${t(m.role)}</p><small>${t('academic')}<br>${m.supervisor}</small></article>`).join('');
+}
+function setLanguage(next) {
+  lang = next; document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = lang === 'zh' ? 'Cued Speech · 中文线索语' : 'Cued Speech · Mandarin';
+  $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  $$('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+  $('#language').textContent = lang === 'zh' ? 'EN' : '中文';
+  $('#language').setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换到中文');
+  renderComparison(); renderConversation(); renderExperiment(); renderTeam();
+}
+$('#language').addEventListener('click', () => setLanguage(lang === 'zh' ? 'en' : 'zh'));
 setLanguage(lang);

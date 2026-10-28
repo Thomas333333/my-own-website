@@ -1,47 +1,91 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#074bc4">
-  <title>让语言被看见 · Mandarin Cued Speech</title>
-  <meta name="description" content="认识 Mandarin Cued Speech，体验双向交流，探索声音、动作与同步。HKUST(GZ) Red Bird MPhil 展览。">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='22' fill='%23074bc4'/%3E%3Cpath d='M18 45V35m11 20V25m11 38V17m11 38V25m11 20V35' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#123dba">
+  <title>Cued Speech · 中文线索语</title>
+  <meta name="description" content="字幕、口型与 Cued Speech：比较同一句话的不同呈现，体验中文线索语双向交流。HKUST(GZ) T20250692 项目展览。">
+  <link rel="icon" href="assets/cs-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=2">
+  <script src="app.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">跳到内容</a>
-<header class="topbar"><a class="brand" href="#" aria-label="Visible Language home"><span class="brand-icon" aria-hidden="true">ııı</span><span>VISIBLE LANGUAGE<small>HKUST(GZ) · RED BIRD MPHIL</small></span></a><div class="top-actions"><span class="edition" data-i18n="edition">POSTER EXPERIENCE / 01</span><button id="language" class="language" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button></div></header>
+<header class="topbar wrap">
+  <a class="brand" href="#" aria-label="Cued Speech"><img src="assets/cs-mark.svg" width="42" height="42" alt=""><span>CUED SPEECH<small data-i18n="brandSub">中文线索语 · HKUST(GZ)</small></span></a>
+  <div class="top-actions"><a href="#conversation" data-i18n="navDemo">体验原型</a><a href="#team" data-i18n="navTeam">团队</a><button id="language" class="language" aria-label="Switch to English">EN</button></div>
+</header>
 <main id="main">
- <section class="hero wrap" aria-labelledby="hero-title">
-  <div class="hero-copy"><p class="eyebrow"><span class="blue-dot"></span><span data-i18n="heroKicker">中文线索语 · 一场关于交流的探索</span></p><h1 id="hero-title" data-i18n-html="heroTitle">让语言<br>被<span class="blue">看见。</span></h1><p class="hero-description" data-i18n="heroDesc">口型与手部线索，让普通话有了可见的表达。</p><a class="primary" href="#discover"><span data-i18n="start">开始 90 秒体验</span><span aria-hidden="true">↗</span></a><div class="hero-meta"><span data-i18n="noPermission">无需麦克风或摄像头</span><span data-i18n="soundOptional">可静音浏览</span></div></div>
-  <div class="hero-visual"><div class="video-topline"><span class="live-dot"></span><span>MANDARIN CUED SPEECH</span><span class="film-number">01 / MCS</span></div><video id="hero-video" poster="assets/reply-poster.jpg" controls muted playsinline preload="none" aria-label="Mandarin Cued Speech sample" src="assets/reply.mp4"></video><div class="video-caption"><div><span class="caption-small" data-i18n="visibleReply">一段看得见的回应</span><strong>我明天过来接你。</strong><span class="translation">I'll come and pick you up tomorrow.</span></div><span class="play-symbol" aria-hidden="true">↗</span></div><a class="source-inline" href="https://mccs-2023.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="sampleCredit">真人参考视频：MCCSD 公开样例 ↗</a></div>
- </section>
- <nav class="chapter-nav" aria-label="体验章节"><div class="wrap"><a href="#discover"><span>01</span><b data-i18n="navDiscover">认识 MCS</b></a><a href="#conversation"><span>02</span><b data-i18n="navConversation">完成一次交流</b></a><a href="#explore"><span>03</span><b data-i18n="navExplore">不止于文字</b></a><a href="#team"><span>04</span><b data-i18n="navTeam">认识团队</b></a></div></nav>
- <section id="discover" class="section wrap">
-  <div class="section-heading"><p class="eyebrow">01 / DISCOVER</p><h2 data-i18n-html="discoverTitle">多一种线索，<br>多一份理解。</h2><p data-i18n="discoverDesc">Mandarin Cued Speech（MCS）结合口型、手形和位置，提供可见的语音线索。</p></div>
-  <div class="discover-layout"><div class="observation"><div class="observation-stage" id="observation-stage"><video id="learn-video" src="assets/reply.mp4" poster="assets/reply-poster.jpg" muted playsinline preload="none" aria-label="观察口型和手部线索"></video><span class="view-label" id="view-label" data-i18n="fullView">完整视图</span></div><div class="observation-controls"><button id="learn-play" class="text-button"><span aria-hidden="true">▷</span> <span data-i18n="playClip">播放片段</span></button><div class="segmented" role="group" aria-label="观察视图"><button id="mouth-view" aria-pressed="false" data-i18n="mouthOnly">只看口型</button><button id="full-view" aria-pressed="true" data-i18n="withHands">加入手部线索</button></div></div></div>
-  <div class="cues"><button class="cue active" data-cue="mouth" aria-pressed="true"><span class="cue-number">01</span><span><strong data-i18n="mouth">口型</strong><small data-i18n="mouthDesc">观察发音时的口部动作。</small></span><span aria-hidden="true">↗</span></button><button class="cue" data-cue="hand" aria-pressed="false"><span class="cue-number">02</span><span><strong data-i18n="hand">手形</strong><small data-i18n="handDesc">不同手形提示不同的声母分组。</small></span><span aria-hidden="true">↗</span></button><button class="cue" data-cue="position" aria-pressed="false"><span class="cue-number">03</span><span><strong data-i18n="position">位置</strong><small data-i18n="positionDesc">手相对面部的位置提示韵母分组。</small></span><span aria-hidden="true">↗</span></button><p class="cue-insight" id="cue-insight" aria-live="polite"></p></div></div>
-  <p class="respect-note" data-i18n="respect">MCS 与手语是不同的交流方式。请和交流伙伴一起选择合适的方式。</p>
- </section>
- <section id="conversation" class="conversation-section section"><div class="wrap"><div class="section-heading"><p class="eyebrow">02 / CONNECT</p><h2 data-i18n="conversationTitle">从一句话，到一次对话。</h2><p data-i18n="conversationDesc">试着约定明天见面。你发出文字，对方用 MCS 回应。</p></div>
-  <div class="conversation-app"><div class="conversation-header"><span class="scenario-icon" aria-hidden="true">↔</span><div><strong data-i18n="scenario">明天见面</strong><span data-i18n="preset">预设场景 · 双向流程演示</span></div><button id="reset-conversation" class="text-button" data-i18n="restart">重新体验</button></div>
-   <ol class="flow-progress" aria-label="交流步骤"><li class="active" data-flow="0"><b>1</b><span data-i18n="stepSend">发送文字</span></li><li data-flow="1"><b>2</b><span data-i18n="stepSee">看见回应</span></li><li data-flow="2"><b>3</b><span data-i18n="stepHear">听到表达</span></li></ol>
-   <div id="conversation-stage" class="conversation-stage" aria-live="polite"></div>
-   <div class="conversation-bottom"><span id="conversation-status"></span><button id="conversation-next" class="primary"></button></div>
-  </div><p class="demo-note" data-i18n="demoNote">文字→视频：原型素材编排。视频→文字：已标注样例匹配。此页播放预先准备的结果，不进行现场识别。</p>
- </div></section>
- <section id="explore" class="section wrap"><div class="section-heading"><p class="eyebrow">03 / LOOK CLOSER</p><h2 data-i18n="exploreTitle">交流，不止于文字。</h2><p data-i18n="exploreDesc">海报中的三个研究问题，在这里变成可以观察的小实验。</p></div>
-  <div class="experiment-tabs" role="group" aria-label="研究体验"><button data-experiment="voice" aria-pressed="true"><span>01</span><b data-i18n="voiceTab">声音与情绪</b></button><button data-experiment="motion" aria-pressed="false"><span>02</span><b data-i18n="motionTab">动作与节奏</b></button><button data-experiment="alignment" aria-pressed="false"><span>03</span><b data-i18n="alignmentTab">声音与画面</b></button></div>
-  <div id="experiment-content" class="experiment-content"></div>
- </section>
- <section id="team" class="team-section section"><div class="wrap"><div class="section-heading team-heading"><div><p class="eyebrow">04 / MEET THE TEAM</p><h2 data-i18n="teamTitle">四个方向，一起连接。</h2></div><p data-i18n="teamDesc">从声音、视频到动作与同步，共同探索更自然的双向交流。</p></div><div class="team-grid" id="team-grid"></div><div class="supervisors"><span>Project Supervisor <b>Jingwei Yang</b></span><span>Academic Supervisors <b>Zixin Zhong · Zhiming Hu · Yingcong Chen · Li Liu</b></span></div>
-  <details class="project-details"><summary data-i18n="statusTitle">现在做到了什么？接下来呢？</summary><div><p data-i18n="statusCurrent">当前：双向流程原型、素材编排、参考样例匹配与基础质量检查。</p><p data-i18n="statusNext">下一步：情感语音、更自然的动作衔接、可靠的跨模态对齐与生成内容水印。</p><p data-i18n="statusLimit">任意人物、任意句子的实时 MCS 识别仍在研究中。可读性和实际使用效果需要更多用户参与验证。</p></div></details>
-  <div class="closing"><span class="blue-dot"></span><p data-i18n="closing">让更多表达，被彼此理解。</p><a href="#" class="text-button" data-i18n="backTop">回到开头 ↑</a></div>
- </div></section>
+  <section id="compare" class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">T20250692 / POSTER EXHIBITION</p>
+      <h1 data-i18n-html="heroTitle">只读字幕，<br><em>还少了什么？</em></h1>
+      <p class="hero-description" data-i18n="heroDesc">文字传递内容。口型、手部线索和语气，传递更多。</p>
+      <a class="text-link" href="#why"><span data-i18n="heroLink">为什么选择 Cued Speech</span> <span aria-hidden="true">↓</span></a>
+      <p class="hero-note" data-i18n="heroNote">切换视图，比较同一句话。</p>
+    </div>
+    <div class="comparison">
+      <div class="comparison-top"><span data-i18n="sameSentence">同一句话 / 三种呈现</span><span id="comparison-count">01 / 03</span></div>
+      <div class="compare-tabs" role="group" aria-label="Presentation / 呈现方式">
+        <button data-view="text" aria-pressed="true" data-i18n="textView">纯文字字幕</button>
+        <button data-view="mouth" aria-pressed="false" data-i18n="mouthView">只看口型</button>
+        <button data-view="cued" aria-pressed="false">Cued Speech</button>
+      </div>
+      <div class="comparison-stage" id="comparison-stage">
+        <div id="caption-view"><span class="caption-kicker" data-i18n="captionKicker">字幕</span><p>我明天过来接你。</p><span>I'll come and pick you up tomorrow.</span></div>
+        <video id="comparison-video" poster="assets/reply-poster.jpg" muted playsinline preload="none" aria-label="Cued Speech / 我明天过来接你" hidden></video>
+        <button id="comparison-play" class="play-button" hidden data-i18n="playClip">播放片段</button>
+        <span id="silent-label" class="silent-label" hidden data-i18n="silent">静音观察</span>
+      </div>
+      <div class="comparison-result" aria-live="polite"><strong id="comparison-gain"></strong><p id="comparison-limit"></p></div>
+      <p class="comparison-note" data-i18n="comparisonNote">同一录制素材的视图对比，不是识别准确率测试。</p>
+    </div>
+  </section>
+
+  <section id="why" class="why-section section wrap">
+    <div class="section-heading"><p class="eyebrow">01 / WHY CUED SPEECH</p><h2 data-i18n="whyTitle">内容之外，我们关注发音。</h2><p data-i18n="whyDesc">海报中的两种场景：看电影时感受语气，学普通话时辨别发音。</p></div>
+    <div class="contrast-grid">
+      <article><span class="method-index">A</span><h3 data-i18n="captionTitle">字幕 / ASR</h3><p data-i18n="captionBenefit">直接读到说话内容。</p><p class="limitation" data-i18n="captionLimit">纯文字不会自动保留原声的语气、节奏。</p></article>
+      <article><span class="method-index">B</span><h3 data-i18n="lipTitle">唇读</h3><p data-i18n="lipBenefit">看到发音时的口部动作。</p><p class="limitation" data-i18n="lipLimit">相似口型可能对应不同的语音。</p></article>
+      <article><span class="method-index">C</span><h3 data-i18n="signTitle">手语</h3><p data-i18n="signBenefit">有自己的语法，能完整表达含义与情绪。</p><p class="limitation" data-i18n="signLimit">不以逐音节对应普通话发音为目标。</p></article>
+      <article class="cued-card"><span class="method-index">D / OUR FOCUS</span><h3>Cued Speech</h3><p data-i18n="cuedBenefit">口型 + 手形 + 位置，共同区分语音。</p><p class="limitation" data-i18n="cuedLimit">为发音增加可见线索；理解它需要学习。</p></article>
+    </div>
+    <div class="research-bridge"><span class="bridge-line" aria-hidden="true"></span><p data-i18n="researchBridge">我们的目标：在普通话与 MCS 之间双向转换，进一步保留语气、节奏与音画同步。</p></div>
+    <p class="fineprint" data-i18n="comparisonScope">比较的是使用场景，不是语言的优劣。字幕也可补充声音与情绪描述。</p>
+  </section>
+
+  <section id="conversation" class="conversation-section section"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">02 / TRY THE PROTOTYPE</p><h2 data-i18n="conversationTitle">一次来回。</h2><p data-i18n="conversationDesc">文字 → Cued Speech → 文字与语音。</p></div>
+    <div class="conversation-app">
+      <div class="conversation-header"><span data-i18n="preset">预设对话 · 明天见面</span><button id="reset-conversation" class="text-button" data-i18n="restart">重来</button></div>
+      <ol class="flow-progress" aria-label="Conversation / 对话步骤"><li class="active" data-flow="0"><b>1</b><span data-i18n="stepSend">发出文字</span></li><li data-flow="1"><b>2</b><span data-i18n="stepSee">收到回应</span></li><li data-flow="2"><b>3</b><span data-i18n="stepHear">听到表达</span></li></ol>
+      <div id="conversation-stage" class="conversation-stage" aria-live="polite"></div>
+      <div class="conversation-bottom"><span id="conversation-status"></span><button id="conversation-next" class="primary"></button></div>
+    </div>
+    <p class="demo-note" data-i18n="demoNote">预先准备的原型结果与已标注样例；此页不进行现场识别。</p>
+  </div></section>
+
+  <section id="explore" class="section wrap">
+    <div class="section-heading"><p class="eyebrow">03 / WORK IN PROGRESS</p><h2 data-i18n="exploreTitle">下一步，要更自然。</h2></div>
+    <div class="experiment-tabs" role="group" aria-label="Research examples / 研究样例"><button data-experiment="voice" aria-pressed="true" data-i18n="voiceTab">情绪语音</button><button data-experiment="motion" aria-pressed="false" data-i18n="motionTab">动作衔接</button><button data-experiment="alignment" aria-pressed="false" data-i18n="alignmentTab">音画同步</button></div>
+    <div id="experiment-content" class="experiment-content"></div>
+  </section>
+
+  <section id="team" class="team-section section"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">04 / TEAM</p><h2 data-i18n="teamTitle">开发团队</h2></div>
+    <div class="team-grid" id="team-grid"></div>
+    <p class="supervisors">Project Supervisor <strong>Jingwei Yang</strong></p>
+    <details class="project-details"><summary data-i18n="statusTitle">项目进度与来源</summary><div>
+      <p data-i18n="statusCurrent">完整原型已接通双向流程、素材编排、样例匹配与基础质量检查。</p>
+      <p data-i18n="statusNext">情感合成、动作补间、生成内容水印仍在开发；通用实时识别尚未实现。</p>
+      <p><a href="https://mccs-2023.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="sourceLink">视频与标注：MCCSD 公开样例 ↗</a></p>
+      <p><a href="https://www.nidcd.nih.gov/glossary/cued-speech" target="_blank" rel="noopener noreferrer">Cued Speech — NIDCD ↗</a> · <a href="https://www.nidcd.nih.gov/health/american-sign-language" target="_blank" rel="noopener noreferrer">Sign language — NIDCD ↗</a></p>
+    </div></details>
+  </div></section>
 </main>
-<footer class="wrap footer"><div><strong>Safe, Immersive, and Robust Audio-Visual Intelligence<br>for Human-Centered AI Systems</strong><p>HKUST(GZ) · College of Future Technology · Red Bird MPhil<br>Group Project T20250692 · Exhibition edition 1.0</p></div><div><a href="https://mccs-2023.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="sourceLink">参考视频与标注：MCCSD ↗</a><p data-i18n="baseCredit">基于 Q语通原型 · 不收集录音或录像</p></div></footer>
+<footer class="footer wrap"><div><strong>Bridging Spoken Mandarin and Mandarin Cued Speech<br>for Inclusive Communication</strong><p>HKUST(GZ) · Red Bird MPhil · T20250692</p></div><div><p data-i18n="privacy">无需录音或录像 · 无访问追踪</p><a href="#" class="text-link" data-i18n="backTop">回到开头 ↑</a></div></footer>
 <div id="media-notice" class="toast" role="status" hidden></div>
-<noscript><p>请启用 JavaScript 体验互动。MCS 结合口型、手形和位置提供语音线索。Mandarin Cued Speech combines mouth movements and hand cues. The videos above remain available.</p></noscript>
+<noscript><p>互动需要 JavaScript。Cued Speech 结合口型与手部线索来区分语音。请参阅下方项目介绍与来源。</p></noscript>
 </body>
 </html>
