@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>语通 · 答辩数据汇总</title><link rel="stylesheet" href="study.css"><link rel="stylesheet" href="results.css"><script type="module" src="results.mjs"></script></head><body>
+<header class="site-header"><div class="shell header-inner"><div class="brand"><span class="brand-mark">语</span>答辩数据汇总</div><nav><a href="design.html">问卷与图表设计</a>　<a href="./">参与者问卷</a></nav></div></header>
+<main class="shell report"><div class="page-heading"><div><p class="panel-label">REMOTE PROTOTYPE FEEDBACK</p><h1>把真实答卷变成答辩图表</h1><p>导入 P01–P05 的新版 CSV。每个点对应一个人，图中保留缺答与实际样本数。</p></div></div>
+<section class="panel import-panel"><label class="upload-label" for="files">选择答卷 CSV（可多选）</label><input id="files" type="file" accept=".csv,text/csv" multiple><button id="clear" class="secondary">清空本次导入</button><p id="import-status" role="status">尚未导入数据，图表等待真实答卷。</p><p class="microcopy">文件只在当前页面内处理，不上传、不集中保存；刷新页面后需重新导入。同一编号只接受一份答卷，试跑 P00 与旧版问卷会被排除。</p></section>
+<section class="summary-strip" aria-label="数据概况"><div><strong id="sample-n">0 / 5</strong><span>已导入参与者</span></div><div><strong>四张主图</strong><span>对应四位主讲人</span></div><div><strong>1–5 分</strong><span>显示个人分布与有效人数</span></div></section>
+<div id="participants"></div><div id="charts"></div>
+<section class="panel report-section"><h2>十条定向反馈</h2><p class="panel-intro">仅显示明确允许匿名引用的原话。保留原意，英文翻译需与中文核对。不同题目得到的反馈不用于比较主题出现频率。</p><div id="quotes"></div></section>
+<section class="panel report-section"><h2>评分明细与缺答</h2><p class="panel-intro">显示所有实际导入的评分项。— 表示没有可用数值，包括未答、不适用或无法判断；不按 0 分处理。</p><div id="data-table" class="table-scroll"></div></section>
+<p class="report-footer">研究定位：5 人远程原型体验评估。问卷记录主观体验、偏好和预期用途。播放记录表示触发播放，不表示看完或理解正确。技术准确率、同步指标及模型改进需另外验证。</p>
+</main></body></html>

@@ -49,7 +49,7 @@ progress { appearance: none; display: block; width: 100%; height: 6px; margin-to
 progress::-webkit-progress-bar { background: #dfe8f7; }
 progress::-webkit-progress-value { background: var(--blue); }
 progress::-moz-progress-bar { background: var(--blue); }
-.chapter-nav { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; padding: 5px; border: 1px solid var(--border); border-radius: 15px; background: white; margin-bottom: 20px; }
+.chapter-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; padding: 5px; border: 1px solid var(--border); border-radius: 15px; background: white; margin-bottom: 20px; }
 .chapter-button { min-height: 45px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); font-weight: 660; }
 .chapter-button[aria-current="step"] { background: var(--pale); color: var(--blue); }
 .chapter-button:hover { background: #f0f5fd; }
@@ -157,3 +157,5 @@ input[type="checkbox"] { accent-color: var(--blue); width: 18px; height: 18px; f
 @media (max-width: 1000px) and (min-width: 721px) {
   .chapter-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+.subsection { font-size: 20px; margin: 24px 0 15px; }
