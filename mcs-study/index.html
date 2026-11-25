@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="中文线索语原型的远程体验与问卷。">
+  <meta name="theme-color" content="#f4f7fc">
+  <title>语通 · 中文线索语体验研究</title>
+  <link rel="stylesheet" href="study.css">
+  <script type="module" src="study.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">跳到体验内容</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">语</span><span>语通 <small>QYUTONG</small></span></div>
+      <label class="participant-label" for="participant">参与编号
+        <select id="participant">
+          <option value="P00">试跑</option><option>P01</option><option>P02</option><option>P03</option><option>P04</option><option>P05</option>
+        </select>
+      </label>
+    </div>
+  </header>
+  <main class="shell">
+    <div class="page-heading">
+      <div>
+        <h1>中文线索语体验研究</h1>
+        <p>先体验演示，再回答对应问题。了解中文线索语的基本原理即可参加。</p>
+      </div>
+      <div class="study-progress">
+        <span id="progress-label">完成 0 / 4 部分</span>
+        <progress id="progress" max="4" value="0" aria-label="问卷完成进度"></progress>
+      </div>
+    </div>
+    <nav id="chapters" class="chapter-nav" aria-label="研究步骤"></nav>
+    <p id="announcement" class="sr-only" role="status"></p>
+    <div id="workspace" class="workspace" tabindex="-1">
+      <section id="demo" class="panel demo-panel" aria-labelledby="demo-title"></section>
+      <section id="questions" class="panel questionnaire" aria-labelledby="question-title"></section>
+    </div>
+    <footer>
+      <details>
+        <summary>参与说明与数据保存</summary>
+        <p>参与自愿，可以跳过或随时停止。页面不要求姓名、联系方式，也不使用你的摄像头或麦克风。请避免在文字反馈里写入可识别个人的信息。</p>
+        <p>答案自动保存在当前浏览器。完成后下载 CSV，再通过研究团队约定的方式发送。换设备或清理浏览器数据前，请先导出。</p>
+      </details>
+      <p class="footer-label">RBM 项目 T20250692 <span>·</span> Mandarin Cued Speech</p>
+    </footer>
+  </main>
+  <noscript><p class="shell">需要开启 JavaScript 才能播放互动演示并填写问卷。</p></noscript>
+</body>
+</html>
