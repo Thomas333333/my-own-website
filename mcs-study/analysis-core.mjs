@@ -53,3 +53,5 @@ export function counts(people,key,options){
   return {n:valid.length,rows:options.map(([value,label])=>({value,label,count:valid.filter(p=>{const v=p.answers[key].value;return Array.isArray(v)?v.includes(value):v===value;}).length}))};
 }
 export function median(values){if(!values.length)return null;const x=[...values].sort((a,b)=>a-b),m=Math.floor(x.length/2);return x.length%2?x[m]:(x[m-1]+x[m])/2;}
+
+export const RATING_KEYS = ["need_lips", "need_practice", "need_repair", "context_frequency", "current_support", "exchange_ease", "exchange_clarity", "exchange_confirm", "clip1_mouth", "clip1_full", "clip2_mouth", "clip2_full", "lesson_start", "lesson_pace", "lesson_locate", "lesson_independent", "pace_normal_detail", "pace_slow_detail", "pace_normal_natural", "pace_slow_natural", "correction_find", "correction_control", "correction_status", "correction_comfort", "reading_standard", "reading_large", "reading_status", "context_need", "scenario_practice", "scenario_meeting", "scenario_service", "satisfaction", "reuse", "learning", "communication"];

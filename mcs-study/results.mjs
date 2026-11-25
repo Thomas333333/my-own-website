@@ -1,4 +1,4 @@
-import {PIDS,readAnswerFile,points,paired,counts,median} from './analysis-core.mjs';
+import {PIDS,RATING_KEYS,readAnswerFile,points,paired,counts,median} from './analysis-core.mjs';
 const people=new Map(), $=s=>document.querySelector(s);
 const colors=['#1d4ed8','#087f8c','#8942b5','#b45b06','#12805c'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -64,7 +64,7 @@ function render(){
  $('#participants').innerHTML='<div class="participant-list">'+list.map(p=>`<span class="pill">${p.pid} · ${Object.values(p.answers).filter(a=>Array.isArray(a.value)?a.value.length:a.value!=='').length} 项已答</span>`).join('')+'</div>';
  $('#charts').innerHTML=defs.map(d=>`<section class="panel report-section"><div class="chart-head"><div><p class="chart-owner">${esc(d.owner)}</p><h2>${esc(d.title)}</h2></div><button class="secondary" data-export="${d.id}" ${list.length?'':'disabled'}>下载英文图 SVG</button></div>${list.length?`<div class="chart-canvas" id="chart-${d.id}">${d.make(list)}</div>`:'<div class="empty">等待真实答卷。导入后显示个人分数与有效人数。</div>'}<p class="chart-note">${esc(d.note)}</p></section>`).join('');
  $('#quotes').innerHTML=list.length?'<div class="quote-grid">'+list.map(p=>`<article class="quote-card"><strong>${p.pid} · ${topics[p.pid]}</strong>`+(p.answers.quote_permission?.value==='quote-yes'?[1,2].map(n=>'<p>'+n+'. '+esc(p.answers['feedback'+n]?.value||'未填写')+'</p>').join(''):'<p>未获匿名原话引用许可。请仅使用汇总分析。</p>')+'</article>').join('')+'</div>':'<p class="empty">等待反馈。</p>';
- const keys=[...new Set(list.flatMap(p=>Object.entries(p.answers).filter(([k,a])=>a.rating!==null).map(([k])=>k)))];
+ const keys=RATING_KEYS.filter(key=>list.some(p=>p.answers[key]));
  $('#data-table').innerHTML=keys.length?'<table><thead><tr><th>评分项</th>'+PIDS.map(pid=>'<th>'+pid+'</th>').join('')+'<th>有效 n</th></tr></thead><tbody>'+keys.map(key=>{
  const first=list.find(p=>p.answers[key])?.answers[key];return '<tr><td>'+esc(first.label)+(first.setting?' · '+esc(first.setting):'')+'</td>'+PIDS.map(pid=>'<td>'+(people.get(pid)?.answers[key]?.rating??'—')+'</td>').join('')+'<td>'+points(list,key).length+'</td></tr>';
  }).join('')+'</tbody></table>':'<p class="microcopy">尚无可用评分。</p>';
