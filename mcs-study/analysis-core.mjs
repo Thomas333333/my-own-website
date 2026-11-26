@@ -1,4 +1,4 @@
-export const VERSION = 'presentation-study-4';
+export const VERSION = 'presentation-study-5';
 export const PIDS = ['P01','P02','P03','P04','P05'];
 export function parseCSV(text) {
   const rows=[]; let row=[], cell='', quoted=false;
@@ -54,4 +54,4 @@ export function counts(people,key,options){
 }
 export function median(values){if(!values.length)return null;const x=[...values].sort((a,b)=>a-b),m=Math.floor(x.length/2);return x.length%2?x[m]:(x[m-1]+x[m])/2;}
 
-export const RATING_KEYS = ["need_lips", "need_practice", "need_repair", "context_frequency", "current_support", "exchange_ease", "exchange_clarity", "exchange_confirm", "clip1_mouth", "clip1_full", "clip2_mouth", "clip2_full", "lesson_start", "lesson_pace", "lesson_locate", "lesson_independent", "pace_normal_detail", "pace_slow_detail", "pace_normal_natural", "pace_slow_natural", "correction_find", "correction_control", "correction_status", "correction_comfort", "reading_standard", "reading_large", "reading_status", "context_need", "scenario_practice", "scenario_meeting", "scenario_service", "satisfaction", "reuse", "learning", "communication"];
+export const RATING_KEYS = ["need_lips", "need_practice", "need_repair", "context_frequency", "current_support", "intro_clarity", "exchange_ease", "exchange_clarity", "exchange_confirm", "clip1_mouth", "clip1_full", "clip2_mouth", "clip2_full", "lesson_start", "lesson_pace", "lesson_locate", "lesson_independent", "pace_normal_detail", "pace_slow_detail", "pace_normal_natural", "pace_slow_natural", "correction_find", "correction_control", "correction_status", "correction_comfort", "reading_standard", "reading_large", "reading_status", "context_need", "scenario_practice", "scenario_meeting", "scenario_service", "satisfaction", "reuse", "learning", "communication", "learning_interest"];

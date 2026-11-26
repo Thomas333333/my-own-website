@@ -1,10 +1,10 @@
-const CHAPTERS = ['使用背景', '对话体验', '视频呈现', '句子跟练', '文字确认', '阅读显示', '歧义场景', '总体评价'];
+const CHAPTERS = ['使用背景', '认识 MCS', '对话体验', '视频呈现', '句子跟练', '文字确认', '阅读显示', '歧义场景', '总体评价'];
 const PARTICIPANTS = ['P00', 'P01', 'P02', 'P03', 'P04', 'P05'];
-const VERSION = 'presentation-study-4';
+const VERSION = 'presentation-study-5';
 
 const CLIPS = [
-  { id: 'clip1', label: '片段一', asset: 's01' },
-  { id: 'clip2', label: '片段二', asset: 's06' }
+  { id: 'clip1', label: '片段一', asset: 's01', text: '快（kuai）' },
+  { id: 'clip2', label: '片段二', asset: 's06', text: '帅（shuai）' }
 ];
 
 const VIEWS = { mouth: '口型特写', full: '完整手口画面' };
@@ -26,10 +26,10 @@ const FOLLOW_UP = [
 ];
 const FEEDBACK = {
   P01: ['对话流程', '哪一个操作让你最犹豫？请指出页面位置或按钮。', '如果只能改动一个步骤，你希望它怎么做？'],
-  P02: ['视频和播放', '哪一个片段或呈现方式最容易跟上？具体是什么让你更容易看？', '在实际使用时，你最希望增加或改善哪一种播放控制？为什么？'],
+  P02: ['视频和播放', '哪一个片段或呈现方式的动作细节更容易看清？具体是什么让你更容易看？', '在实际使用时，你最希望增加或改善哪一种播放控制？为什么？'],
   P03: ['真实需求', '请举一个你自己遇过的场景，说明现在通常怎么处理。', '在这个场景里，原型能帮到哪一步？还有哪一步需要其他方式？'],
   P04: ['确认与纠错', '看完回复后，什么信息能让你更清楚接下来会发生什么？', '如果回复文字写错，你希望在哪里改、用什么提示确认改成功？'],
-  P05: ['初次上手', '第一次打开页面时，有没有一个词或按钮需要解释？请指出具体位置。', '如果把原型发给只懂 MCS 基本原理的朋友，你最想给他加哪一条提示？']
+  P05: ['初次上手', '第一次打开页面时，有没有一个词或按钮需要解释？请指出具体位置。', '如果把原型发给从未接触过 MCS 的朋友，你最想给他加哪一条提示？']
 };
 
 const LESSON_PARTS = [
@@ -42,7 +42,7 @@ const EXTRA_RATINGS = {
     ['lesson_start', '开始这句练习有多容易？', '很难', '很容易'],
     ['lesson_pace', '调节到适合自己的观看节奏有多容易？', '很难', '很容易'],
     ['lesson_locate', '找到想重新看的那个字有多容易？', '很难', '很容易'],
-    ['lesson_independent', '按这种方式独自进行下一次练习，你有多大把握？', '没把握', '很有把握']
+    ['lesson_independent', '下次独自使用播放、重播和慢放按钮，你有多大把握？', '没把握', '很有把握']
   ],
   correction: [
     ['correction_find', '找到修改文字的入口有多容易？', '很难', '很容易'],
@@ -80,9 +80,19 @@ const BARRIERS = [
 ];
 const DEVICES = [['phone', '手机'], ['tablet', '平板'], ['computer', '电脑'], ['other-device', '其他']];
 
+const MCS_EXPERIENCE = [
+  ['none-used', '从未听过，第一次接触'], ['heard-only', '听说过，但没有学过'],
+  ['basics', '了解一些原理或学过基础'], ['have-practised', '实际练习或使用过']
+];
+const DIFFICULTIES = [
+  ['instructions', '说明或按钮含义不够清楚'], ['visual-details', '画面中的动作细节看不清'],
+  ['cue-meaning', '不熟悉 MCS，不知道动作代表什么'], ['relevance', '暂时想不到适合自己的用途'],
+  ['other-difficulty', '其他困难'], ['no-difficulty', '没有明显困难']
+];
+
 const NEED_RATINGS = [
   ['need_lips', '过去三个月，你多常遇到看口型仍分不清说了什么的情况？', '从未', '非常经常'],
-  ['need_practice', '过去三个月，你多常想找到能反复观看的发音或 MCS 跟练示例？', '从未', '非常经常'],
+  ['need_practice', '过去三个月，你多常需要可以反复观看的口型或发音示例？', '从未', '非常经常'],
   ['need_repair', '过去三个月，交流时你多常需要重新打字或请对方重复，才能确认一句消息？', '从未', '非常经常'],
   ['context_frequency', '过去三个月，纯文字交流时你多常遇到语气不好判断的情况？', '从未', '非常经常'],
   ['current_support', '你目前使用的交流方式，整体有多能满足自己的需要？', '完全不能', '完全能']
@@ -105,11 +115,10 @@ const PACE_PREFERENCES = [['pace-normal', '正常速度'], ['pace-slow', '慢放
 const QUOTE_OPTIONS = [['quote-yes', '可以匿名引用'], ['quote-no', '请只汇总分析，不直接引用原话']];
 
 const LABELS = Object.fromEntries([
-  ...COMMUNICATION_MODES, ...GAPS, ...PACE_PREFERENCES, ...QUOTE_OPTIONS,
+  ...MCS_EXPERIENCE, ...DIFFICULTIES, ...COMMUNICATION_MODES, ...GAPS, ...PACE_PREFERENCES, ...QUOTE_OPTIONS,
   ...LESSON_PREFERENCES, ...CONFIRM_PREFERENCES, ...READING_PREFERENCES, ...FEATURE_PRIORITIES, ...BARRIERS, ...DEVICES,
   ...USE_CASES, ...PLAYBACK_PRIORITIES, ...CONTEXT_PRIORITIES, ...FOLLOW_UP,
   ...Object.entries(VIEWS), ['both', '两种都可以'], ['neither', '两种都有困难'],
-  ['none-used', '以前没接触过'], ['basics', '懂基本原理'], ['have-practised', '练习过或在使用'],
   ['na', '无法判断']
 ]);
 
@@ -174,13 +183,14 @@ function count(keys) {
 function requiredKeys() {
   return [
     ['mcs', 'device', 'communication_modes', ...NEED_RATINGS.map(([key]) => key), 'biggest_gap'],
+    ['intro_clarity'],
     ['exchange_ease', 'exchange_clarity', 'exchange_confirm', 'follow_up'],
     [...CLIPS.flatMap(({ id }) => [id + '_mouth', id + '_full', id + '_preference']), 'playback_priority'],
     [...EXTRA_RATINGS.lesson.map(([key]) => key), ...PACE_RATINGS.map(([key]) => key), 'lesson_preference', 'pace_preference'],
     [...EXTRA_RATINGS.correction.map(([key]) => key), 'confirm_preference'],
     [...EXTRA_RATINGS.reading.map(([key]) => key), 'reading_preference'],
     ['context_need', 'context_priority', ...EXTRA_RATINGS.scenarios.map(([key]) => key)],
-    ['satisfaction', 'reuse', 'learning', 'communication', 'use_case', 'barrier', 'priorities', 'feedback1', 'feedback2', 'quote_permission']
+    ['satisfaction', 'reuse', 'learning', 'communication', 'learning_interest', 'difficulty_reasons', 'use_case', 'barrier', 'priorities', 'feedback1', 'feedback2', 'quote_permission']
   ];
 }
 
@@ -256,17 +266,34 @@ function needsDemo() {
   return panelTitle('开始体验', '先了解你的日常需要', '先回想自己的日常经历，再进入演示。没有相关经历可以选「不适用」。')
     + '<div class="context-card"><strong>你会体验什么</strong><p>一次预设对话、两种视频画面、句子跟练、文字确认和字号切换。</p></div>'
     + '<div class="context-card"><strong>怎样填写</strong><p>按真实感受评价，低分、高分和无法判断都同样有用。无需辨认音节，也无需自己做手势。</p></div>'
-    + '<div class="context-card"><strong>填写与使用</strong><p>共八部分，可中途下载或暂停。答案仅保存在你的浏览器，最后下载后交给团队，用于课程项目的汇总分析。末尾可选择是否允许匿名引用你的两条意见。</p></div>';
+    + '<div class="context-card"><strong>填写与使用</strong><p>共九部分，可中途下载或暂停。答案仅保存在你的浏览器，最后下载后交给团队，用于课程项目的汇总分析。末尾可选择是否允许匿名引用你的两条意见。</p></div>';
 }
 function needsQuestions() {
   return questionTitle('你的使用背景', '请在观看演示前填写。这些问题没有标准答案。')
     + '<div class="form-content">'
-    + options('mcs', '参加前，你对中文线索语有多熟悉？', [['none-used', '以前没接触过'], ['basics', '懂基本原理'], ['have-practised', '练习过或在使用']])
+    + options('mcs', '参加前，你对中文线索语有多熟悉？', MCS_EXPERIENCE)
     + options('device', '这次主要用哪种设备体验？', DEVICES)
     + multiField('communication_modes', '日常最常用哪些交流方式？', COMMUNICATION_MODES, 3)
     + NEED_RATINGS.map(([key,title,low,high]) => scale(key,title,low,high,'不适用或无法判断')).join('')
     + options('biggest_gap', '目前最希望得到哪方面的额外支持？', GAPS)
-    + '</div><div class="action-row">' + button('开始对话体验', 'chapter', 'primary', 'data-index="1"') + '</div>';
+    + '</div><div class="action-row">' + button('先看入门说明', 'chapter', 'primary', 'data-index="1"') + '</div>';
+}
+
+function introDemo() {
+  return panelTitle('统一入门说明', '第一次接触，也可以参加', '先读下面的说明，再观看一个带文字的示例。你可以暂停或反复看。')
+    + '<div class="context-card"><strong>什么是中文线索语（MCS）？</strong><p>它用手形、手的位置与口型配合，为普通话语音提供视觉线索。它与日常手语不同，读懂这些线索需要学习。</p></div>'
+    + '<div class="example-caption"><span>这个示例对应的文字</span><strong>明天见</strong></div>'
+    + media('greeting.mp4', '明天见，入门示例', 'greeting-poster.jpg') + demoTools()
+    + '<p class="source-note">这是预录示例。文字已经给出，可以静音观看，无需猜测它说了什么。</p>';
+}
+
+function introQuestions() {
+  return questionTitle('接下来怎样体验', '所有参与者都看同一份说明，按自己的真实感受作答。')
+    + '<div class="context-card"><strong>你需要做什么</strong><p>试用播放与切换画面、修改文字、调整字号等功能，评价画面是否看得清、按钮是否好用，以及自己是否预期有用。</p></div>'
+    + '<div class="context-card"><strong>不要求你会 MCS</strong><p>无需辨认音节、模仿手势或判断动作是否规范。暂时不理解动作含义，不影响你继续体验。无法评价的题目可选「无法判断」。</p></div>'
+    + '<div class="form-content">'
+    + scale('intro_clarity', '看完说明后，你对接下来要做什么有多清楚？', '很不清楚', '很清楚', '未体验或无法判断')
+    + '</div><div class="action-row">' + button('开始对话体验', 'chapter', 'primary', 'data-index="2"') + '</div>';
 }
 
 function exchangeDemo() {
@@ -299,7 +326,7 @@ function exchangeQuestions() {
     + scale('exchange_clarity', '你有多清楚目前在看对话的哪一步？', '很不清楚', '很清楚', '无法判断')
     + scale('exchange_confirm', '想核对对方的回复时，你有多容易找到那条文字？', '很难', '很容易', '无法判断')
     + options('follow_up', '如果你发现回复文字有问题，最想先看到哪项功能？', FOLLOW_UP)
-    + '</div><div class="action-row">' + button('继续视频呈现', 'chapter', 'primary', 'data-index="2"') + '</div>';
+    + '</div><div class="action-row">' + button('继续视频呈现', 'chapter', 'primary', 'data-index="3"') + '</div>';
 }
 
 function firstView() {
@@ -316,6 +343,7 @@ function videoDemo() {
         `data-index="${index}" aria-pressed="${clipIndex === index}"`)).join('')}</div>`
     + `<div class="media-tools" aria-label="呈现方式">${order.map((key) => button(VIEWS[key], 'view', 'mini-button',
       `data-view="${key}" aria-pressed="${view === key}"`)).join('')}</div>`
+    + `<div class="example-caption"><span>当前示例对应的文字</span><strong>${clip.text}</strong></div>`
     + media(clip.asset + '-' + view + '.mp4', clip.label + '，' + VIEWS[view]) + '<div class="media-tools">' + button('重播', 'replay', 'mini-button') + '</div>'
     + `<p class="source-note">这是原型学习模式中的短片。${next === 1 ? '评完片段一后，可以切换到片段二。' : ''}</p>`;
 }
@@ -323,16 +351,16 @@ function videoDemo() {
 function videoQuestions() {
   const { id, label } = CLIPS[clipIndex];
   const order = firstView() === 'full' ? ['full', 'mouth'] : ['mouth', 'full'];
-  const mediaRatings = order.map((key) => scale(id + '_' + key, '看「' + VIEWS[key] + '」时，你有多容易跟上动作？',
+  const mediaRatings = order.map((key) => scale(id + '_' + key, '看「' + VIEWS[key] + '」时，画面中展示的动作细节有多容易看清？',
     '很难', '很容易', '无法判断')).join('');
-  return questionTitle('视频呈现反馈', '看完两种画面后，分别为它们打分。', label + ' / 共两段')
+  return questionTitle('视频呈现反馈', '看完两种画面后，分别评价视觉细节。无需理解或辨认 MCS。', label + ' / 共两段')
     + '<div class="form-content">' + mediaRatings
-    + options(id + '_preference', '如果用它学习或跟练，你更希望保留哪种画面？',
+    + options(id + '_preference', '继续观看这类示例时，你更希望保留哪种画面？',
       [...order.map((key) => [key, VIEWS[key]]), ['both', '两种都可以'], ['neither', '两种都有困难']])
     + (clipIndex === 1 ? options('playback_priority', '如果原型只能优先保留一项观看功能，你会选什么？', PLAYBACK_PRIORITIES) : '')
     + '</div><div class="action-row">'
     + (clipIndex === 0 ? button('体验片段二', 'clip', 'primary', 'data-index="1"') :
-      button('继续句子跟练', 'chapter', 'primary', 'data-index="3"'))
+      button('继续句子跟练', 'chapter', 'primary', 'data-index="4"'))
     + '</div>';
 }
 
@@ -342,7 +370,7 @@ function ratingSet(group) {
 }
 
 function lessonDemo() {
-  return panelTitle('互动演示', '按自己的节奏练一句', '试着播放「明天见」，点一个字重看，再用慢放跟练。')
+  return panelTitle('互动演示', '按自己的节奏看一句', '试着播放「明天见」，点一个字重看，再试慢放。这里只评价播放操作，无需模仿手势。')
     + media('greeting.mp4', '明天见，句子跟练视频', 'greeting-poster.jpg')
     + '<div class="media-tools" aria-label="按字定位">' + LESSON_PARTS.map(({ label, pinyin }, index) =>
       button(label + '<small>' + pinyin + '</small>', 'lesson-part', 'character-button', 'data-index="' + index + '"')
@@ -363,7 +391,7 @@ function lessonQuestions() {
     + '<h3 class="subsection">两种速度的体验</h3>' + paceQuestions()
     + options('pace_preference', '以后跟练时，你更希望使用哪种速度？', PACE_PREFERENCES)
     + options('lesson_preference', '你更喜欢哪种练习方式？', LESSON_PREFERENCES)
-    + '</div><div class="action-row">' + button('继续文字确认', 'chapter', 'primary', 'data-index="4"') + '</div>';
+    + '</div><div class="action-row">' + button('继续文字确认', 'chapter', 'primary', 'data-index="5"') + '</div>';
 }
 
 function correctionDemo() {
@@ -382,7 +410,7 @@ function correctionQuestions() {
   return questionTitle('修改与确认反馈', '实际修改或确认一条文字后，评价这一步是否清楚、是否符合你的习惯。')
     + '<div class="form-content">' + ratingSet('correction')
     + options('confirm_preference', '以后使用时，你希望系统什么时候请你确认？', CONFIRM_PREFERENCES)
-    + '</div><div class="action-row">' + button('继续阅读显示', 'chapter', 'primary', 'data-index="5"') + '</div>';
+    + '</div><div class="action-row">' + button('继续阅读显示', 'chapter', 'primary', 'data-index="6"') + '</div>';
 }
 
 function readingDemo() {
@@ -400,7 +428,7 @@ function readingQuestions() {
   return questionTitle('显示与阅读反馈', '分别试过两种显示后，告诉我们阅读起来是否轻松。')
     + '<div class="form-content">' + ratingSet('reading')
     + options('reading_preference', '你希望原型默认提供哪种文字显示？', READING_PREFERENCES)
-    + '</div><div class="action-row">' + button('继续歧义场景', 'chapter', 'primary', 'data-index="6"') + '</div>';
+    + '</div><div class="action-row">' + button('继续歧义场景', 'chapter', 'primary', 'data-index="7"') + '</div>';
 }
 
 function multiField(key, title, values, limit) {
@@ -439,7 +467,7 @@ function contextQuestions() {
     + scale('context_need', '如果这类消息能附上说话者的表情和动作，你预期有多大帮助？', '没帮助', '很有帮助', '无法判断')
     + options('context_priority', '遇到这种情形，你最想在原型里看到哪一种补充信息？', CONTEXT_PRIORITIES)
     + ratingSet('scenarios')
-    + '</div><div class="action-row">' + button('继续总体评价', 'chapter', 'primary', 'data-index="7"') + '</div>';
+    + '</div><div class="action-row">' + button('继续总体评价', 'chapter', 'primary', 'data-index="8"') + '</div>';
 }
 
 function feedbackDemo() {
@@ -456,8 +484,10 @@ function feedbackQuestions() {
     + '<div class="form-content">'
     + scale('satisfaction', '整体体验有多满意？', '很不满意', '很满意', '无法判断')
     + scale('reuse', '如果有类似需求，你有多愿意再用一次这个原型？', '很不愿意', '很愿意', '无法判断')
-    + scale('learning', '如果你想学一句普通话对应的 MCS，你觉得有多大帮助？', '没帮助', '很有帮助', '无法判断')
-    + scale('communication', '和不会 MCS 的人确认一句简单消息时，你觉得有多大帮助？', '没帮助', '很有帮助', '无法判断')
+    + scale('learning', '这些视频示例和播放功能，对你了解或练习中文线索语可能有多大帮助？', '没帮助', '很有帮助', '无法判断')
+    + scale('communication', '仅根据这次示例，你预计这个原型在日常短句交流中对自己有多大帮助？', '没帮助', '很有帮助', '无法判断')
+    + scale('learning_interest', '体验后，你对继续了解或尝试中文线索语有多大兴趣？', '完全不感兴趣', '很有兴趣', '无法判断')
+    + multiField('difficulty_reasons', '这次体验中，哪些因素让你感到困难或难以判断？', DIFFICULTIES, 3)
     + options('use_case', '你最可能在哪个场景用一次？', USE_CASES)
     + options('barrier', '如果考虑实际使用，最可能影响你使用的因素是什么？', BARRIERS)
     + prioritiesField()
@@ -470,14 +500,14 @@ function feedbackQuestions() {
 
 function renderMedia() {
   lessonEnd = null;
-  demo.innerHTML = [needsDemo, exchangeDemo, videoDemo, lessonDemo, correctionDemo, readingDemo, contextDemo, feedbackDemo][chapter]();
+  demo.innerHTML = [needsDemo, introDemo, exchangeDemo, videoDemo, lessonDemo, correctionDemo, readingDemo, contextDemo, feedbackDemo][chapter]();
   const video = demo.querySelector('video');
   if (video) video.playbackRate = playbackRate;
   if (video) {
     const section = chapter;
     video.addEventListener('play', () => { recordAction('video-play-' + section); markPacePlayed(video); });
   }
-  if (video && chapter === 3) {
+  if (video && chapter === 4) {
     video.addEventListener('timeupdate', () => {
       if (lessonEnd !== null && video.currentTime >= lessonEnd - 0.025) {
         video.pause();
@@ -485,7 +515,7 @@ function renderMedia() {
       }
     });
   }
-  if (video && chapter === 2) {
+  if (video && chapter === 3) {
     const key = CLIPS[clipIndex].id + '_' + view;
     video.addEventListener('play', () => {
       draft.played[key] = true;
@@ -495,7 +525,7 @@ function renderMedia() {
 }
 
 function markPacePlayed(video) {
-  if (chapter !== 3) return;
+  if (chapter !== 4) return;
   const name = video.playbackRate === 0.65 ? 'slow' : video.playbackRate === 1 ? 'normal' : null;
   if (!name) return;
   for (const metric of ['detail','natural']) draft.played['pace_' + name + '_' + metric] = true;
@@ -508,7 +538,7 @@ function render(focus = '') {
       ${name}<span class="complete-mark" aria-hidden="true" hidden>✓</span></button>`
   ).join('');
   renderMedia();
-  questions.innerHTML = [needsQuestions, exchangeQuestions, videoQuestions, lessonQuestions, correctionQuestions, readingQuestions, contextQuestions, feedbackQuestions][chapter]();
+  questions.innerHTML = [needsQuestions, introQuestions, exchangeQuestions, videoQuestions, lessonQuestions, correctionQuestions, readingQuestions, contextQuestions, feedbackQuestions][chapter]();
   updateProgress();
   if (focus) $(focus)?.focus({ preventScroll: true });
 }
@@ -541,12 +571,13 @@ function exportRows() {
   append('使用背景', 'MCS 熟悉度', 'mcs');
   append('使用背景', '主要交流方式', 'communication_modes');
   append('使用背景', '最需要的支持', 'biggest_gap');
+  append('认识 MCS', '任务说明清晰度', 'intro_clarity', '统一入门说明后');
   append('对话体验', '操作容易度', 'exchange_ease', '预设双向对话');
   append('对话体验', '步骤清晰度', 'exchange_clarity', '预设双向对话');
   append('对话体验', '查找结果文字的容易度', 'exchange_confirm', '预设双向对话');
   append('对话体验', '优先改进需求', 'follow_up');
   for (const { id, label } of CLIPS) {
-    for (const [key, display] of Object.entries(VIEWS)) append('视频呈现', '跟上动作的容易度', id + '_' + key, label + ' / ' + display);
+    for (const [key, display] of Object.entries(VIEWS)) append('视频呈现', '看清动作细节的容易度', id + '_' + key, label + ' / ' + display);
     append('视频呈现', '呈现方式偏好', id + '_preference', label);
   }
   append('视频呈现', '优先观看功能', 'playback_priority');
@@ -559,13 +590,14 @@ function exportRows() {
   append('文字确认', '确认时机偏好', 'confirm_preference');
   append('阅读显示', '字号偏好', 'reading_preference');
   append('使用背景', '体验设备', 'device');
+  append('总体评价', '本次体验困难', 'difficulty_reasons', '最多三项');
   append('总体评价', '使用障碍', 'barrier');
   append('总体评价', '优先打磨功能', 'priorities');
   append('歧义场景', '表情和动作的预期帮助', 'context_need', '文字情境演示');
   append('歧义场景', '首选补充信息', 'context_priority');
   for (const [key, label] of [
     ['satisfaction', '整体满意度'], ['reuse', '再次使用意愿'],
-    ['learning', '感知的学习帮助'], ['communication', '感知的交流帮助'], ['use_case', '首选使用场景']
+    ['learning', '预期的学习帮助'], ['communication', '预期的交流帮助'], ['learning_interest', '继续了解或尝试 MCS 的兴趣'], ['use_case', '首选使用场景']
   ]) append('总体评价', label, key, '体验后');
   const [topic] = FEEDBACK[participant] ?? FEEDBACK.P01;
   append('定向反馈', '反馈一', 'feedback1', topic);
@@ -626,6 +658,18 @@ questions.addEventListener('input', (event) => {
     const chosen = [...questions.querySelectorAll('[name=communication_modes]:checked')];
     if (chosen.length > 3) { field.checked = false; $('#announcement').textContent = '最多选择三种交流方式'; }
     draft.answers.communication_modes = [...questions.querySelectorAll('[name=communication_modes]:checked')].map(input => input.value);
+  } else if (field.name === 'difficulty_reasons') {
+    const selector = '[name="difficulty_reasons"]';
+    if (field.checked && field.value === 'no-difficulty') {
+      questions.querySelectorAll(selector).forEach(input => { input.checked = input === field; });
+    } else if (field.checked) {
+      questions.querySelector(selector + '[value="no-difficulty"]').checked = false;
+      if (questions.querySelectorAll(selector + ':checked').length > 3) {
+        field.checked = false;
+        $('#announcement').textContent = '最多选择三项体验困难';
+      }
+    }
+    draft.answers.difficulty_reasons = [...questions.querySelectorAll(selector + ':checked')].map(input => input.value);
   } else if (field.name === 'priorities') {
     let checked = [...questions.querySelectorAll('[name="priorities"]:checked')];
     if (field.checked && field.value === 'none-needed') {

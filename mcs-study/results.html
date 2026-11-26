@@ -3,8 +3,9 @@
 <main class="shell report"><div class="page-heading"><div><p class="panel-label">REMOTE PROTOTYPE FEEDBACK</p><h1>把真实答卷变成答辩图表</h1><p>导入 P01–P05 的新版 CSV。每个点对应一个人，图中保留缺答与实际样本数。</p></div></div>
 <section class="panel import-panel"><label class="upload-label" for="files">选择答卷 CSV（可多选）</label><input id="files" type="file" accept=".csv,text/csv" multiple><button id="clear" class="secondary">清空本次导入</button><p id="import-status" role="status">尚未导入数据，图表等待真实答卷。</p><p class="microcopy">文件只在当前页面内处理，不上传、不集中保存；刷新页面后需重新导入。同一编号只接受一份答卷，试跑 P00 与旧版问卷会被排除。</p></section>
 <section class="summary-strip" aria-label="数据概况"><div><strong id="sample-n">0 / 5</strong><span>已导入参与者</span></div><div><strong>四张主图</strong><span>对应四位主讲人</span></div><div><strong>1–5 分</strong><span>显示个人分布与有效人数</span></div></section>
-<div id="participants"></div><div id="charts"></div>
+<p class="microcopy">参与前的 MCS 熟悉度按原回答显示。首次接触者与有经验者使用同一套核心问题；不会因不熟悉 MCS 或给出低分而剔除。</p><div id="participants"></div><div id="charts"></div>
+<section class="panel report-section"><h2>本次体验困难</h2><p class="panel-intro">每人最多三项。区分操作说明、画面细节、MCS 熟悉度和用途相关性，用来解释评分。缺答不计入有效人数；选择人数合计可能超过有效人数，不据此删除或调整原始评分。</p><div id="difficulty-table" class="table-scroll"></div></section>
 <section class="panel report-section"><h2>十条定向反馈</h2><p class="panel-intro">仅显示明确允许匿名引用的原话。保留原意，英文翻译需与中文核对。不同题目得到的反馈不用于比较主题出现频率。</p><div id="quotes"></div></section>
 <section class="panel report-section"><h2>评分明细与缺答</h2><p class="panel-intro">显示所有实际导入的评分项。— 表示没有可用数值，包括未答、不适用或无法判断；不按 0 分处理。</p><div id="data-table" class="table-scroll"></div></section>
-<p class="report-footer">研究定位：5 人远程原型体验评估。问卷记录主观体验、偏好和预期用途。播放记录表示触发播放，不表示看完或理解正确。技术准确率、同步指标及模型改进需另外验证。</p>
+<p class="report-footer">研究定位：5 人远程原型体验评估。包含首次接触 MCS 的参与者，统一提供文字说明与带文字的示例。问卷记录主观体验、偏好和预期用途，不测 MCS 学习成绩。播放记录表示触发播放，不表示看完或理解正确。技术准确率、同步指标及模型改进需另外验证。</p>
 </main></body></html>
