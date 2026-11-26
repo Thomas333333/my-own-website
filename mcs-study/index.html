@@ -17,7 +17,7 @@
       <div class="brand"><span class="brand-mark" aria-hidden="true">语</span><span>语通 <small>QYUTONG</small></span></div>
       <label class="participant-label" for="participant">参与编号
         <select id="participant">
-          <option value="P00">试跑</option><option>P01</option><option>P02</option><option>P03</option><option>P04</option><option>P05</option><option>P06</option><option>P07</option><option>P08</option><option>P09</option><option>P10</option><option>P11</option><option>P12</option><option>P13</option><option>P14</option><option>P15</option>
+          <option value="P00">P00 · 试跑</option><option>P01</option><option>P02</option><option>P03</option><option>P04</option><option>P05</option><option>P06</option><option>P07</option><option>P08</option><option>P09</option><option>P10</option><option>P11</option><option>P12</option><option>P13</option><option>P14</option><option>P15</option>
         </select>
       </label>
     </div>
@@ -33,9 +33,14 @@
         <progress id="progress" max="9" value="0" aria-label="问卷完成进度"></progress>
       </div>
     </div>
+    <section id="participant-notice" class="participant-notice" aria-label="参与编号说明"></section>
     <nav id="chapters" class="chapter-nav" aria-label="研究步骤"></nav>
     <div class="save-toolbar"><span class="saved" role="status">草稿保存在当前浏览器</span><div class="toolbar-actions"><button type="button" class="mini-button" data-action="chapter" data-index="1">重看入门说明</button><button type="button" class="mini-button" data-action="export-draft">下载草稿 CSV</button></div></div>
     <p id="announcement" class="sr-only" role="status"></p>
+    <details id="completion-panel" class="completion-panel" hidden>
+      <summary id="completion-title" tabindex="-1">答卷检查</summary>
+      <div id="completion-content"></div>
+    </details>
     <div id="workspace" class="workspace" tabindex="-1">
       <section id="demo" class="panel demo-panel" aria-labelledby="demo-title"></section>
       <section id="questions" class="panel questionnaire" aria-labelledby="question-title"></section>
@@ -43,7 +48,7 @@
     <footer>
       <details>
         <summary>参与说明与数据保存</summary>
-        <p>参与自愿，可以跳过评分题或随时停止。正式下载答卷需要两条文字反馈各至少 20 字（不计空格和标点），未完成时可以先保存草稿。页面不要求姓名、联系方式，也不使用你的摄像头或麦克风。请避免在文字反馈里写入可识别个人的信息。</p>
+        <p>参与自愿，可以随时停止并保存草稿。正式下载需使用 P01–P15，完成各题与指定视频体验，两条文字反馈各至少 20 字（不计空格和标点）。评分无法判断时可选择对应选项。P00 仅用于试跑，不计入正式统计。页面不要求姓名、联系方式，也不使用你的摄像头或麦克风。请避免在文字反馈里写入可识别个人的信息。</p>
         <p>答案和演示按钮的操作次数自动保存在当前浏览器。完成后下载正式答卷 CSV，再通过研究团队约定的方式发送。换设备或清理浏览器数据前，请先下载草稿 CSV 备份。</p>
       </details>
       <p class="footer-label">RBM 项目 T20250692 <span>·</span> Mandarin Cued Speech</p>

@@ -1,8 +1,7 @@
+import {COMPLETION_RULE,FEEDBACK_MIN_LENGTH,FEEDBACK_KEYS,ANSWER_GROUPS,REQUIRED_VIDEOS,feedbackLength,answerComplete,videoPlayed,checkCompletion} from './completion.mjs';
 const CHAPTERS = ['使用背景', '认识 MCS', '对话体验', '视频呈现', '句子跟练', '文字确认', '阅读显示', '歧义场景', '总体评价'];
 const PARTICIPANTS = ['P00', ...Array.from({length: 15}, (_, i) => 'P' + String(i + 1).padStart(2, '0'))];
 const VERSION = 'presentation-study-5';
-const FEEDBACK_MIN_LENGTH = 20;
-const FEEDBACK_KEYS = ['feedback1', 'feedback2'];
 
 const CLIPS = [
   { id: 'clip1', label: '片段一', asset: 's01', text: '快（kuai）' },
@@ -152,6 +151,7 @@ let playbackRate = 1;
 let lessonEnd = null;
 let readingMode = 'standard';
 let feedbackErrorsShown = false;
+let completionShown = false;
 
 function loadDraft() {
   const blank = { answers: {}, played: {}, actions: {}, editorText: '我今天过来接你。' };
@@ -186,12 +186,7 @@ function persist() {
 }
 
 function has(key) {
-  if (FEEDBACK_KEYS.includes(key)) return feedbackLength(draft.answers[key]) >= FEEDBACK_MIN_LENGTH;
-  return String(draft.answers[key] ?? '').trim() !== '';
-}
-
-function feedbackLength(value) {
-  return (String(value ?? '').match(/[\p{L}\p{N}]/gu) ?? []).length;
+  return answerComplete(key,draft.answers[key]);
 }
 
 function updateFeedbackFields() {
@@ -212,22 +207,12 @@ function count(keys) {
 }
 
 function requiredKeys() {
-  return [
-    ['mcs', 'device', 'communication_modes', ...NEED_RATINGS.map(([key]) => key), 'biggest_gap'],
-    ['intro_clarity'],
-    ['exchange_ease', 'exchange_clarity', 'exchange_confirm', 'follow_up'],
-    [...CLIPS.flatMap(({ id }) => [id + '_mouth', id + '_full', id + '_preference']), 'playback_priority'],
-    [...EXTRA_RATINGS.lesson.map(([key]) => key), ...PACE_RATINGS.map(([key]) => key), 'lesson_preference', 'pace_preference'],
-    [...EXTRA_RATINGS.correction.map(([key]) => key), 'confirm_preference'],
-    [...EXTRA_RATINGS.reading.map(([key]) => key), 'reading_preference'],
-    ['context_need', 'context_priority', ...EXTRA_RATINGS.scenarios.map(([key]) => key)],
-    ['satisfaction', 'reuse', 'learning', 'communication', 'learning_interest', 'difficulty_reasons', 'use_case', 'barrier', 'priorities', 'feedback1', 'feedback2', 'quote_permission']
-  ];
+  return ANSWER_GROUPS;
 }
 
 function updateProgress() {
   const groups = requiredKeys();
-  const complete = groups.map((keys) => count(keys) === keys.length);
+  const complete = groups.map((keys,index) => count(keys) === keys.length && REQUIRED_VIDEOS.filter(item=>item.chapter===index).every(item=>videoPlayed(item,draft.played)));
   const total = complete.filter(Boolean).length;
   $('#progress').value = total;
   $('#progress-label').textContent = '完成 ' + total + ' / ' + CHAPTERS.length + ' 部分';
@@ -240,6 +225,70 @@ function updateProgress() {
     status.textContent = storageAvailable ? '已保存在当前浏览器' : '草稿保存失败，请先下载草稿';
   });
   updateFeedbackFields();
+  updateCompletionUI();
+}
+
+function questionLabels() {
+  // Reuse the exported question labels so reminders and CSV refer to the same items.
+  return Object.fromEntries(exportRows('draft').slice(1).filter(row=>!row[10].startsWith('action:')).map(row=>[row[10],(row[2]==='视频呈现'?row[4]+' · ':'')+row[3]]));
+}
+
+function updateCompletionUI() {
+  const state=checkCompletion(participant,draft.answers,draft.played);
+  const trial=participant==='P00';
+  $('#participant-notice').classList.toggle('trial-notice',trial);
+  $('#participant-notice').innerHTML=trial
+    ? '<strong>当前为 P00 试跑模式，不计入正式统计。</strong><p>正式参与请先选择组织者分配的 P01–P15。切换编号会打开对应的独立答卷，当前试跑内容会保留。</p>'+button('选择正式编号','choose-participant','mini-button')
+    : '<strong>当前编号：'+participant+'</strong><p>请使用组织者分配的唯一编号。完成题目和指定视频体验后，才能下载正式答卷。</p>';
+  const panel=$('#completion-panel');
+  panel.hidden=!completionShown;
+  if(completionShown){
+    const labels=questionLabels();
+    $('#completion-title').textContent=state.ready?'答卷检查：可以下载正式答卷':'答卷检查：'+state.missingAnswers.length+' 项待答，'+state.missingVideos.length+' 段视频未记录播放'+(trial?' · 当前为试跑':'');
+    const questionGroups=CHAPTERS.map((name,index)=>{
+      const items=state.missingAnswers.filter(item=>item.chapter===index);
+      return items.length?'<li><strong>'+name+' · '+items.length+' 项待完成</strong><ul>'+items.map(item=>'<li>'+button(esc(labels[item.key]||item.key)+(FEEDBACK_KEYS.includes(item.key)?'（至少 20 字）':''),'resolve-answer','issue-link','data-key="'+item.key+'"')+'</li>').join('')+'</ul></li>':'';
+    }).join('');
+    $('#completion-content').innerHTML=(trial?'<p class="feedback-error">P00 只能下载试跑答卷或草稿。正式参与请先选择已分配的编号。</p>':'')
+      +(state.ready?'<p>题目已答齐，两条反馈字数达标，指定视频均已记录播放。</p>':'<p>点击下方项目可直接前往补做。评分可以选择「无法判断」；未完成时仍可下载草稿。</p>')
+      +(questionGroups?'<ul class="completion-list">'+questionGroups+'</ul>':'')
+      +(state.missingVideos.length?'<h3>需要播放的视频</h3><ul class="completion-list">'+state.missingVideos.map(item=>'<li>'+button(esc(item.label),'resolve-video','issue-link','data-key="'+item.key+'"')+'</li>').join('')+'</ul>':'');
+  }
+  for(const field of questions.querySelectorAll('[data-question]')) field.classList.toggle('question-missing',completionShown&&!has(field.dataset.question));
+  const videoList=$('#video-checklist');
+  if(videoList){
+    videoList.innerHTML='<strong>本部分的视频体验</strong><ul>'+REQUIRED_VIDEOS.filter(item=>item.chapter===chapter).map(item=>'<li class="'+(videoPlayed(item,draft.played)?'video-done':'video-pending')+'">'+button(esc(item.label),'resolve-video','issue-link','data-key="'+item.key+'"')+'<span>'+(videoPlayed(item,draft.played)?'已记录播放':'尚未记录播放')+'</span></li>').join('')+'</ul><p class="microcopy">请点击播放按钮。仅切换画面或速度不算播放；记录表示开始播放，不表示已看完或理解正确。</p>';
+  }
+  const status=$('#download-status');
+  if(status) status.textContent=trial?'当前是试跑，导出的文件不会计入正式统计。':state.ready?'已完成检查，可以下载正式答卷。':'还需完成 '+state.missingAnswers.length+' 项回答和 '+state.missingVideos.length+' 段视频体验。';
+}
+
+function showCompletion() {
+  completionShown=true;
+  feedbackErrorsShown=true;
+  updateProgress();
+  $('#completion-panel').open=true;
+  $('#completion-title').focus({preventScroll:true});
+  $('#completion-panel').scrollIntoView({block:'start'});
+  $('#announcement').textContent=$('#completion-title').textContent;
+}
+
+function resolveItem(key,isVideo) {
+  const target=isVideo?REQUIRED_VIDEOS.find(item=>item.key===key):ANSWER_GROUPS.flatMap((keys,chapter)=>keys.map(key=>({key,chapter}))).find(item=>item.key===key);
+  if(!target)return;
+  if(target.chapter===3){
+    clipIndex=target.clipIndex??(key.startsWith('clip2')||key==='playback_priority'?1:0);
+    view=target.view??(key.endsWith('_full')?'full':key.endsWith('_mouth')?'mouth':firstView());
+  }
+  if(target.stage!==undefined)stage=target.stage;
+  playbackRate=target.rate??1;
+  chapter=target.chapter;
+  persist();
+  render();
+  $('#completion-panel').open=false;
+  const destination=isVideo?demo.querySelector('video'):questions.querySelector('[name="'+key+'"]');
+  destination?.focus({preventScroll:true});
+  (isVideo?demo:destination?.closest('[data-question]')||questions).scrollIntoView({block:'center'});
 }
 
 function esc(value) {
@@ -253,21 +302,21 @@ function selected(key, value) {
 }
 
 function options(key, legend, values) {
-  return `<fieldset><legend>${esc(legend)}</legend><div class="choice-stack">${values.map(([value, label]) =>
+  return `<fieldset data-question="${key}"><legend>${esc(legend)}</legend><div class="choice-stack">${values.map(([value, label]) =>
     `<label class="choice"><input type="radio" name="${key}" value="${esc(value)}"${selected(key, value)}><span>${esc(label)}</span></label>`
   ).join('')}</div></fieldset>`;
 }
 
 function scale(key, legend, low, high, optionalLabel) {
   const values = [1, 2, 3, 4, 5];
-  return `<fieldset><legend>${esc(legend)}</legend><div class="scale-row">${values.map((value) =>
+  return `<fieldset data-question="${key}"><legend>${esc(legend)}</legend><div class="scale-row">${values.map((value) =>
     `<label class="scale-option"><input type="radio" name="${key}" value="${value}" aria-label="${value}${value === 1 ? ' ' + esc(low) : value === 5 ? ' ' + esc(high) : ''}"${selected(key, value)}><span aria-hidden="true">${value}</span></label>`
   ).join('')}</div><div class="scale-endpoints" aria-hidden="true"><span>1 ${esc(low)}</span><span>5 ${esc(high)}</span></div>${optionalLabel ?
     `<label class="choice" style="margin-top:6px"><input type="radio" name="${key}" value="na"${selected(key, 'na')}><span>${esc(optionalLabel)}</span></label>` : ''}</fieldset>`;
 }
 
 function textField(key, legend, placeholder = '请写明具体位置、经历或原因，至少 20 字') {
-  return `<div class="text-field"><label class="field-label" for="${key}">${esc(legend)}</label>
+  return `<div class="text-field" data-question="${key}"><label class="field-label" for="${key}">${esc(legend)}</label>
     <textarea id="${key}" name="${key}" minlength="${FEEDBACK_MIN_LENGTH}" maxlength="600" required aria-describedby="${key}-hint ${key}-count" placeholder="${esc(placeholder)}">${esc(draft.answers[key])}</textarea>
     <p id="${key}-hint" class="microcopy">每条至少 ${FEEDBACK_MIN_LENGTH} 字，按汉字、字母和数字计数；空格和标点不计入。</p>
     <p id="${key}-count" class="feedback-count" aria-live="polite" aria-atomic="true"></p></div>`;
@@ -301,7 +350,7 @@ function needsDemo() {
   return panelTitle('开始体验', '先了解你的日常需要', '先回想自己的日常经历，再进入演示。没有相关经历可以选「不适用」。')
     + '<div class="context-card"><strong>你会体验什么</strong><p>一次预设对话、两种视频画面、句子跟练、文字确认和字号切换。</p></div>'
     + '<div class="context-card"><strong>怎样填写</strong><p>按真实感受评价，低分、高分和无法判断都同样有用。无需辨认音节，也无需自己做手势。</p></div>'
-    + '<div class="context-card"><strong>填写与使用</strong><p>共九部分，可中途下载或暂停。答案仅保存在你的浏览器，最后下载后交给团队，用于课程项目的汇总分析。两条文字反馈各至少 20 字（不计空格和标点），未完成可先下载草稿。末尾可选择是否允许匿名引用你的两条意见。</p></div>';
+    + '<div class="context-card"><strong>填写与使用</strong><p>共九部分，可中途下载或暂停。答案仅保存在你的浏览器，最后下载后交给团队，用于课程项目的汇总分析。正式下载前需答齐题目、播放指定视频，两条文字反馈各至少 20 字（不计空格和标点）。未完成可先下载草稿。末尾可选择是否允许匿名引用你的两条意见。</p></div>';
 }
 function needsQuestions() {
   return questionTitle('你的使用背景', '请在观看演示前填写。这些问题没有标准答案。')
@@ -468,13 +517,13 @@ function readingQuestions() {
 
 function multiField(key, title, values, limit) {
   const chosen = draft.answers[key] ?? [];
-  return '<fieldset><legend>' + title + '</legend><p class="microcopy">最多选择 ' + limit + ' 项。</p><div class="choice-stack">' + values.map(([value,label]) =>
+  return '<fieldset data-question="'+key+'"><legend>' + title + '</legend><p class="microcopy">最多选择 ' + limit + ' 项。</p><div class="choice-stack">' + values.map(([value,label]) =>
     '<label class="choice"><input type="checkbox" name="' + key + '" value="' + value + '"' + (chosen.includes(value) ? ' checked' : '') + '><span>' + label + '</span></label>').join('') + '</div></fieldset>';
 }
 
 function prioritiesField() {
   const chosen = draft.answers.priorities ?? [];
-  return '<fieldset><legend>如果后续优先打磨三项功能，你会选哪些？</legend><p class="microcopy">最多选三项，也可以选择暂时没有。</p><div class="choice-stack">'
+  return '<fieldset data-question="priorities"><legend>如果后续优先打磨三项功能，你会选哪些？</legend><p class="microcopy">最多选三项，也可以选择暂时没有。</p><div class="choice-stack">'
     + FEATURE_PRIORITIES.map(([value, label]) =>
       '<label class="choice"><input type="checkbox" name="priorities" value="' + value + '"' + (chosen.includes(value) ? ' checked' : '') + '><span>' + label + '</span></label>'
     ).join('') + '</div></fieldset>';
@@ -529,19 +578,40 @@ function feedbackQuestions() {
     + textField('feedback1', '反馈一。' + first)
     + textField('feedback2', '反馈二。' + second)
     + options('quote_permission', '是否允许团队在课程答辩中用参与编号匿名引用这两条意见？', QUOTE_OPTIONS)
-    + `<div class="export-note"><strong>完成后保存答卷</strong><p>两条反馈各达到 ${FEEDBACK_MIN_LENGTH} 字后，下载正式答卷 CSV，再用团队约定的方式发送。中途可用页面上方的「下载草稿 CSV」保存进度。</p></div>
+    + `<div class="export-note"><strong>${participant==='P00'?'当前为试跑':'完成后保存答卷'}</strong><p>${participant==='P00'?'试跑答卷可随时下载用于检查流程，不会计入正式统计。正式参与请先选择组织者分配的编号。':'正式下载前会检查各题、两条反馈字数和指定视频播放记录。评分无法判断时可以选对应选项；未完成时可用页面上方的「下载草稿 CSV」保存进度。'}</p><p id="download-status" role="status"></p></div>
     <p id="feedback-summary" class="feedback-error" role="alert" hidden>请将两条反馈各补充到至少 ${FEEDBACK_MIN_LENGTH} 字，再下载正式答卷。当前内容已保留。</p></div>
-    <div class="action-row">${button('下载答案 CSV', 'export')}<span class="saved" role="status"></span></div>`;
+    <div class="action-row">${button('检查未完成项','check-completion','secondary')}${button(participant==='P00'?'下载试跑答卷 CSV':'检查并下载正式答卷 CSV',participant==='P00'?'export-trial':'export')}<span class="saved" role="status"></span></div>`;
 }
 
 function renderMedia() {
   lessonEnd = null;
   demo.innerHTML = [needsDemo, introDemo, exchangeDemo, videoDemo, lessonDemo, correctionDemo, readingDemo, contextDemo, feedbackDemo][chapter]();
+  if(REQUIRED_VIDEOS.some(item=>item.chapter===chapter))demo.insertAdjacentHTML('beforeend','<div id="video-checklist" class="video-checklist"></div><p id="media-error" class="feedback-error" role="status" hidden></p>');
   const video = demo.querySelector('video');
   if (video) video.playbackRate = playbackRate;
   if (video) {
-    const section = chapter;
-    video.addEventListener('play', () => { recordAction('video-play-' + section); markPacePlayed(video); });
+    const section=chapter,exchangeStep=stage,clipKey=section===3?CLIPS[clipIndex].id+'_'+view:null;
+    const recordPlayback=()=>{
+      if(video!==demo.querySelector('video')||video.paused||video.seeking||video.readyState<2)return;
+      let keys=[];
+      if(section===1)keys=['intro_example'];
+      if(section===2&&exchangeStep<2)keys=[exchangeStep===0?'exchange_sent':'exchange_reply'];
+      if(clipKey)keys=[clipKey];
+      if(section===4){
+        const speed=video.playbackRate===0.65?'slow':video.playbackRate===1?'normal':null;
+        if(speed)keys=['pace_'+speed+'_detail','pace_'+speed+'_natural'];
+      }
+      let changed=false;
+      for(const key of keys)if(draft.played[key]!==true){draft.played[key]=true;changed=true;}
+      if(changed)persist();
+      const error=$('#media-error');if(error)error.hidden=true;
+    };
+    video.addEventListener('playing',()=>{recordPlayback();recordAction('video-play-'+section);});
+    video.addEventListener('timeupdate',recordPlayback);
+    video.addEventListener('error',()=>{
+      const error=$('#media-error');
+      if(error){error.textContent='视频未能加载，请检查网络后重试。没有成功播放时不会记为已体验；也可以先下载草稿。';error.hidden=false;}
+    });
   }
   if (video && chapter === 4) {
     video.addEventListener('timeupdate', () => {
@@ -551,21 +621,7 @@ function renderMedia() {
       }
     });
   }
-  if (video && chapter === 3) {
-    const key = CLIPS[clipIndex].id + '_' + view;
-    video.addEventListener('play', () => {
-      draft.played[key] = true;
-      persist();
-    }, { once: true });
-  }
-}
-
-function markPacePlayed(video) {
-  if (chapter !== 4) return;
-  const name = video.playbackRate === 0.65 ? 'slow' : video.playbackRate === 1 ? 'normal' : null;
-  if (!name) return;
-  for (const metric of ['detail','natural']) draft.played['pace_' + name + '_' + metric] = true;
-  persist();
+  updateCompletionUI();
 }
 
 function render(focus = '') {
@@ -593,7 +649,7 @@ function csvCell(value) {
   return '"' + raw.replace(/"/g, '""') + '"';
 }
 
-function exportRows(isDraft = false) {
+function exportRows(kind = 'final') {
   const rows = [['版本', '参与编号', '部分', '指标', '条件', '评分（1–5）', '选择或反馈', '是否实际播放', '记录类型', '答案来源', '指标ID', '原始答案', '导出时间']];
   const exportedAt = new Date().toISOString();
   const append = (section, label, key, setting = '') => {
@@ -654,29 +710,24 @@ function exportRows(isDraft = false) {
   for (const [key, count] of Object.entries(draft.actions)) {
     rows.push([VERSION, participant, '操作记录', actionLabels[key] ?? key, '当前浏览器操作次数', '', count, '', '操作次数', '当前版操作', 'action:' + key, JSON.stringify(count), exportedAt]);
   }
-  return rows.map((row, index) => [...row, index === 0 ? '答卷状态' : isDraft ? '草稿' : '正式答卷']);
+  const state=kind==='draft'?'草稿':kind==='trial'?'试跑答卷':'正式答卷';
+  const played=JSON.stringify(REQUIRED_VIDEOS.filter(item=>videoPlayed(item,draft.played)).map(item=>item.key));
+  return rows.map((row,index)=>[...row,...(index===0?['答卷状态','完成校验规则','必看视频记录']:[state,COMPLETION_RULE,played])]);
 }
 
-function download(isDraft = false) {
-  const incomplete = FEEDBACK_KEYS.filter(key => !has(key));
-  if (!isDraft && incomplete.length) {
-    feedbackErrorsShown = true;
-    goToChapter(CHAPTERS.length - 1);
-    const first = $('#' + incomplete[0]);
-    first.focus({ preventScroll: true });
-    first.scrollIntoView({ block: 'center' });
-    return;
-  }
-  const content = '\uFEFF' + exportRows(isDraft).map((row) => row.map(csvCell).join(',')).join('\r\n');
+function download(kind = 'final') {
+  if(kind==='final'&&!checkCompletion(participant,draft.answers,draft.played).ready){showCompletion();return;}
+  if(kind==='trial'&&participant!=='P00')return;
+  const content = '\uFEFF' + exportRows(kind).map((row) => row.map(csvCell).join(',')).join('\r\n');
   const file = URL.createObjectURL(new Blob([content], { type: 'text/csv;charset=utf-8' }));
   const anchor = document.createElement('a');
   anchor.href = file;
-  anchor.download = 'qyutong-' + participant + (isDraft ? '-draft.csv' : '-answers.csv');
+  anchor.download = 'qyutong-' + participant + (kind==='draft'?'-draft.csv':kind==='trial'?'-trial.csv':'-answers.csv');
   document.body.append(anchor);
   anchor.click();
   anchor.remove();
   setTimeout(() => URL.revokeObjectURL(file), 1500);
-  $('#announcement').textContent = isDraft ? '已请求下载草稿 CSV；正式答卷请在反馈完成后下载' : '已请求下载正式答卷 CSV';
+  $('#announcement').textContent = kind==='draft'?'已请求下载草稿 CSV':kind==='trial'?'已请求下载试跑答卷，不计入正式统计':'已请求下载正式答卷 CSV';
 }
 
 participantSelect.value = participant;
@@ -694,6 +745,8 @@ participantSelect.addEventListener('change', () => {
   playbackRate = 1;
   readingMode = 'standard';
   feedbackErrorsShown = false;
+  completionShown = false;
+  $('#completion-panel').open=false;
   render();
 });
 
@@ -752,6 +805,19 @@ document.addEventListener('click', (event) => {
   if (!control) return;
   const action = control.dataset.action;
   switch (action) {
+    case 'choose-participant':
+      participantSelect.focus();
+      participantSelect.scrollIntoView({block:'center'});
+      break;
+    case 'check-completion':
+      showCompletion();
+      break;
+    case 'resolve-answer':
+      resolveItem(control.dataset.key,false);
+      break;
+    case 'resolve-video':
+      resolveItem(control.dataset.key,true);
+      break;
     case 'chapter':
       goToChapter(Number(control.dataset.index));
       break;
@@ -767,7 +833,6 @@ document.addEventListener('click', (event) => {
       video.playbackRate = playbackRate;
       video.currentTime = 0;
       recordAction('pace-' + control.dataset.pace);
-      if (!video.paused) markPacePlayed(video);
       video.play().catch(() => { $('#announcement').textContent = '请点击视频播放按钮继续'; });
       demo.querySelectorAll('[data-rate]').forEach(item => item.setAttribute('aria-pressed', String(Number(item.dataset.rate) === playbackRate)));
       break;
@@ -776,7 +841,6 @@ document.addEventListener('click', (event) => {
       recordAction('rate-' + chapter + '-' + control.dataset.rate);
       playbackRate = Number(control.dataset.rate);
       demo.querySelector('video').playbackRate = playbackRate;
-      if (!demo.querySelector('video').paused) markPacePlayed(demo.querySelector('video'));
       demo.querySelectorAll('[data-rate]').forEach((item) => {
         item.setAttribute('aria-pressed', String(Number(item.dataset.rate) === playbackRate));
       });
@@ -848,7 +912,10 @@ document.addEventListener('click', (event) => {
       download();
       break;
     case 'export-draft':
-      download(true);
+      download('draft');
+      break;
+    case 'export-trial':
+      download('trial');
       break;
   }
 });

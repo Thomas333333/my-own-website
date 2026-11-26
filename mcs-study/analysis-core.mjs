@@ -1,3 +1,4 @@
+import {COMPLETION_RULE,REQUIRED_VIDEOS,checkCompletion} from './completion.mjs';
 export const VERSION = 'presentation-study-5';
 export const PIDS = Array.from({length: 15}, (_, i) => 'P' + String(i + 1).padStart(2, '0'));
 export function parseCSV(text) {
@@ -25,7 +26,7 @@ export function readAnswerFile(text) {
   const pid=[...ids][0];
   if(!PIDS.includes(pid))throw new Error('试跑或未知编号不计入正式统计');
   if(records.some(r=>r['版本']!==VERSION))throw new Error('问卷版本不匹配，旧版答卷请单独分析');
-  if(header.includes('答卷状态') && records.some(r=>r['答卷状态']!=='正式答卷'))throw new Error('草稿暂不计入汇总，请补充反馈后下载正式答卷 CSV');
+  if(header.includes('答卷状态') && records.some(r=>r['答卷状态']!=='正式答卷'))throw new Error('草稿和试跑答卷不计入汇总，请完成检查后下载正式答卷 CSV');
   const answers={};
   for(const r of records){
     const key=r['指标ID'];
@@ -37,7 +38,21 @@ export function readAnswerFile(text) {
     if(rating!==null && String(value)!==String(rating))throw new Error('数值列和原始答案不一致');
     answers[key]={value,rating,played:r['是否实际播放']==='是',label:r['指标'],section:r['部分'],setting:r['条件']};
   }
-  return {pid,answers,exportedAt:records[0]['导出时间']||''};
+  const completionChecked=header.includes('完成校验规则');
+  if(completionChecked){
+    if(!header.includes('答卷状态')||!header.includes('必看视频记录')||records.some(r=>r['完成校验规则']!==COMPLETION_RULE))throw new Error('完成校验信息不完整或规则不匹配');
+    const videoRecord=records[0]['必看视频记录'];
+    if(records.some(r=>r['必看视频记录']!==videoRecord))throw new Error('视频播放记录不一致');
+    let videoKeys;try{videoKeys=JSON.parse(videoRecord);}catch{throw new Error('视频播放记录格式无效');}
+    if(!Array.isArray(videoKeys)||videoKeys.some(key=>!REQUIRED_VIDEOS.some(item=>item.key===key))||new Set(videoKeys).size!==videoKeys.length)throw new Error('视频播放记录格式无效');
+    const played={};
+    for(const item of REQUIRED_VIDEOS.filter(item=>videoKeys.includes(item.key))){
+      for(const key of item.playedKeys)played[key]=answers[key]?answers[key].played:true;
+    }
+    const state=checkCompletion(pid,Object.fromEntries(Object.entries(answers).map(([key,answer])=>[key,answer.value])),played);
+    if(!state.ready)throw new Error('答卷未通过完整性检查：'+state.missingAnswers.length+' 项未完成，'+state.missingVideos.length+' 段视频未记录播放');
+  }
+  return {pid,answers,completionChecked,exportedAt:records[0]['导出时间']||''};
 }
 export function numeric(person,key){return person.answers[key]?.rating ?? null;}
 export function points(people,key){return people.map(p=>({pid:p.pid,value:numeric(p,key)})).filter(p=>p.value!==null);}

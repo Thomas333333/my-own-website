@@ -167,4 +167,25 @@ input[type="checkbox"] { accent-color: var(--blue); width: 18px; height: 18px; f
 .example-caption span { color: var(--muted); font-size: 14px; }
 .example-caption strong { font-size: 25px; color: #142541; }
 .toolbar-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.participant-notice { margin: 0 0 18px; padding: 14px 17px; border: 1px solid #b5cafa; border-radius: 12px; background: #eff5ff; }
+.participant-notice p { font-size: 14px; margin: 4px 0 0; color: #3b5275; }
+.participant-notice .mini-button { margin-top: 9px; }
+.trial-notice { border-color: #d9ab55; background: #fff7e5; }
+.trial-notice strong { color: #704800; }
+.completion-panel { margin: 0 0 18px; padding: 15px 18px; border: 2px solid #d49b3c; border-radius: 12px; background: #fffaf0; scroll-margin-top: 90px; }
+.completion-panel summary { cursor: pointer; font-weight: 700; }
+.completion-panel h3 { margin: 16px 0 6px; font-size: 17px; }
+.completion-panel p { margin-top: 10px; font-size: 14px; }
+.completion-list { margin: 10px 0 0; padding-left: 22px; }
+.completion-list ul { padding-left: 18px; }
+.completion-list > li { margin-bottom: 8px; }
+.issue-link { padding: 5px 0; min-height: 36px; background: transparent; border: 0; color: #204d93; text-decoration: underline; text-underline-offset: 3px; text-align: left; overflow-wrap: anywhere; font-size: 14px; }
+.issue-link:hover { color: #102f60; background: #e9f0ff; }
+.question-missing { outline: 2px solid #cc9031; outline-offset: 5px; border-radius: 4px; scroll-margin-top: 90px; }
+.video-checklist { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 14px; }
+.video-checklist ul { list-style: none; margin: 8px 0; padding: 0; }
+.video-checklist li { display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: space-between; align-items: center; }
+.video-checklist li span { flex-shrink: 0; }
+.video-done span { color: #12613f; }
+.video-pending span { color: #85530a; }
 @media (max-width: 720px) { .save-toolbar { align-items: flex-start; flex-direction: column; } .toolbar-actions { width: 100%; } .example-caption { flex-wrap: wrap; } }
