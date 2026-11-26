@@ -1,6 +1,8 @@
 const CHAPTERS = ['使用背景', '认识 MCS', '对话体验', '视频呈现', '句子跟练', '文字确认', '阅读显示', '歧义场景', '总体评价'];
 const PARTICIPANTS = ['P00', ...Array.from({length: 10}, (_, i) => 'P' + String(i + 1).padStart(2, '0'))];
 const VERSION = 'presentation-study-5';
+const FEEDBACK_MIN_LENGTH = 20;
+const FEEDBACK_KEYS = ['feedback1', 'feedback2'];
 
 const CLIPS = [
   { id: 'clip1', label: '片段一', asset: 's01', text: '快（kuai）' },
@@ -144,6 +146,7 @@ let stage = 0;
 let playbackRate = 1;
 let lessonEnd = null;
 let readingMode = 'standard';
+let feedbackErrorsShown = false;
 
 function loadDraft() {
   const blank = { answers: {}, played: {}, actions: {}, editorText: '我今天过来接你。' };
@@ -178,7 +181,25 @@ function persist() {
 }
 
 function has(key) {
+  if (FEEDBACK_KEYS.includes(key)) return feedbackLength(draft.answers[key]) >= FEEDBACK_MIN_LENGTH;
   return String(draft.answers[key] ?? '').trim() !== '';
+}
+
+function feedbackLength(value) {
+  return (String(value ?? '').match(/[\p{L}\p{N}]/gu) ?? []).length;
+}
+
+function updateFeedbackFields() {
+  for (const key of FEEDBACK_KEYS) {
+    const field = questions.querySelector('[name="' + key + '"]');
+    if (!field) continue;
+    const length = feedbackLength(draft.answers[key]);
+    const remaining = Math.max(0, FEEDBACK_MIN_LENGTH - length);
+    $('#' + key + '-count').textContent = '已写 ' + length + ' 字 · ' + (remaining ? '还差 ' + remaining + ' 字' : '已达到最低字数');
+    field.setAttribute('aria-invalid', String(feedbackErrorsShown && remaining > 0));
+  }
+  const summary = $('#feedback-summary');
+  if (summary) summary.hidden = !feedbackErrorsShown || FEEDBACK_KEYS.every(has);
 }
 
 function count(keys) {
@@ -211,8 +232,9 @@ function updateProgress() {
     button.setAttribute('aria-label', CHAPTERS[index] + (complete[index] ? '，已完成' : ''));
   }
   document.querySelectorAll('.saved').forEach((status) => {
-    status.textContent = storageAvailable ? '已保存在当前浏览器' : '草稿保存失败，请先下载答案';
+    status.textContent = storageAvailable ? '已保存在当前浏览器' : '草稿保存失败，请先下载草稿';
   });
+  updateFeedbackFields();
 }
 
 function esc(value) {
@@ -239,8 +261,11 @@ function scale(key, legend, low, high, optionalLabel) {
     `<label class="choice" style="margin-top:6px"><input type="radio" name="${key}" value="na"${selected(key, 'na')}><span>${esc(optionalLabel)}</span></label>` : ''}</fieldset>`;
 }
 
-function textField(key, legend, placeholder = '写一到两句话即可') {
-  return `<label class="text-field"><span class="field-label">${esc(legend)}</span><textarea name="${key}" maxlength="600" placeholder="${esc(placeholder)}">${esc(draft.answers[key])}</textarea></label>`;
+function textField(key, legend, placeholder = '请写明具体位置、经历或原因，至少 20 字') {
+  return `<div class="text-field"><label class="field-label" for="${key}">${esc(legend)}</label>
+    <textarea id="${key}" name="${key}" minlength="${FEEDBACK_MIN_LENGTH}" maxlength="600" required aria-describedby="${key}-hint ${key}-count" placeholder="${esc(placeholder)}">${esc(draft.answers[key])}</textarea>
+    <p id="${key}-hint" class="microcopy">每条至少 ${FEEDBACK_MIN_LENGTH} 字，按汉字、字母和数字计数；空格和标点不计入。</p>
+    <p id="${key}-count" class="feedback-count" aria-live="polite" aria-atomic="true"></p></div>`;
 }
 
 function panelTitle(label, title, intro = '') {
@@ -271,7 +296,7 @@ function needsDemo() {
   return panelTitle('开始体验', '先了解你的日常需要', '先回想自己的日常经历，再进入演示。没有相关经历可以选「不适用」。')
     + '<div class="context-card"><strong>你会体验什么</strong><p>一次预设对话、两种视频画面、句子跟练、文字确认和字号切换。</p></div>'
     + '<div class="context-card"><strong>怎样填写</strong><p>按真实感受评价，低分、高分和无法判断都同样有用。无需辨认音节，也无需自己做手势。</p></div>'
-    + '<div class="context-card"><strong>填写与使用</strong><p>共九部分，可中途下载或暂停。答案仅保存在你的浏览器，最后下载后交给团队，用于课程项目的汇总分析。末尾可选择是否允许匿名引用你的两条意见。</p></div>';
+    + '<div class="context-card"><strong>填写与使用</strong><p>共九部分，可中途下载或暂停。答案仅保存在你的浏览器，最后下载后交给团队，用于课程项目的汇总分析。两条文字反馈各至少 20 字（不计空格和标点），未完成可先下载草稿。末尾可选择是否允许匿名引用你的两条意见。</p></div>';
 }
 function needsQuestions() {
   return questionTitle('你的使用背景', '请在观看演示前填写。这些问题没有标准答案。')
@@ -499,7 +524,8 @@ function feedbackQuestions() {
     + textField('feedback1', '反馈一。' + first)
     + textField('feedback2', '反馈二。' + second)
     + options('quote_permission', '是否允许团队在课程答辩中用参与编号匿名引用这两条意见？', QUOTE_OPTIONS)
-    + `<div class="export-note"><strong>完成后保存答卷</strong><p>下载 CSV，再用团队约定的方式发送。中途也可以导出当前进度。</p></div></div>
+    + `<div class="export-note"><strong>完成后保存答卷</strong><p>两条反馈各达到 ${FEEDBACK_MIN_LENGTH} 字后，下载正式答卷 CSV，再用团队约定的方式发送。中途可用页面上方的「下载草稿 CSV」保存进度。</p></div>
+    <p id="feedback-summary" class="feedback-error" role="alert" hidden>请将两条反馈各补充到至少 ${FEEDBACK_MIN_LENGTH} 字，再下载正式答卷。当前内容已保留。</p></div>
     <div class="action-row">${button('下载答案 CSV', 'export')}<span class="saved" role="status"></span></div>`;
 }
 
@@ -562,7 +588,7 @@ function csvCell(value) {
   return '"' + raw.replace(/"/g, '""') + '"';
 }
 
-function exportRows() {
+function exportRows(isDraft = false) {
   const rows = [['版本', '参与编号', '部分', '指标', '条件', '评分（1–5）', '选择或反馈', '是否实际播放', '记录类型', '答案来源', '指标ID', '原始答案', '导出时间']];
   const exportedAt = new Date().toISOString();
   const append = (section, label, key, setting = '') => {
@@ -623,20 +649,29 @@ function exportRows() {
   for (const [key, count] of Object.entries(draft.actions)) {
     rows.push([VERSION, participant, '操作记录', actionLabels[key] ?? key, '当前浏览器操作次数', '', count, '', '操作次数', '当前版操作', 'action:' + key, JSON.stringify(count), exportedAt]);
   }
-  return rows;
+  return rows.map((row, index) => [...row, index === 0 ? '答卷状态' : isDraft ? '草稿' : '正式答卷']);
 }
 
-function download() {
-  const content = '\uFEFF' + exportRows().map((row) => row.map(csvCell).join(',')).join('\r\n');
+function download(isDraft = false) {
+  const incomplete = FEEDBACK_KEYS.filter(key => !has(key));
+  if (!isDraft && incomplete.length) {
+    feedbackErrorsShown = true;
+    goToChapter(CHAPTERS.length - 1);
+    const first = $('#' + incomplete[0]);
+    first.focus({ preventScroll: true });
+    first.scrollIntoView({ block: 'center' });
+    return;
+  }
+  const content = '\uFEFF' + exportRows(isDraft).map((row) => row.map(csvCell).join(',')).join('\r\n');
   const file = URL.createObjectURL(new Blob([content], { type: 'text/csv;charset=utf-8' }));
   const anchor = document.createElement('a');
   anchor.href = file;
-  anchor.download = 'qyutong-' + participant + '-answers.csv';
+  anchor.download = 'qyutong-' + participant + (isDraft ? '-draft.csv' : '-answers.csv');
   document.body.append(anchor);
   anchor.click();
   anchor.remove();
   setTimeout(() => URL.revokeObjectURL(file), 1500);
-  $('#announcement').textContent = '已请求下载当前答卷 CSV';
+  $('#announcement').textContent = isDraft ? '已请求下载草稿 CSV；正式答卷请在反馈完成后下载' : '已请求下载正式答卷 CSV';
 }
 
 participantSelect.value = participant;
@@ -653,6 +688,7 @@ participantSelect.addEventListener('change', () => {
   stage = 0;
   playbackRate = 1;
   readingMode = 'standard';
+  feedbackErrorsShown = false;
   render();
 });
 
@@ -805,6 +841,9 @@ document.addEventListener('click', (event) => {
       break;
     case 'export':
       download();
+      break;
+    case 'export-draft':
+      download(true);
       break;
   }
 });

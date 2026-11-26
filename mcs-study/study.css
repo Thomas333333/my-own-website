@@ -103,6 +103,9 @@ input[type="radio"] { width: 17px; height: 17px; accent-color: var(--blue); marg
 .scale-endpoints { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 13px; margin-top: 4px; }
 textarea { display: block; width: 100%; min-height: 84px; resize: vertical; padding: 9px 12px; color: var(--ink); border: 1px solid #c9d8ec; border-radius: 10px; background: #fff; }
 .text-field { display: block; }
+.feedback-count { margin-top: 5px; font-size: 14px; color: var(--muted); }
+textarea[aria-invalid="true"] { border-color: #b42318; box-shadow: 0 0 0 1px #b42318; }
+.feedback-error { padding: 12px 15px; margin-top: 15px; color: #8c2119; background: #fff2ef; border: 1px solid #e8b4ab; border-radius: 10px; }
 .action-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 19px; }
 .primary { min-height: 45px; padding: 8px 16px; border: 1px solid transparent; border-radius: 10px; background: var(--blue); color: white; font-weight: 690; }
 .primary:hover { background: var(--blue-dark); }

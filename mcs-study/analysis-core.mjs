@@ -25,6 +25,7 @@ export function readAnswerFile(text) {
   const pid=[...ids][0];
   if(!PIDS.includes(pid))throw new Error('试跑或未知编号不计入正式统计');
   if(records.some(r=>r['版本']!==VERSION))throw new Error('问卷版本不匹配，旧版答卷请单独分析');
+  if(header.includes('答卷状态') && records.some(r=>r['答卷状态']!=='正式答卷'))throw new Error('草稿暂不计入汇总，请补充反馈后下载正式答卷 CSV');
   const answers={};
   for(const r of records){
     const key=r['指标ID'];
